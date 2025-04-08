@@ -138,7 +138,7 @@ export default function SignUp() {
   muted
   loop
   playsInline
-  src="/robot.mp4"
+  src="/robot2.mp4"
   style={{
     position: 'absolute',
     top: 0,
