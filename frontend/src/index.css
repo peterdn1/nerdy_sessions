@@ -8,6 +8,7 @@
   --agents-color: #9b59b6;
   --tools-color: #f39c12;
   --workflows-color: #1abc9c;
+  --stock-color: #8e44ad; /* Added purple for stock */
 }
 
 /* Custom component styles */
@@ -33,6 +34,7 @@
 .agents-accent::before { border-color: var(--agents-color); }
 .tools-accent::before { border-color: var(--tools-color); }
 .workflows-accent::before { border-color: var(--workflows-color); }
+.stock-accent::before { border-color: var(--stock-color); }
 
 .nav-item {
   position: relative;
@@ -86,6 +88,7 @@
 .nav-item.agents.active::after { background-color: var(--agents-color); }
 .nav-item.tools.active::after { background-color: var(--tools-color); }
 .nav-item.workflows.active::after { background-color: var(--workflows-color); }
+.nav-item.stock.active::after { background-color: var(--stock-color); }
 
 .widget {
   background: white;
@@ -132,6 +135,9 @@
 
 .workflows-header { background-color: rgba(26, 188, 156, 0.1); }
 .workflows-icon { background-color: var(--workflows-color); color: white; }
+
+.stock-header { background-color: rgba(142, 68, 173, 0.1); } /* Purple theme */
+.stock-icon { background-color: var(--stock-color); color: white; }
 
 .circular-button {
   width: 48px;

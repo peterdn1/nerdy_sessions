@@ -13,7 +13,7 @@ const App = () => {
     <BrowserRouter>
       <div className="flex flex-col min-h-screen">
         <Header />
-        <div className="flex flex-1 pt-16">
+        <div className="flex flex-1 pt-16 justify-center items-center">
           <Routes>
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
