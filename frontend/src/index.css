@@ -1,0 +1,207 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --news-color: #ff5a5f;
+  --life-color: #2ecc71;
+  --agents-color: #9b59b6;
+  --tools-color: #f39c12;
+  --workflows-color: #1abc9c;
+}
+
+/* Custom component styles */
+.ring-accent {
+  position: relative;
+}
+
+.ring-accent::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 50%;
+  border: 2px solid;
+  opacity: 0.7;
+  z-index: -1;
+}
+
+.news-accent::before { border-color: var(--news-color); }
+.life-accent::before { border-color: var(--life-color); }
+.agents-accent::before { border-color: var(--agents-color); }
+.tools-accent::before { border-color: var(--tools-color); }
+.workflows-accent::before { border-color: var(--workflows-color); }
+
+.nav-item {
+  position: relative;
+  transition: all 0.3s ease;
+}
+.nav-item {
+  position: relative;
+  padding: 4px 8px;
+  font-weight: 500;
+  color: #222;
+  transition: color 0.3s ease;
+}
+
+.nav-item:hover {
+  color: #000;
+}
+
+.nav-item.active {
+  color: #000;
+}
+
+.nav-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background-color: #c44; /* subtle red underline */
+  border-radius: 1px;
+}
+
+
+.nav-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 100%;
+  height: 6px !important;
+  border-radius: 3px;
+  background-color: currentColor !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  opacity: 1;
+  transform: scaleY(1.2);
+}
+
+.nav-item.news.active::after { background-color: var(--news-color); }
+.nav-item.life.active::after { background-color: var(--life-color); }
+.nav-item.agents.active::after { background-color: var(--agents-color); }
+.nav-item.tools.active::after { background-color: var(--tools-color); }
+.nav-item.workflows.active::after { background-color: var(--workflows-color); }
+
+.widget {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+}
+
+.widget:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.widget-header {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.widget-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.news-header { background-color: rgba(255, 90, 95, 0.1); }
+.news-icon { background-color: var(--news-color); color: white; }
+
+.life-header { background-color: rgba(46, 204, 113, 0.1); }
+.life-icon { background-color: var(--life-color); color: white; }
+
+.agents-header { background-color: rgba(155, 89, 182, 0.1); }
+.agents-icon { background-color: var(--agents-color); color: white; }
+
+.tools-header { background-color: rgba(243, 156, 18, 0.1); }
+.tools-icon { background-color: var(--tools-color); color: white; }
+
+.workflows-header { background-color: rgba(26, 188, 156, 0.1); }
+.workflows-icon { background-color: var(--workflows-color); color: white; }
+
+.circular-button {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.headline-source {
+  display: inline-block;
+  background-color: #f0f0f0;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  margin-bottom: 4px;
+}
+
+.headline-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.headline-item:last-child {
+  border-bottom: none;
+}
+
+.circular-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .config-sidebar {
+    position: fixed;
+    right: -100%;
+    top: 0;
+.headline-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 12px;
+}
+
+.headline-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.headline-source {
+  margin-bottom: 6px;
+}
+
+    bottom: 0;
+    width: 80%;
+    max-width: 300px;
+    z-index: 50;
+    transition: right 0.3s ease;
+  }
+  
+  .config-sidebar.active {
+    right: 0;
+  }
+  
+  .mobile-sidebar-toggle {
+    display: block !important;
+  }
+}
