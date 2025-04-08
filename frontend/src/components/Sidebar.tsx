@@ -30,10 +30,41 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
           </ListItemIcon>
           <ListItemText primary="News" />
         </ListItemButton>
+        <List component="div" disablePadding>
+          <ListItemButton
+            sx={{ pl: 4 }}
+            selected={activeNav === 'news-dashboard'}
+            onClick={() => setActiveNav('news-dashboard')}
+          >
+            <ListItemText primary="Dashboard" />
+          </ListItemButton>
+          <ListItemButton
+            sx={{ pl: 4 }}
+            selected={activeNav === 'news-feeds'}
+            onClick={() => setActiveNav('news-feeds')}
+          >
+            <ListItemText primary="Feeds" />
+          </ListItemButton>
+          <ListItemButton
+            sx={{ pl: 4 }}
+            selected={activeNav === 'news-weekly-summaries'}
+            onClick={() => setActiveNav('news-weekly-summaries')}
+          >
+            <ListItemText primary="Weekly Summaries" />
+          </ListItemButton>
+          <ListItemButton
+            sx={{ pl: 4 }}
+            selected={activeNav === 'news-configure'}
+            onClick={() => setActiveNav('news-configure')}
+          >
+            <ListItemText primary="Configure" />
+          </ListItemButton>
+        </List>
         <ListItemButton
           selected={activeNav === 'life'}
           onClick={() => setActiveNav('life')}
         >
+          
           <ListItemIcon>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M12 21C12 21 4 13.5 4 8.5C4 5.42 6.42 3 9.5 3C11.24 3 12.91 3.81 14 5.08C15.09 3.81 16.76 3 18.5 3C21.58 3 24 5.42 24 8.5C24 13.5 16 21 16 21H12Z"></path>
@@ -79,6 +110,18 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
           </ListItemIcon>
           <ListItemText primary="Workflow" />
         </ListItemButton>
+        <ListItemButton
+            selected={activeNav === 'stocks'}
+            onClick={() => setActiveNav('stocks')}
+          >
+            <ListItemIcon>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <polyline points="4 17 10 11 14 15 21 8" />
+                <polyline points="4 12 4 17 9 17" />
+              </svg>
+            </ListItemIcon>
+            <ListItemText primary="Stocks" />
+          </ListItemButton>
       </List>
     </MuiSidebar>
   );
