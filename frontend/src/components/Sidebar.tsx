@@ -122,6 +122,43 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
             </ListItemIcon>
             <ListItemText primary="Stocks" />
           </ListItemButton>
+<List component="div" disablePadding>
+  <ListItemButton
+    sx={{ pl: 4 }}
+    selected={activeNav === 'stocks-dashboard'}
+    onClick={() => setActiveNav('stocks-dashboard')}
+  >
+    <ListItemText primary="Dashboard" />
+  </ListItemButton>
+  <ListItemButton
+    sx={{ pl: 4 }}
+    selected={activeNav === 'stocks-screener'}
+    onClick={() => setActiveNav('stocks-screener')}
+  >
+    <ListItemText primary="Stock Screener" />
+  </ListItemButton>
+  <ListItemButton
+    sx={{ pl: 4 }}
+    selected={activeNav === 'stocks-mock-trading'}
+    onClick={() => setActiveNav('stocks-mock-trading')}
+  >
+    <ListItemText primary="Mock Trading" />
+  </ListItemButton>
+  <ListItemButton
+    sx={{ pl: 4 }}
+    selected={activeNav === 'stocks-watchlist'}
+    onClick={() => setActiveNav('stocks-watchlist')}
+  >
+    <ListItemText primary="Watchlist" />
+  </ListItemButton>
+  <ListItemButton
+    sx={{ pl: 4 }}
+    selected={activeNav === 'stocks-leaderboard'}
+    onClick={() => setActiveNav('stocks-leaderboard')}
+  >
+    <ListItemText primary="Leaderboard" />
+  </ListItemButton>
+</List>
       </List>
     </MuiSidebar>
   );
