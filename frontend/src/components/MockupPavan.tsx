@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 interface UploadItem {
-  id: number;
+  id: string;
   imageUrl: string;
   description: string;
 }
@@ -11,67 +11,131 @@ const MockupPavan: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
   const [description, setDescription] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const fetchUploads = async () => {
+    try {
+      const res = await fetch('http://localhost:5001/api/mockup-images');
+      const data = await res.json();
+      const formatted = data.map((item: any) => ({
+        id: item.id,
+        imageUrl: `http://localhost:5001${item.url}`,
+        description: item.description || '',
+      }));
+      setUploads(formatted);
+    } catch (err) {
+      console.error('Failed to fetch uploads', err);
+    }
+  };
+
+  React.useEffect(() => {
+    fetchUploads();
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!file) return;
 
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setUploads(prev => [
-        { id: Date.now(), imageUrl: reader.result as string, description },
-        ...prev,
-      ]);
+    const formData = new FormData();
+    formData.append('image', file);
+    formData.append('description', description);
+
+    try {
+      const res = await fetch('http://localhost:5001/api/mockup-images', {
+        method: 'POST',
+        body: formData,
+      });
+      if (!res.ok) throw new Error('Upload failed');
+      const saved = await res.json();
+      fetchUploads();
       setFile(null);
       setDescription('');
-    };
-    reader.readAsDataURL(file);
+    } catch (err) {
+      console.error('Failed to upload', err);
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    try {
+      const res = await fetch(`http://localhost:5001/api/mockup-images/${id}`, {
+        method: 'DELETE',
+      });
+      if (!res.ok) {
+        alert('Delete failed on server. Removing locally.');
+      } else {
+        fetchUploads();
+        return;
+      }
+    } catch (err) {
+      console.error('Failed to delete upload', err);
+      alert('Delete failed on server. Removing locally.');
+    }
+    // Remove locally if server delete failed
+    setUploads(prev => prev.filter(item => item.id !== id));
   };
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Pavan's Mockup</h2>
+    <div className="p-6 max-w-7xl mx-auto bg-gray-900 rounded-2xl shadow-lg">
+      <h2 className="text-3xl font-extrabold text-center text-white mb-8 border-b border-gray-700 pb-4">
+        Pavan's Mockup Gallery
+      </h2>
 
-      <form onSubmit={handleSubmit} className="mb-6 flex flex-col gap-2">
-        <input
-          type="file"
-          accept="image/*"
-          onChange={e => setFile(e.target.files ? e.target.files[0] : null)}
-          required
-        />
-        <input
-          type="text"
-          placeholder="Description"
-          value={description}
-          onChange={e => setDescription(e.target.value)}
-          className="border p-2 rounded"
-          required
-        />
+      <form
+        onSubmit={handleSubmit}
+        className="mb-10 flex flex-col md:flex-row md:items-center gap-4 bg-gray-800 p-6 rounded-xl shadow-inner"
+      >
+        <label className="flex-1 flex flex-col gap-2 text-white font-medium">
+          Select Image
+          <input
+            type="file"
+            accept="image/*"
+            onChange={e => setFile(e.target.files ? e.target.files[0] : null)}
+            required
+            className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer"
+          />
+        </label>
+        <label className="flex-1 flex flex-col gap-2 text-white font-medium">
+          Description
+          <input
+            type="text"
+            placeholder="Enter a description"
+            value={description}
+            onChange={e => setDescription(e.target.value)}
+            className="border border-gray-600 bg-gray-700 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </label>
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+          className="bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200"
         >
           Upload
         </button>
       </form>
 
       <div
-        className="grid gap-3"
+        className="grid gap-x-8 gap-y-10"
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
         }}
       >
         {uploads.map(item => (
           <div
             key={item.id}
-            className="rounded-xl border border-gray-700 bg-[#333] shadow-md flex flex-col p-3"
+            className="relative rounded-3xl border border-gray-700 bg-gray-800 shadow-lg flex flex-col p-4 transition-transform duration-200 hover:scale-105 hover:shadow-2xl"
           >
+            <button
+              onClick={() => handleDelete(item.id)}
+              className="absolute top-2 right-2 bg-red-600 hover:bg-red-700 text-white text-xs px-2 py-1 rounded-full transition-all duration-150"
+              title="Delete"
+            >
+              ✕
+            </button>
             <img
               src={item.imageUrl}
               alt="Uploaded"
-              className="w-full object-cover rounded-lg"
+              className="w-full h-48 object-cover rounded-2xl border border-gray-600"
             />
-            <div className="mt-2 text-white text-sm font-medium">
+            <div className="mt-3 text-white text-base font-semibold text-center break-words">
               {item.description}
             </div>
           </div>

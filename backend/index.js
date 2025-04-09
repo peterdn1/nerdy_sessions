@@ -7,9 +7,31 @@ const { PrismaClient } = require('@prisma/client');
 const app = express();
 const port = process.env.PORT || 5001;
 
+const multer = require('multer');
+const fs = require('fs');
+
+// Ensure uploads directory exists
+const uploadDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir);
+}
+
+// Multer storage config
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, uploadDir);
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, uniqueSuffix + '-' + file.originalname);
+  }
+});
+const upload = multer({ storage });
+
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use('/uploads', express.static(uploadDir));
 
 // Database connection
 const prisma = new PrismaClient();
@@ -25,8 +47,10 @@ prisma.$connect()
     process.exit(1);
   });
 
-// Serve static files from frontend
-app.use(express.static(path.join(__dirname, '../frontend/dist')));
+// In development, don't serve frontend files since Vite handles that
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../frontend/dist')));
+}
 
 // Sample API endpoint
 app.get('/api', (req, res) => {
@@ -105,10 +129,83 @@ app.get('/api/news', async (req, res) => {
   }
 });
 
-// All other routes should serve the frontend
-app.use((req, res) => {
-  res.status(200).sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+// --- Mockup Images Upload ---
+app.post('/api/mockup-images', upload.single('image'), async (req, res) => {
+  try {
+    const file = req.file;
+    const userId = req.body.user_id || null;
+    const description = req.body.description || null;
+
+    if (!file) {
+      return res.status(400).json({ error: 'No file uploaded' });
+    }
+
+    const imageUrl = `/uploads/${file.filename}`;
+
+    const saved = await prisma.mockup_images.create({
+      data: {
+        filename: file.filename,
+        original_name: file.originalname,
+        url: imageUrl,
+        description: description,
+        uploaded_by: userId
+      }
+    });
+
+    res.json(saved);
+  } catch (err) {
+    console.error('Error uploading mockup image:', err);
+    res.status(500).json({ error: 'Failed to upload image' });
+  }
 });
+
+// --- Mockup Images List ---
+app.get('/api/mockup-images', async (req, res) => {
+  try {
+    const images = await prisma.mockup_images.findMany({
+      orderBy: { uploaded_at: 'desc' }
+    });
+    res.json(images);
+  } catch (err) {
+    console.error('Error fetching mockup images:', err);
+    res.status(500).json({ error: 'Failed to fetch images' });
+  }
+});
+
+// --- Mockup Images Delete ---
+app.delete('/api/mockup-images/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+    const image = await prisma.mockup_images.findUnique({ where: { id } });
+    if (!image) {
+      return res.status(404).json({ error: 'Image not found' });
+    }
+
+    // Delete file from disk
+    const filePath = path.join(uploadDir, image.filename);
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        console.warn('File not found or already deleted:', filePath);
+      }
+    });
+
+    // Delete from database
+    await prisma.mockup_images.delete({ where: { id } });
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Error deleting mockup image:', err);
+    res.status(500).json({ error: 'Failed to delete image' });
+  }
+});
+
+// All other routes should serve the frontend
+// In development, don't handle frontend routes since Vite handles that
+if (process.env.NODE_ENV === 'production') {
+  app.use((req, res) => {
+    res.status(200).sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+  });
+}
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
