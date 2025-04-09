@@ -18,7 +18,7 @@ const App = () => {
   const location = useLocation();
   const [activeNav, setActiveNav] = useState('news');
 
-  const hideHeader = location.pathname === '/signin' || location.pathname === '/signup';
+  const hideHeader = location.pathname === '/' || location.pathname === '/signin' || location.pathname === '/signup';
 
   return (
     <div className="flex flex-col min-h-screen">
