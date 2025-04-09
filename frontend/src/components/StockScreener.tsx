@@ -145,6 +145,7 @@ const StockScreener: React.FC = () => {
 
                 const changeValue = parseFloat(stock.change.replace('%', ''));
                 const changeColor = changeValue >= 0 ? 'text-green-600' : 'text-red-600';
+                console.log(`Stock: ${stock.symbol}, Change: ${stock.change}, Parsed: ${changeValue}, Color: ${changeColor}`);
 
                 return (
                   <tr key={stock.symbol}>
@@ -152,7 +153,7 @@ const StockScreener: React.FC = () => {
                     <td className="px-4 py-4 whitespace-nowrap truncate">{stock.name}</td>
                     <td className="px-4 py-4 whitespace-nowrap truncate">{stock.sector}</td>
                     <td className="px-4 py-4 whitespace-nowrap">{stock.price}</td>
-                    <td className={`px-4 py-4 whitespace-nowrap ${changeColor}`}>{stock.change}</td>
+                    <td className={`px-4 py-4 whitespace-nowrap font-semibold ${changeColor}`}>{stock.change}</td>
                     <td className="px-4 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <span className={`mr-2 font-semibold ${scoreColor} w-8 text-right`}>{scorePrefix}{stock.aiScore}</span>
@@ -163,10 +164,10 @@ const StockScreener: React.FC = () => {
                       </div>
                     </td>
                     <td className="px-4 py-4 whitespace-nowrap">
-                      <button className="text-purple-600 hover:text-purple-900 mr-3" title="Add to Watchlist">
+                      <button className="text-purple-800 hover:text-purple-900 mr-3" title="Add to Watchlist">
                         <i className="far fa-star"></i>
                       </button>
-                      <button className="text-green-600 hover:text-green-900" title="Trade">
+                      <button className="text-green-800 hover:text-green-900" title="Trade">
                         <i className="fas fa-shopping-cart"></i>
                       </button>
                     </td>
