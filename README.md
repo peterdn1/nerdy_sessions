@@ -145,3 +145,7 @@ The frontend includes a robust ESLint configuration for TypeScript and React. To
 ## License
 
 ISC
+
+## Screenshot
+
+![Screenshot](frontend/src/assets/Screenshot.png)
