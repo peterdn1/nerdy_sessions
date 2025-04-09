@@ -19,7 +19,7 @@ import {
 import { styled, ThemeProvider, createTheme } from '@mui/material/styles';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
 import robotVideo from '../assets/robot.mp4';
  
@@ -67,6 +67,7 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
 }));
 
 export default function SignIn() {
+  const navigate = useNavigate();
   const [emailError, setEmailError] = React.useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
   const [passwordError, setPasswordError] = React.useState(false);
@@ -127,7 +128,7 @@ export default function SignIn() {
       if (response.ok) {
         setLoginMessage(result.message || 'Login successful');
         setLoginError(null);
-        // TODO: redirect or update UI after successful login
+        navigate('/app');
       } else {
         setLoginError(result.error || 'Login failed');
         setLoginMessage(null);

@@ -20,27 +20,25 @@ router.post('/register', async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const username = email.split('@')[0];
+
+    // Generate a verification token BEFORE creating user
+    const crypto = require('crypto');
+    const verificationToken = crypto.randomBytes(32).toString('hex');
+
     const user = await prisma.users.create({
       data: {
         email,
         username,
         hashed_password: hashedPassword,
-        emailVerified: false
+        emailVerified: false,
+        verificationToken
       }
     });
 
-    // Generate a verification token
-    const crypto = require('crypto');
-    const verificationToken = crypto.randomBytes(32).toString('hex');
 
-    // Save token to user
-    await prisma.users.update({
-      where: { id: user.id },
-      data: { verificationToken }
-    });
-
-    // Construct verification URL
-    const verifyUrl = `${req.protocol}://${req.get('host')}/api/auth/verify-email?token=${verificationToken}`;
+    // Construct verification URL pointing to frontend
+    const frontendBaseUrl = process.env.FRONTEND_BASE_URL || 'http://localhost:5173';
+    const verifyUrl = `${frontendBaseUrl}/verify-email?token=${verificationToken}`;
 
     // Placeholder for sending email
     console.log(`Send verification email to ${email} with link: ${verifyUrl}`);
@@ -77,6 +75,26 @@ router.post('/login', async (req, res) => {
 // Placeholder for social login
 router.post('/social/:provider', async (req, res) => {
   const { provider } = req.params;
+// TEMP endpoint to delete two most recent users
+router.delete('/delete-test-users', async (req, res) => {
+  try {
+    const users = await prisma.users.findMany({
+      orderBy: { created_at: 'desc' },
+      take: 2
+    });
+
+    const deleted = [];
+    for (const user of users) {
+      await prisma.users.delete({ where: { id: user.id } });
+      deleted.push(user.email);
+    }
+
+    res.json({ message: 'Deleted users', deleted });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to delete users' });
+  }
+});
   // TODO: Implement OAuth flow for Google, GitHub, etc.
   res.status(501).json({ error: `Social login with ${provider} not implemented yet` });
 });
@@ -84,21 +102,38 @@ router.post('/social/:provider', async (req, res) => {
 // Placeholder for email verification
 router.get('/verify-email', async (req, res) => {
   const { token } = req.query;
+  console.log('Received token:', token);
   if (!token) return res.status(400).json({ error: 'Verification token required' });
 
   try {
-    const user = await prisma.users.findFirst({ where: { verificationToken: token } });
-    if (!user) return res.status(400).json({ error: 'Invalid or expired verification token' });
+    let user = await prisma.users.findFirst({ where: { verificationToken: token } });
+    console.log('User found with token:', user);
 
-    await prisma.users.update({
-      where: { id: user.id },
-      data: {
+    if (user) {
+      await prisma.users.update({
+        where: { id: user.id },
+        data: {
+          emailVerified: true,
+          verificationToken: null
+        }
+      });
+      return res.json({ message: 'Email successfully verified. You can now log in.' });
+    }
+
+    // If no user with token, check if already verified
+    user = await prisma.users.findFirst({
+      where: {
         emailVerified: true,
         verificationToken: null
       }
     });
+    console.log('User found already verified:', user);
 
-    res.json({ message: 'Email successfully verified. You can now log in.' });
+    if (user) {
+      return res.json({ message: 'Email already verified. You can now log in.' });
+    }
+
+    return res.status(400).json({ error: 'Invalid or expired verification token' });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Email verification failed' });

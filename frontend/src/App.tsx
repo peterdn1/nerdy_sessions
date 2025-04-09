@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Page from './components/Page';
 import SignIn from './components/SignIn';
+import WelcomePage from './components/WelcomePage';
 import SignUp from './components/SignUp';
 import './App.css';
 import VerifyEmail from './components/VerifyEmail';
@@ -24,6 +25,7 @@ const App = () => {
       {!hideHeader && <Header />}
       <div className="flex flex-1 pt-16 justify-center items-center">
         <Routes>
+          <Route path="/" element={<WelcomePage />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/verify-email" element={<VerifyEmail />} />
