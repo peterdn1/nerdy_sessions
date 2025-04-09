@@ -39,12 +39,12 @@ erDiagram
 ## API Endpoints
 ```mermaid
 graph TD
-    Auth[/auth/*] --> Login[/login]
-    Auth --> Signup[/signup]
-    Stocks[/stocks/*] --> List[/]
-    Stocks --> Detail[/:symbol]
-    Portfolio[/portfolio/*] --> Holdings[/]
-    Portfolio --> History[/history]
+    Auth["/auth/*"] --> Login["/login"]
+    Auth --> Signup["/signup"]
+    Stocks["/stocks/*"] --> List["/"]
+    Stocks --> Detail["/:symbol"]
+    Portfolio["/portfolio/*"] --> Holdings["/"]
+    Portfolio --> History["/history"]
 ```
 
 ## Frontend Component Architecture
