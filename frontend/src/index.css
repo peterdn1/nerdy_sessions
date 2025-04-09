@@ -175,6 +175,11 @@
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
+/* Style for fixed table layout */
+ .table-fixed {
+    table-layout: fixed;
+}
+
 /* Responsive styles */
 @media (max-width: 768px) {
   .config-sidebar {
@@ -210,4 +215,70 @@
   .mobile-sidebar-toggle {
     display: block !important;
   }
+}
+
+/* === Dashboard Custom Styles === */
+.ai-positive {
+    background: linear-gradient(90deg, rgba(52,211,153,0.2) 0%, rgba(16,185,129,0.1) 100%);
+    border-left: 4px solid #10B981; /* Green border */
+}
+.ai-negative {
+    background: linear-gradient(90deg, rgba(239,68,68,0.2) 0%, rgba(220,38,38,0.1) 100%);
+    border-left: 4px solid #EF4444; /* Red border */
+}
+.ai-neutral {
+    background: linear-gradient(90deg, rgba(156,163,175,0.2) 0%, rgba(107,114,128,0.1) 100%);
+    border-left: 4px solid #6B7280; /* Gray border */
+}
+/* Styles for the AI score bar (used in screener, but defined globally) */
+.score-bar {
+    height: 8px;
+    border-radius: 4px;
+    background: #E5E7EB; /* Light gray background */
+    position: relative;
+    overflow: hidden;
+}
+.score-fill-positive {
+    position: absolute;
+    height: 100%;
+    background: linear-gradient(90deg, #10B981 0%, #34D399 100%); /* Green fill */
+    border-radius: 4px;
+    left: 50%;
+    width: 0%; /* Calculated by JS or inline style */
+}
+.score-fill-negative {
+    position: absolute;
+    height: 100%;
+    background: linear-gradient(90deg, #EF4444 0%, #F87171 100%); /* Red fill */
+    border-radius: 4px;
+    right: 50%;
+    width: 0%; /* Calculated by JS or inline style */
+}
+/* Hover effect for news items */
+.news-item {
+    transition: all 0.3s ease;
+}
+.news-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+/* Chart container sizing */
+.chart-container {
+    position: relative;
+    height: 250px; /* Default height */
+    width: 100%;
+}
+/* Taller chart container on medium screens and up */
+@media (min-width: 768px) {
+    .chart-container {
+        height: 300px;
+    }
+}
+/* Basic styles needed if only showing this section */
+body {
+    font-family: sans-serif; /* Add a default font */
+}
+/* Ensure tab content is visible when standalone */
+.tab-content {
+     display: block;
 }

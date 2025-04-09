@@ -5,6 +5,7 @@ import AgentsDashboard from './AgentsDashboard';
 import ToolsDashboard from './ToolsDashboard';
 import WorkflowsDashboard from './WorkflowsDashboard';
 import StockDashboard from './StockDashboard';
+import StockScreener from './StockScreener';
 
 interface BodyProps {
   activeNav: string;
@@ -19,6 +20,7 @@ const Body: React.FC<BodyProps> = ({ activeNav }) => {
       {activeNav === 'tools' && <ToolsDashboard />}
       {activeNav === 'workflows' && <WorkflowsDashboard />}
       {activeNav === 'stocks' && <StockDashboard />}
+      {activeNav === 'stocks-screener' && <StockScreener />}
     </main>
   );
 };
