@@ -17,6 +17,7 @@ A modern fullstack application with a React frontend and Node.js backend.
 ### Backend
 - Node.js with Express
 - PostgreSQL database
+- Prisma ORM for database access and migrations
 - CORS enabled
 - Environment variables support with dotenv
 
@@ -55,6 +56,20 @@ DATABASE_URL=postgresql://username:password@localhost:5432/database_name
 # Additional environment variables as needed
 ```
 
+4. Generate Prisma client
+
+```bash
+# From the backend directory
+npx prisma generate
+```
+
+5. Run database migrations (optional, if you have migrations set up)
+
+```bash
+# From the backend directory
+npx prisma migrate dev --name init
+```
+
 4. Start the development servers
 
 Backend:
@@ -84,6 +99,13 @@ npm run dev  # Starts Vite dev server
 - `npm start` - Start the server
 - `npm run dev` - Start the server with nodemon (auto-reload)
 - `npm test` - Run tests (not configured yet)
+
+### Prisma & Database
+
+- `npx prisma generate` - Generate Prisma client from schema
+- `npx prisma migrate dev --name <name>` - Run development migration
+- `npx prisma studio` - Open Prisma Studio to view and edit data
+- `npx prisma db push` - Push schema changes to database without migration
 
 ## Project Structure
 
