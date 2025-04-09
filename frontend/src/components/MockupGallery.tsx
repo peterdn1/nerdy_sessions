@@ -6,7 +6,7 @@ interface UploadItem {
   description: string;
 }
 
-const MockupPavan: React.FC = () => {
+const MockupGallery: React.FC = () => {
   const [uploads, setUploads] = useState<UploadItem[]>([]);
   const [file, setFile] = useState<File | null>(null);
   const [description, setDescription] = useState('');
@@ -172,4 +172,4 @@ const MockupPavan: React.FC = () => {
   );
 };
 
-export default MockupPavan;
+export default MockupGallery;
