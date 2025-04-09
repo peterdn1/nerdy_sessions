@@ -92,7 +92,7 @@ const MockupGallery: React.FC = () => {
   return (
     <div className="p-6 max-w-7xl mx-auto bg-gray-900 rounded-2xl shadow-lg">
       <h2 className="text-3xl font-extrabold text-center text-white mb-8 border-b border-gray-700 pb-4">
-        Pavan's Mockup Gallery
+        Mockup Gallery
       </h2>
 
       <form

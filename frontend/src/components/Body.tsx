@@ -7,6 +7,7 @@ import WorkflowsDashboard from './WorkflowsDashboard';
 import StockDashboard from './StockDashboard';
 import StockScreener from './StockScreener';
 import MockupGallery from './MockupGallery';
+import MockupWebsites from './MockupWebsites';
 
 interface BodyProps {
   activeNav: string;
@@ -23,6 +24,7 @@ const Body: React.FC<BodyProps> = ({ activeNav }) => {
       {activeNav === 'stocks' && <StockDashboard />}
       {activeNav === 'stocks-screener' && <StockScreener />}
       {activeNav === 'mockup-gallery' && <MockupGallery />}
+      {activeNav === 'mockup-websites' && <MockupWebsites />}
     </main>
   );
 };

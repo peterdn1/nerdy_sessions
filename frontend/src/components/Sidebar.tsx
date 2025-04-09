@@ -184,6 +184,13 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
             >
               <ListItemText primary="Gallery" />
             </ListItemButton>
+            <ListItemButton
+              sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #f7f2ff)' }}
+              selected={activeNav === 'mockup-websites'}
+              onClick={() => setActiveNav('mockup-websites')}
+            >
+              <ListItemText primary="Websites" />
+            </ListItemButton>
           </List>
         )}
         <ListItemButton
