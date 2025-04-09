@@ -1,23 +1,52 @@
-# React + TypeScript + Vite
+<p align="center">
+  <img src="src/assets/nerdy_sessions.svg" alt="Nerdy Sessions Logo" width="200"/>
+</p>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Nerdy Sessions Frontend
 
-Currently, two official plugins are available:
+A modern, responsive frontend for the **Nerdy Sessions** platform, built with React, TypeScript, Vite, and TailwindCSS. This interface allows users to interact with various dashboards, manage configurations, and access powerful tools within the Nerdy Sessions ecosystem.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
 
-## Expanding the ESLint configuration
+- **React 18** with **TypeScript**
+- **Vite** for fast development and build tooling
+- **TailwindCSS** for utility-first styling
+- **ESLint** for code quality and consistency
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Features
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
+- Multiple interactive dashboards (Agents, Tools, Workflows, News, Stock, Life)
+- User authentication (Sign In / Sign Up)
+- Configurable sidebar navigation
+- Responsive design optimized for all devices
+- Integration-ready with backend APIs
+
+## Available Routes
+
+- `/` — Main dashboard page
+- `/signin` — User login page
+- `/signup` — User registration page
+
+## Getting Started
+
+Install dependencies:
+
+\`\`\`bash
+npm install
+\`\`\`
+
+Run the development server:
+
+\`\`\`bash
+npm run dev
+\`\`\`
+
+Build for production:
+
+\`\`\`bash
+npm run build
+\`\`\`
+
     // Optionally, add this for stylistic rules
     ...tseslint.configs.stylisticTypeChecked,
   ],
