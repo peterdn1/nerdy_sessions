@@ -5,6 +5,7 @@ import Page from './components/Page';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import './App.css';
+import VerifyEmail from './components/VerifyEmail';
 
 const AppWrapper = () => (
   <BrowserRouter>
@@ -25,6 +26,7 @@ const App = () => {
         <Routes>
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/verify-email" element={<VerifyEmail />} />
           <Route path="*" element={<Page activeNav={activeNav} setActiveNav={setActiveNav} />} />
         </Routes>
       </div>

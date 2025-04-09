@@ -29,7 +29,21 @@ router.post('/register', async (req, res) => {
       }
     });
 
-    // TODO: send verification email here
+    // Generate a verification token
+    const crypto = require('crypto');
+    const verificationToken = crypto.randomBytes(32).toString('hex');
+
+    // Save token to user
+    await prisma.users.update({
+      where: { id: user.id },
+      data: { verificationToken }
+    });
+
+    // Construct verification URL
+    const verifyUrl = `${req.protocol}://${req.get('host')}/api/auth/verify-email?token=${verificationToken}`;
+
+    // Placeholder for sending email
+    console.log(`Send verification email to ${email} with link: ${verifyUrl}`);
 
     res.json({ message: 'User registered. Please verify your email.' });
   } catch (err) {
@@ -69,8 +83,26 @@ router.post('/social/:provider', async (req, res) => {
 
 // Placeholder for email verification
 router.get('/verify-email', async (req, res) => {
-  // TODO: Implement email verification logic
-  res.status(501).json({ error: 'Email verification not implemented yet' });
+  const { token } = req.query;
+  if (!token) return res.status(400).json({ error: 'Verification token required' });
+
+  try {
+    const user = await prisma.users.findFirst({ where: { verificationToken: token } });
+    if (!user) return res.status(400).json({ error: 'Invalid or expired verification token' });
+
+    await prisma.users.update({
+      where: { id: user.id },
+      data: {
+        emailVerified: true,
+        verificationToken: null
+      }
+    });
+
+    res.json({ message: 'Email successfully verified. You can now log in.' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Email verification failed' });
+  }
 });
 
 // Placeholder for password reset request
