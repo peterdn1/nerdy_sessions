@@ -5,8 +5,13 @@ function NewsDashboard() {
     <>
       <div className="p-4 w-full">
         <h2 className="text-2xl font-bold mb-6 flex items-center">
-          <span className="w-8 h-8 ring-accent news-accent bg-red-500 rounded-full mr-3 flex items-center justify-center text-white">
-            <i className="fas fa-newspaper text-sm"></i>
+          <span className="mr-3 flex items-center justify-center">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <rect x="3" y="4" width="18" height="16" rx="2" ry="2"></rect>
+              <line x1="7" y1="8" x2="17" y2="8"></line>
+              <line x1="7" y1="12" x2="17" y2="12"></line>
+              <line x1="7" y1="16" x2="13" y2="16"></line>
+            </svg>
           </span>
           News Dashboard
         </h2>
