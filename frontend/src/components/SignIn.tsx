@@ -21,6 +21,10 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Link as RouterLink } from 'react-router-dom';
 
+import robotVideo from '../assets/robot.mp4';
+ 
+import nerdyLogo from '../assets/nerdy_sessions.svg';
+ 
 const theme = createTheme();
 
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -118,7 +122,7 @@ export default function SignIn() {
   muted
   loop
   playsInline
-  src="/robot.mp4"
+  src={robotVideo}
   style={{
     position: 'absolute',
     top: 0,
@@ -130,13 +134,11 @@ export default function SignIn() {
   }}
 />
         <Card variant="outlined">
-          <Typography
-            component="h1"
-            variant="h4"
-            sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}
-          >
-            Sign in
-          </Typography>
+          <img
+            src={nerdyLogo}
+            alt="Nerdy Sessions Logo"
+            style={{ width: '150px', margin: '0 auto' }}
+          />
           <Box
             component="form"
             onSubmit={handleSubmit}

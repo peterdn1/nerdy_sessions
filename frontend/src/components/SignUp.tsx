@@ -18,6 +18,10 @@ import { styled, ThemeProvider, createTheme } from '@mui/material/styles';
 /* Video background for SignUp */
 // No import needed, video is served from public directory
 
+import robot2Video from '../assets/robot2.mp4';
+ 
+import nerdyLogo from '../assets/nerdy_sessions.svg';
+ 
 const theme = createTheme();
 
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -138,7 +142,7 @@ export default function SignUp() {
   muted
   loop
   playsInline
-  src="/robot2.mp4"
+  src={robot2Video}
   style={{
     position: 'absolute',
     top: 0,
@@ -150,13 +154,11 @@ export default function SignUp() {
   }}
 />
         <Card variant="outlined">
-          <Typography
-            component="h1"
-            variant="h4"
-            sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}
-          >
-            Sign up
-          </Typography>
+          <img
+            src={nerdyLogo}
+            alt="Nerdy Sessions Logo"
+            style={{ width: '150px', margin: '0 auto', display: 'block' }}
+          />
           <Box
             component="form"
             onSubmit={handleSubmit}
