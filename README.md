@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="frontend/src/assets/nerdy_sessions.svg" alt="Nerdy Sessions Logo" width="200"/>
+</p>
+
 # Fullstack Application
 
 A modern fullstack application with a React frontend and Node.js backend.
