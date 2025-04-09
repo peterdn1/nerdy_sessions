@@ -27,7 +27,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
             setActiveNav('life');
             setLifeOpen(!lifeOpen);
           }}
-          sx={{ backgroundColor: '#f5f5f5' }}
+          sx={{ background: 'linear-gradient(270deg, #f9fdf9, #e6f9e6)' }}
         >
           <ListItemIcon>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -39,28 +39,28 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
         {lifeOpen && (
           <List component="div" disablePadding>
             <ListItemButton
-              sx={{ pl: 4 }}
+              sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #f2fdf2)' }}
               selected={activeNav === 'life-health'}
               onClick={() => setActiveNav('life-health')}
             >
               <ListItemText primary="Health" />
             </ListItemButton>
             <ListItemButton
-              sx={{ pl: 4 }}
+              sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #f2fdf2)' }}
               selected={activeNav === 'life-safety'}
               onClick={() => setActiveNav('life-safety')}
             >
               <ListItemText primary="Safety" />
             </ListItemButton>
             <ListItemButton
-              sx={{ pl: 4 }}
+              sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #f2fdf2)' }}
               selected={activeNav === 'life-family'}
               onClick={() => setActiveNav('life-family')}
             >
               <ListItemText primary="Family" />
             </ListItemButton>
             <ListItemButton
-              sx={{ pl: 4 }}
+              sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #f2fdf2)' }}
               selected={activeNav === 'life-career'}
               onClick={() => setActiveNav('life-career')}
             >
@@ -74,7 +74,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
               setActiveNav('stocks');
               setStocksOpen(!stocksOpen);
             }}
-            sx={{ backgroundColor: '#f5f5f5' }}
+            sx={{ background: 'linear-gradient(270deg, #f9fbff, #e6f0ff)' }}
           >
             <ListItemIcon>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -87,28 +87,28 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
         {stocksOpen && (
           <List component="div" disablePadding>
             <ListItemButton
-              sx={{ pl: 4 }}
+              sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #f2f7ff)' }}
               selected={activeNav === 'stocks-screener'}
               onClick={() => setActiveNav('stocks-screener')}
             >
               <ListItemText primary="Stock Screener" />
             </ListItemButton>
             <ListItemButton
-              sx={{ pl: 4 }}
+              sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #f2f7ff)' }}
               selected={activeNav === 'stocks-mock-trading'}
               onClick={() => setActiveNav('stocks-mock-trading')}
             >
               <ListItemText primary="Mock Trading" />
             </ListItemButton>
             <ListItemButton
-              sx={{ pl: 4 }}
+              sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #f2f7ff)' }}
               selected={activeNav === 'stocks-watchlist'}
               onClick={() => setActiveNav('stocks-watchlist')}
             >
               <ListItemText primary="Watchlist" />
             </ListItemButton>
             <ListItemButton
-              sx={{ pl: 4 }}
+              sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #f2f7ff)' }}
               selected={activeNav === 'stocks-leaderboard'}
               onClick={() => setActiveNav('stocks-leaderboard')}
             >
@@ -122,7 +122,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
             setActiveNav('news');
             setNewsOpen(!newsOpen);
           }}
-          sx={{ backgroundColor: '#f5f5f5' }}
+          sx={{ background: 'linear-gradient(270deg, #fff9f9, #ffe6e6)' }}
         >
           <ListItemIcon>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -137,21 +137,21 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
         {newsOpen && (
           <List component="div" disablePadding>
             <ListItemButton
-              sx={{ pl: 4 }}
+              sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #fff2f2)' }}
               selected={activeNav === 'news-feeds'}
               onClick={() => setActiveNav('news-feeds')}
             >
               <ListItemText primary="Feeds" />
             </ListItemButton>
             <ListItemButton
-              sx={{ pl: 4 }}
+              sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #fff2f2)' }}
               selected={activeNav === 'news-weekly-summaries'}
               onClick={() => setActiveNav('news-weekly-summaries')}
             >
               <ListItemText primary="Weekly Summaries" />
             </ListItemButton>
             <ListItemButton
-              sx={{ pl: 4 }}
+              sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #fff2f2)' }}
               selected={activeNav === 'news-configure'}
               onClick={() => setActiveNav('news-configure')}
             >
@@ -165,7 +165,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
             setActiveNav('mockup');
             setMockupOpen(!mockupOpen);
           }}
-          sx={{ backgroundColor: '#f5f5f5' }}
+          sx={{ background: 'linear-gradient(270deg, #fbf9ff, #f0e6ff)' }}
         >
           <ListItemIcon>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -178,21 +178,21 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
         {mockupOpen && (
           <List component="div" disablePadding>
             <ListItemButton
-              sx={{ pl: 4 }}
+              sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #f7f2ff)' }}
               selected={activeNav === 'mockup-juergen'}
               onClick={() => setActiveNav('mockup-juergen')}
             >
               <ListItemText primary="Juergen" />
             </ListItemButton>
             <ListItemButton
-              sx={{ pl: 4 }}
+              sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #f7f2ff)' }}
               selected={activeNav === 'mockup-pavan'}
               onClick={() => setActiveNav('mockup-pavan')}
             >
               <ListItemText primary="Pavan" />
             </ListItemButton>
             <ListItemButton
-              sx={{ pl: 4 }}
+              sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #f7f2ff)' }}
               selected={activeNav === 'mockup-peter'}
               onClick={() => setActiveNav('mockup-peter')}
             >
@@ -203,7 +203,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
         <ListItemButton
           selected={activeNav === 'agents'}
           onClick={() => setActiveNav('agents')}
-          sx={{ backgroundColor: '#f5f5f5' }}
+          sx={{ background: 'linear-gradient(270deg, #fffdf9, #fff0e6)' }}
         >
           <ListItemIcon>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -216,7 +216,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
         <ListItemButton
           selected={activeNav === 'tools'}
           onClick={() => setActiveNav('tools')}
-          sx={{ backgroundColor: '#f5f5f5' }}
+          sx={{ background: 'linear-gradient(270deg, #fdfaf7, #f0e6d3)' }}
         >
           <ListItemIcon>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -228,7 +228,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
         <ListItemButton
           selected={activeNav === 'workflows'}
           onClick={() => setActiveNav('workflows')}
-          sx={{ backgroundColor: '#f5f5f5' }}
+          sx={{ background: 'linear-gradient(270deg, #f9fbff, #e6f0ff)' }}
         >
           <ListItemIcon>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
