@@ -6,6 +6,9 @@ import ToolsDashboard from './ToolsDashboard';
 import WorkflowsDashboard from './WorkflowsDashboard';
 import StockDashboard from './StockDashboard';
 import StockScreener from './StockScreener';
+import MockupJuergen from './MockupJuergen';
+import MockupPavan from './MockupPavan';
+import MockupPeter from './MockupPeter';
 
 interface BodyProps {
   activeNav: string;
@@ -21,6 +24,9 @@ const Body: React.FC<BodyProps> = ({ activeNav }) => {
       {activeNav === 'workflows' && <WorkflowsDashboard />}
       {activeNav === 'stocks' && <StockDashboard />}
       {activeNav === 'stocks-screener' && <StockScreener />}
+      {activeNav === 'mockup-juergen' && <MockupJuergen />}
+      {activeNav === 'mockup-pavan' && <MockupPavan />}
+      {activeNav === 'mockup-peter' && <MockupPeter />}
     </main>
   );
 };

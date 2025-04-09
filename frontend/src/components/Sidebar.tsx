@@ -16,6 +16,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
   const [stocksOpen, setStocksOpen] = useState(false);
   const [newsOpen, setNewsOpen] = useState(false);
   const [lifeOpen, setLifeOpen] = useState(false);
+  const [mockupOpen, setMockupOpen] = useState(false);
 
   return (
     <MuiSidebar width="240px">
@@ -155,6 +156,47 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
               onClick={() => setActiveNav('news-configure')}
             >
               <ListItemText primary="Configure" />
+            </ListItemButton>
+          </List>
+        )}
+        <ListItemButton
+          selected={activeNav.startsWith('mockup')}
+          onClick={() => {
+            setActiveNav('mockup');
+            setMockupOpen(!mockupOpen);
+          }}
+          sx={{ backgroundColor: '#f5f5f5' }}
+        >
+          <ListItemIcon>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <path d="M3 9h18M9 21V9"></path>
+            </svg>
+          </ListItemIcon>
+          <ListItemText primary="Mockup" primaryTypographyProps={{ fontWeight: 'bold' }} />
+        </ListItemButton>
+        {mockupOpen && (
+          <List component="div" disablePadding>
+            <ListItemButton
+              sx={{ pl: 4 }}
+              selected={activeNav === 'mockup-juergen'}
+              onClick={() => setActiveNav('mockup-juergen')}
+            >
+              <ListItemText primary="Juergen" />
+            </ListItemButton>
+            <ListItemButton
+              sx={{ pl: 4 }}
+              selected={activeNav === 'mockup-pavan'}
+              onClick={() => setActiveNav('mockup-pavan')}
+            >
+              <ListItemText primary="Pavan" />
+            </ListItemButton>
+            <ListItemButton
+              sx={{ pl: 4 }}
+              selected={activeNav === 'mockup-peter'}
+              onClick={() => setActiveNav('mockup-peter')}
+            >
+              <ListItemText primary="Peter" />
             </ListItemButton>
           </List>
         )}
