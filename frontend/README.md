@@ -6,6 +6,34 @@
 
 A modern, responsive frontend for the **Nerdy Sessions** platform, built with React, TypeScript, Vite, and TailwindCSS. This interface allows users to interact with various dashboards, manage configurations, and access powerful tools within the Nerdy Sessions ecosystem.
 
+## Project Structure
+
+```
+/nerdy_sessions
+│
+├── backend
+│   ├── index.js            # Express API server
+│   ├── prisma/
+│   │   └── schema.prisma   # Prisma schema (includes mockup_websites model)
+│   └── uploads/            # Uploaded mockup images
+│
+├── frontend
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── MockupGallery.tsx    # Existing image gallery
+│   │   │   ├── MockupWebsites.tsx   # New website URLs feature
+│   │   │   └── ...
+│   │   ├── App.tsx
+│   │   └── main.tsx
+│   ├── index.html
+│   └── README.md
+│
+├── README.md               # Project documentation
+└── ...
+```
+
+This structure includes the new **Mockup Websites** feature with backend API, database model, and frontend component.
+
 ## Tech Stack
 
 - **React 18** with **TypeScript**
