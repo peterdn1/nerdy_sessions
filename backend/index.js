@@ -5,6 +5,11 @@ const cors = require('cors');
 const { PrismaClient } = require('@prisma/client');
 
 const app = express();
+
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+  next();
+});
 const port = process.env.PORT || 5001;
 
 const multer = require('multer');
@@ -196,6 +201,47 @@ app.delete('/api/mockup-images/:id', async (req, res) => {
   } catch (err) {
     console.error('Error deleting mockup image:', err);
     res.status(500).json({ error: 'Failed to delete image' });
+  }
+});
+
+// --- Mockup Images Update ---
+app.put('/api/mockup-images/:id', upload.single('image'), async (req, res) => {
+  console.log('PUT /api/mockup-images/:id called with id:', req.params.id);
+  const id = req.params.id;
+  try {
+    const image = await prisma.mockup_images.findUnique({ where: { id } });
+    console.log('Prisma findUnique result for id', id, ':', image);
+    if (!image) {
+      return res.status(404).json({ error: 'Image not found' });
+    }
+
+    let filename = image.filename;
+    let url = image.url;
+
+    if (req.file) {
+      // Delete old file
+      const oldPath = path.join(uploadDir, image.filename);
+      fs.unlink(oldPath, (err) => {
+        if (err) console.warn('Old file not found or already deleted:', oldPath);
+      });
+
+      filename = req.file.filename;
+      url = `/uploads/${req.file.filename}`;
+    }
+
+    const updated = await prisma.mockup_images.update({
+      where: { id },
+      data: {
+        description: req.body.description || image.description,
+        filename,
+        url
+      }
+    });
+
+    res.json(updated);
+  } catch (err) {
+    console.error('Error updating mockup image:', err);
+    res.status(500).json({ error: 'Failed to update image' });
   }
 });
 

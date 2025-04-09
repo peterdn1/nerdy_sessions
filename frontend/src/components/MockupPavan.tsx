@@ -10,6 +10,7 @@ const MockupPavan: React.FC = () => {
   const [uploads, setUploads] = useState<UploadItem[]>([]);
   const [file, setFile] = useState<File | null>(null);
   const [description, setDescription] = useState('');
+  const [editingId, setEditingId] = useState<string | null>(null);
 
   const fetchUploads = async () => {
     try {
@@ -32,24 +33,40 @@ const MockupPavan: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!file) return;
 
     const formData = new FormData();
-    formData.append('image', file);
+    if (file) {
+      formData.append('image', file);
+    }
     formData.append('description', description);
 
     try {
-      const res = await fetch('http://localhost:5001/api/mockup-images', {
-        method: 'POST',
-        body: formData,
-      });
-      if (!res.ok) throw new Error('Upload failed');
+      let res;
+      if (editingId) {
+        res = await fetch(`http://localhost:5001/api/mockup-images/${editingId}`, {
+          method: 'PUT',
+          body: formData,
+        });
+        if (!res.ok) throw new Error('Update failed');
+      } else {
+        if (!file) return; // require file for new upload
+        res = await fetch('http://localhost:5001/api/mockup-images', {
+          method: 'POST',
+          body: formData,
+        });
+        if (!res.ok) throw new Error('Upload failed');
+      }
       const saved = await res.json();
+      setUploads(prev => {
+        const updated = prev.filter(item => item.id !== editingId);
+        return [saved, ...updated];
+      });
       fetchUploads();
       setFile(null);
       setDescription('');
+      setEditingId(null);
     } catch (err) {
-      console.error('Failed to upload', err);
+      console.error('Failed to upload/update', err);
     }
   };
 
@@ -88,7 +105,6 @@ const MockupPavan: React.FC = () => {
             type="file"
             accept="image/*"
             onChange={e => setFile(e.target.files ? e.target.files[0] : null)}
-            required
             className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer"
           />
         </label>
@@ -107,7 +123,7 @@ const MockupPavan: React.FC = () => {
           type="submit"
           className="bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200"
         >
-          Upload
+          {editingId ? 'Update' : 'Upload'}
         </button>
       </form>
 
@@ -138,6 +154,17 @@ const MockupPavan: React.FC = () => {
             <div className="mt-3 text-white text-base font-semibold text-center break-words">
               {item.description}
             </div>
+              <button
+                onClick={() => {
+                  setEditingId(item.id);
+                  setDescription(item.description);
+                  setFile(null);
+                }}
+                className="mt-2 bg-yellow-500 hover:bg-yellow-600 text-white text-xs px-3 py-1 rounded-full transition-all duration-150"
+                title="Edit"
+              >
+                Edit
+              </button>
           </div>
         ))}
       </div>

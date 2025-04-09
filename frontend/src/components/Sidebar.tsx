@@ -179,24 +179,10 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
           <List component="div" disablePadding>
             <ListItemButton
               sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #f7f2ff)' }}
-              selected={activeNav === 'mockup-juergen'}
-              onClick={() => setActiveNav('mockup-juergen')}
+              selected={activeNav === 'mockup-gallery'}
+              onClick={() => setActiveNav('mockup-gallery')}
             >
-              <ListItemText primary="Juergen" />
-            </ListItemButton>
-            <ListItemButton
-              sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #f7f2ff)' }}
-              selected={activeNav === 'mockup-pavan'}
-              onClick={() => setActiveNav('mockup-pavan')}
-            >
-              <ListItemText primary="Pavan" />
-            </ListItemButton>
-            <ListItemButton
-              sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #f7f2ff)' }}
-              selected={activeNav === 'mockup-peter'}
-              onClick={() => setActiveNav('mockup-peter')}
-            >
-              <ListItemText primary="Peter" />
+              <ListItemText primary="Gallery" />
             </ListItemButton>
           </List>
         )}
