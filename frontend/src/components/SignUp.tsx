@@ -77,6 +77,8 @@ export default function SignUp() {
   const [nameError, setNameError] = React.useState(false);
   const [nameErrorMessage, setNameErrorMessage] = React.useState('');
   const [showPassword, setShowPassword] = React.useState(false);
+  const [signupMessage, setSignupMessage] = React.useState<string | null>(null);
+  const [signupError, setSignupError] = React.useState<string | null>(null);
 
   const handleClickShowPassword = () => {
     setShowPassword((show) => !show);
@@ -119,7 +121,7 @@ export default function SignUp() {
     return isValid;
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!validateInputs()) {
       return;
@@ -131,6 +133,32 @@ export default function SignUp() {
       email: data.get('email'),
       password: data.get('password'),
     });
+    const payload = {
+      email: data.get('email'),
+      password: data.get('password'),
+    };
+
+    try {
+      const response = await fetch('http://localhost:5001/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setSignupMessage(result.message || 'Registration successful. Please verify your email.');
+        setSignupError(null);
+      } else {
+        setSignupError(result.error || 'Registration failed');
+        setSignupMessage(null);
+      }
+    } catch (error) {
+      console.error('Signup error:', error);
+      setSignupError('An error occurred during registration');
+      setSignupMessage(null);
+    }
   };
 
   return (
@@ -234,6 +262,20 @@ export default function SignUp() {
               Sign up
             </Button>
           </Box>
+          {(signupMessage || signupError) && (
+            <Box mt={2}>
+              {signupMessage && (
+                <Typography color="success.main" textAlign="center">
+                  {signupMessage}
+                </Typography>
+              )}
+              {signupError && (
+                <Typography color="error" textAlign="center">
+                  {signupError}
+                </Typography>
+              )}
+            </Box>
+          )}
           <Divider>
             <Typography sx={{ color: 'text.secondary' }}>or</Typography>
           </Divider>

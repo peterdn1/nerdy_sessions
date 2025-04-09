@@ -72,6 +72,9 @@ export default function SignIn() {
   const [passwordError, setPasswordError] = React.useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
   const [showPassword, setShowPassword] = React.useState(false);
+  const [loginError, setLoginError] = React.useState<string | null>(null);
+  const [loginMessage, setLoginMessage] = React.useState<string | null>(null);
+
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const validateInputs = () => {
@@ -101,16 +104,39 @@ export default function SignIn() {
     return isValid;
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!validateInputs()) {
       return;
     }
     const data = new FormData(event.currentTarget);
-    console.log({
+    const payload = {
       email: data.get('email'),
       password: data.get('password'),
-    });
+    };
+
+    try {
+      const response = await fetch('http://localhost:5001/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setLoginMessage(result.message || 'Login successful');
+        setLoginError(null);
+        // TODO: redirect or update UI after successful login
+      } else {
+        setLoginError(result.error || 'Login failed');
+        setLoginMessage(null);
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      setLoginError('An error occurred during login');
+      setLoginMessage(null);
+    }
   };
 
   return (
@@ -192,6 +218,16 @@ export default function SignIn() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
+            {loginError && (
+              <Typography color="error" variant="body2">
+                {loginError}
+              </Typography>
+            )}
+            {loginMessage && (
+              <Typography color="primary" variant="body2">
+                {loginMessage}
+              </Typography>
+            )}
             <Button
               type="submit"
               fullWidth
