@@ -51,7 +51,7 @@ npm install
 ```bash
 # In the backend directory, create a .env file with:
 PORT=5001
-DATABASE_URL=postgresql://username:password@localhost:5432/database_name
+DATABASE_URL=postgresql://username:password@localhost:5432/nerdy_sessions
 
 # Additional environment variables as needed
 ```
