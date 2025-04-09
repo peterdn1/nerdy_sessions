@@ -26,10 +26,6 @@ const WelcomePage: React.FC = () => {
       </header>
       <main className="flex-1 flex flex-col items-center px-4 pt-20 pb-10 bg-white">
         <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">Explore the best of Your App</h1>
-        <div className="flex gap-4 mb-10">
-          <Link to="/signup" className="px-6 py-2 rounded-full bg-red-500 hover:bg-red-600 text-white font-semibold transition">Sign Up</Link>
-          <Link to="/signin" className="px-6 py-2 rounded-full border border-gray-400 hover:bg-gray-100 text-gray-800 font-semibold transition">Log In</Link>
-        </div>
 
         <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-10 w-full max-w-6xl">
           {[
