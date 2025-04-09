@@ -245,6 +245,85 @@ app.put('/api/mockup-images/:id', upload.single('image'), async (req, res) => {
   }
 });
 
+// --- Mockup Websites Create ---
+app.post('/api/mockup-websites', async (req, res) => {
+  try {
+    const { url, description } = req.body;
+    const userId = req.body.user_id || null;
+
+    if (!url) {
+      return res.status(400).json({ error: 'URL is required' });
+    }
+
+    const saved = await prisma.mockup_websites.create({
+      data: {
+        url,
+        description: description || null,
+        uploaded_by: userId
+      }
+    });
+
+    res.json(saved);
+  } catch (err) {
+    console.error('Error creating mockup website:', err);
+    res.status(500).json({ error: 'Failed to create website' });
+  }
+});
+
+// --- Mockup Websites List ---
+app.get('/api/mockup-websites', async (req, res) => {
+  try {
+    const websites = await prisma.mockup_websites.findMany({
+      orderBy: { created_at: 'desc' }
+    });
+    res.json(websites);
+  } catch (err) {
+    console.error('Error fetching mockup websites:', err);
+    res.status(500).json({ error: 'Failed to fetch websites' });
+  }
+});
+
+// --- Mockup Websites Delete ---
+app.delete('/api/mockup-websites/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+    const website = await prisma.mockup_websites.findUnique({ where: { id } });
+    if (!website) {
+      return res.status(404).json({ error: 'Website not found' });
+    }
+
+    await prisma.mockup_websites.delete({ where: { id } });
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Error deleting mockup website:', err);
+    res.status(500).json({ error: 'Failed to delete website' });
+  }
+});
+
+// --- Mockup Websites Update ---
+app.put('/api/mockup-websites/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+    const website = await prisma.mockup_websites.findUnique({ where: { id } });
+    if (!website) {
+      return res.status(404).json({ error: 'Website not found' });
+    }
+
+    const updated = await prisma.mockup_websites.update({
+      where: { id },
+      data: {
+        url: req.body.url || website.url,
+        description: req.body.description || website.description
+      }
+    });
+
+    res.json(updated);
+  } catch (err) {
+    console.error('Error updating mockup website:', err);
+    res.status(500).json({ error: 'Failed to update website' });
+  }
+});
+
 // All other routes should serve the frontend
 // In development, don't handle frontend routes since Vite handles that
 if (process.env.NODE_ENV === 'production') {

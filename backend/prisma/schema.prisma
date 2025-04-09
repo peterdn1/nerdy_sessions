@@ -62,6 +62,7 @@ model users {
 
   trade_history    trade_history[]
   mockup_images    mockup_images[]
+  mockup_websites  mockup_websites[]
   user_portfolios  user_portfolios[]
 }
 model mockup_images {
@@ -71,6 +72,16 @@ model mockup_images {
   url           String
   description   String?
   uploaded_at   DateTime  @default(now()) @db.Timestamp(6)
+  uploaded_by   String?   @db.Uuid
+
+  users         users?    @relation(fields: [uploaded_by], references: [id], onDelete: SetNull, onUpdate: NoAction)
+}
+
+model mockup_websites {
+  id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  url           String
+  description   String?
+  created_at    DateTime  @default(now()) @db.Timestamp(6)
   uploaded_by   String?   @db.Uuid
 
   users         users?    @relation(fields: [uploaded_by], references: [id], onDelete: SetNull, onUpdate: NoAction)
