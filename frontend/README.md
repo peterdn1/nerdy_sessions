@@ -21,31 +21,54 @@ A modern, responsive frontend for the **Nerdy Sessions** platform, built with Re
 - Responsive design optimized for all devices
 - Integration-ready with backend APIs
 
+### Mockup Websites Feature
+
+- Add website URLs with descriptions
+- View all saved websites in a table
+- Click description to open website in a new tab
+- Edit or delete existing website entries
+- Data stored in the backend database
+
 ## Available Routes
 
 - `/` — Main dashboard page
 - `/signin` — User login page
 - `/signup` — User registration page
 
+## Backend API
+
+The backend exposes REST API endpoints for managing mockup websites:
+
+- `GET /api/mockup-websites` — List all saved websites
+- `POST /api/mockup-websites` — Add a new website (JSON body: `{ "url": "...", "description": "..." }`)
+- `PUT /api/mockup-websites/:id` — Update an existing website
+- `DELETE /api/mockup-websites/:id` — Delete a website
+
+## Database
+
+- Prisma ORM with PostgreSQL
+- New model: `mockup_websites` with fields `id`, `url`, `description`, `created_at`, `uploaded_by`
+- Migration applied via `prisma db push`
+
 ## Getting Started
 
 Install dependencies:
 
-\`\`\`bash
+```bash
 npm install
-\`\`\`
+```
 
 Run the development server:
 
-\`\`\`bash
+```bash
 npm run dev
-\`\`\`
+```
 
 Build for production:
 
-\`\`\`bash
+```bash
 npm run build
-\`\`\`
+```
 
     // Optionally, add this for stylistic rules
     ...tseslint.configs.stylisticTypeChecked,
@@ -80,4 +103,3 @@ export default tseslint.config({
     ...reactDom.configs.recommended.rules,
   },
 })
-```
