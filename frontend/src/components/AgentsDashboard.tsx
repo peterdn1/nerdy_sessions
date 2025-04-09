@@ -1,6 +1,46 @@
 import React from 'react';
 
-function AgentsDashboard() {
+const AgentCard = ({
+  iconClass,
+  title,
+  description,
+  status,
+  lastRun,
+  bgColor = ''
+}: {
+  iconClass: string;
+  title: string;
+  description: string;
+  status: string;
+  lastRun: string;
+  bgColor?: string;
+}) => (
+  <div className="agent-card">
+    <div className="agent-avatar" style={bgColor ? { backgroundColor: bgColor } : {}}>
+      <i className={iconClass}></i>
+    </div>
+    <div className="flex-grow">
+      <div className="flex justify-between items-start">
+        <div>
+          <h4 className="font-bold text-lg">{title}</h4>
+          <p className="text-gray-600 text-sm">{description}</p>
+        </div>
+        <div
+          className={`px-2 py-1 rounded-full text-xs font-semibold ${
+            status === 'Active'
+              ? 'bg-green-100 text-green-700'
+              : 'bg-gray-100 text-gray-700'
+          }`}
+        >
+          {status}
+        </div>
+      </div>
+      <div className="text-xs text-gray-400 mt-1">{lastRun}</div>
+    </div>
+  </div>
+);
+
+const AgentsDashboard: React.FC = () => {
   return (
     <div>
       <h2 className="text-2xl font-bold mb-6 flex items-center">
@@ -10,56 +50,31 @@ function AgentsDashboard() {
         Agents Dashboard
       </h2>
       <div className="dashboard-grid grid grid-cols-1 gap-6">
-        {/* Agents List */}
         <div className="md:col-span-2">
           <div className="mb-6">
-            <div className="agent-card">
-              <div className="agent-avatar">
-                <i className="fas fa-search"></i>
-              </div>
-              <div className="flex-grow">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h4 className="font-bold text-lg">Research Assistant</h4>
-                    <p className="text-gray-600 text-sm">Scans tech blogs daily and summarizes AI news</p>
-                  </div>
-                  <div className="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">Active</div>
-                </div>
-                <div className="text-xs text-gray-400 mt-1">Last run: Today, 9:30 AM</div>
-              </div>
-            </div>
-
-            <div className="agent-card">
-              <div className="agent-avatar" style={{backgroundColor: '#e74c3c'}}>
-                <i className="fas fa-envelope"></i>
-              </div>
-              <div className="flex-grow">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h4 className="font-bold text-lg">Email Triage</h4>
-                    <p className="text-gray-600 text-sm">Sorts emails by priority and categorizes newsletters</p>
-                  </div>
-                  <div className="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">Active</div>
-                </div>
-                <div className="text-xs text-gray-400 mt-1">Last run: Today, 10:15 AM • 23 emails processed</div>
-              </div>
-            </div>
-
-            <div className="agent-card">
-              <div className="agent-avatar" style={{backgroundColor: '#3498db'}}>
-                <i className="fas fa-bell"></i>
-              </div>
-              <div className="flex-grow">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h4 className="font-bold text-lg">Stock Alert</h4>
-                    <p className="text-gray-600 text-sm">Monitors your portfolio and alerts on significant changes</p>
-                  </div>
-                  <div className="px-2 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-semibold">Paused</div>
-                </div>
-                <div className="text-xs text-gray-400 mt-1">Last run: Yesterday, 4:00 PM</div>
-              </div>
-            </div>
+            <AgentCard
+              iconClass="fas fa-search"
+              title="Research Assistant"
+              description="Scans tech blogs daily and summarizes AI news"
+              status="Active"
+              lastRun="Last run: Today, 9:30 AM"
+            />
+            <AgentCard
+              iconClass="fas fa-envelope"
+              title="Email Triage"
+              description="Sorts emails by priority and categorizes newsletters"
+              status="Active"
+              lastRun="Last run: Today, 10:15 AM • 23 emails processed"
+              bgColor="#e74c3c"
+            />
+            <AgentCard
+              iconClass="fas fa-bell"
+              title="Stock Alert"
+              description="Monitors your portfolio and alerts on significant changes"
+              status="Paused"
+              lastRun="Last run: Yesterday, 4:00 PM"
+              bgColor="#3498db"
+            />
           </div>
 
           <div className="border border-dashed border-gray-300 rounded-lg p-6 flex flex-col items-center justify-center text-center">
@@ -67,7 +82,9 @@ function AgentsDashboard() {
               <i className="fas fa-plus"></i>
             </div>
             <h4 className="font-bold text-lg mb-1">Create New Agent</h4>
-            <p className="text-gray-500 text-sm mb-3">Set up an automated assistant to help with your tasks</p>
+            <p className="text-gray-500 text-sm mb-3">
+              Set up an automated assistant to help with your tasks
+            </p>
             <button className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
               Get Started
             </button>
@@ -76,6 +93,6 @@ function AgentsDashboard() {
       </div>
     </div>
   );
-}
+};
 
 export default AgentsDashboard;

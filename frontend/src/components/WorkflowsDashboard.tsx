@@ -1,6 +1,6 @@
 import React from 'react';
 
-function WorkflowsDashboard() {
+const WorkflowsDashboard: React.FC = () => {
   return (
     <div>
       <h2 className="text-2xl font-bold mb-6 flex items-center">
@@ -24,6 +24,6 @@ function WorkflowsDashboard() {
       </div>
     </div>
   );
-}
+};
 
 export default WorkflowsDashboard;

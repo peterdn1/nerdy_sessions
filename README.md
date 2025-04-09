@@ -50,7 +50,7 @@ npm install
 3. Set up environment variables
 ```bash
 # In the backend directory, create a .env file with:
-PORT=3000
+PORT=5001
 DATABASE_URL=postgresql://username:password@localhost:5432/database_name
 
 # Additional environment variables as needed
@@ -127,7 +127,7 @@ npm run dev  # Starts Vite dev server
 ## Development
 
 - Frontend runs on `http://localhost:5173` by default (Vite)
-- Backend runs on `http://localhost:3000` by default
+- Backend runs on `http://localhost:5001` by default
 - API endpoints are prefixed with `/api`
 - CORS is enabled for development
 

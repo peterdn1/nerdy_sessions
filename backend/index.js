@@ -14,9 +14,10 @@ app.use(express.json());
 // Database connection
 const prisma = new PrismaClient();
 
-// Test database connection
-// Database connection with retry logic
-// Prisma Client will connect lazily on first query
+/**
+ * Initialize Prisma connection
+ * Prisma Client connects lazily on first query
+ */
 prisma.$connect()
   .then(() => console.log('Prisma connected'))
   .catch((err) => {
@@ -25,7 +26,7 @@ prisma.$connect()
   });
 
 // Serve static files from frontend
-app.use(express.static('../frontend/dist'));
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
 // Sample API endpoint
 app.get('/api', (req, res) => {
@@ -41,7 +42,7 @@ app.get('/api/stocks', async (req, res) => {
     const stocks = await prisma.stocks.findMany();
     res.json(stocks);
   } catch (err) {
-    console.error(err);
+    console.error('Error in /api/stocks:', err);
     res.status(500).json({ error: 'Failed to fetch stocks' });
   }
 });
@@ -55,7 +56,7 @@ app.get('/api/portfolio', async (req, res) => {
     });
     res.json(portfolio);
   } catch (err) {
-    console.error(err);
+    console.error('Error in /api/portfolio:', err);
     res.status(500).json({ error: 'Failed to fetch portfolio' });
   }
 });
@@ -70,7 +71,7 @@ app.get('/api/trades', async (req, res) => {
     });
     res.json(trades);
   } catch (err) {
-    console.error(err);
+    console.error('Error in /api/trades:', err);
     res.status(500).json({ error: 'Failed to fetch trades' });
   }
 });
@@ -79,11 +80,11 @@ app.get('/api/trades', async (req, res) => {
 app.get('/api/ai-score', async (req, res) => {
   try {
     const symbol = req.query.symbol;
-    // Placeholder: call AI scoring service here
+    // TODO: Replace with real AI scoring service call
     const score = Math.floor(Math.random() * 201) - 100; // -100 to 100
     res.json({ symbol, ai_impact_score: score });
   } catch (err) {
-    console.error(err);
+    console.error('Error in /api/ai-score:', err);
     res.status(500).json({ error: 'Failed to compute AI score' });
   }
 });
@@ -99,14 +100,14 @@ app.get('/api/news', async (req, res) => {
     });
     res.json(news);
   } catch (err) {
-    console.error(err);
+    console.error('Error in /api/news:', err);
     res.status(500).json({ error: 'Failed to fetch news' });
   }
 });
 
 // All other routes should serve the frontend
 app.use((req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+  res.status(200).sendFile(path.join(__dirname, '../frontend/dist/index.html'));
 });
 
 app.listen(port, () => {

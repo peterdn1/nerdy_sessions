@@ -7,18 +7,43 @@ interface Task {
   completed: boolean;
 }
 
-function ToolsDashboard() {
+const TaskItem = ({
+  task,
+  toggleTask,
+}: {
+  task: Task;
+  toggleTask: (id: number) => void;
+}) => (
+  <div className="flex items-center justify-between mb-2">
+    <div>
+      <input
+        type="checkbox"
+        checked={task.completed}
+        onChange={() => toggleTask(task.id)}
+        className="mr-2"
+      />
+      <span className={task.completed ? 'line-through text-gray-400' : ''}>
+        {task.text}
+      </span>
+    </div>
+    <span className="text-xs text-gray-500">{task.due}</span>
+  </div>
+);
+
+const ToolsDashboard: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([
     { id: 1, text: 'Prepare project proposal', due: 'today', completed: false },
     { id: 2, text: 'Review design mockups', due: 'tomorrow', completed: false },
     { id: 3, text: 'Schedule team meeting', due: 'completed', completed: true },
-    { id: 4, text: 'Send client invoice', due: 'in 3 days', completed: false }
+    { id: 4, text: 'Send client invoice', due: 'in 3 days', completed: false },
   ]);
 
   const toggleTask = (id: number) => {
-    setTasks(tasks.map(task =>
-      task.id === id ? {...task, completed: !task.completed} : task
-    ));
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task
+      )
+    );
   };
 
   return (
@@ -40,21 +65,8 @@ function ToolsDashboard() {
             <h3 className="font-bold">Task List</h3>
           </div>
           <div className="widget-content">
-            {tasks.map(task => (
-              <div key={task.id} className="flex items-center justify-between mb-2">
-                <div>
-                  <input
-                    type="checkbox"
-                    checked={task.completed}
-                    onChange={() => toggleTask(task.id)}
-                    className="mr-2"
-                  />
-                  <span className={task.completed ? 'line-through text-gray-400' : ''}>
-                    {task.text}
-                  </span>
-                </div>
-                <span className="text-xs text-gray-500">{task.due}</span>
-              </div>
+            {tasks.map((task) => (
+              <TaskItem key={task.id} task={task} toggleTask={toggleTask} />
             ))}
           </div>
         </div>
@@ -74,6 +86,6 @@ function ToolsDashboard() {
       </div>
     </div>
   );
-}
+};
 
 export default ToolsDashboard;
