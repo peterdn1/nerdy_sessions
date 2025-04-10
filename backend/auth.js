@@ -21,6 +21,7 @@ router.use(authRateLimiter);
 
 // JWT secret from environment
 const JWT_SECRET = process.env.JWT_SECRET || 'dev_secret_key';
+const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET || 'dev_refresh_secret';
 
 // Register new user
 router.post('/register', async (req, res) => {
@@ -175,13 +176,13 @@ router.post('/refresh-token', async (req, res) => {
   if (!refreshToken) return res.status(400).json({ error: 'Refresh token required' });
 
   try {
-    const payload = jwt.verify(refreshToken, JWT_SECRET);
+    const payload = jwt.verify(refreshToken, REFRESH_TOKEN_SECRET);
 
     // Optionally, check payload or token version here
 
     const newAccessToken = jwt.sign(
       { userId: payload.userId, email: payload.email },
-      JWT_SECRET,
+      REFRESH_TOKEN_SECRET,
       { expiresIn: '7d' }
     );
 

@@ -4,8 +4,18 @@ const express = require('express');
 const cors = require('cors');
 const { PrismaClient } = require('@prisma/client');
 
+const cookieParser = require('cookie-parser');
 const authRouter = require('./auth');
 const app = express();
+// Enforce HTTPS in production
+if (process.env.NODE_ENV === 'production') {
+  app.use((req, res, next) => {
+    if (req.headers['x-forwarded-proto'] !== 'https') {
+      return res.redirect('https://' + req.headers.host + req.url);
+    }
+    next();
+  });
+}
 
 app.use((req, res, next) => {
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
@@ -35,6 +45,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // Middleware
+app.use(cookieParser(process.env.COOKIE_SECRET || 'dev_cookie_secret'));
 app.use(cors());
 app.use(express.json());
 app.use('/auth', authRouter);
