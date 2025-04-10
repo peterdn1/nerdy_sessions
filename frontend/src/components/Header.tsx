@@ -2,6 +2,14 @@ import React from 'react';
 import nerdySessionsLogo from '../assets/nerdy_sessions.svg';
 
 const Header = () => {
+  const handleSignOut = () => {
+    // Clear auth tokens or session data
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    // Redirect to welcome page
+    window.location.href = '/';
+  };
+
   return (
     <header className="flex items-center justify-between pl-1 pr-3 h-16 bg-white shadow z-50">
       <div className="flex items-center space-x-2">
@@ -9,6 +17,7 @@ const Header = () => {
           <img src={nerdySessionsLogo} alt="Nerdy Sessions Logo" className="w-3/5 h-3/5" />
         </div>
         <h1 className="text-xl font-bold hidden sm:block">Nerdy Sessions</h1>
+      </div>
       <div className="flex-1 flex justify-center px-4">
         <input
           type="text"
@@ -16,6 +25,13 @@ const Header = () => {
           className="w-full max-w-md px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
+      <div className="flex items-center space-x-2">
+        <button
+          onClick={handleSignOut}
+          className="flex items-center justify-center h-12 px-4 rounded-full bg-gray-200 hover:bg-gray-300 transition"
+        >
+          Sign out
+        </button>
       </div>
     </header>
   );
