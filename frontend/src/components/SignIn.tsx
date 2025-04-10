@@ -75,6 +75,8 @@ export default function SignIn() {
   const [showPassword, setShowPassword] = React.useState(false);
   const [loginError, setLoginError] = React.useState<string | null>(null);
   const [loginMessage, setLoginMessage] = React.useState<string | null>(null);
+  const [rememberMe, setRememberMe] = React.useState(false);
+  
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -124,9 +126,20 @@ export default function SignIn() {
       });
 
       const result = await response.json();
+      console.log('Login response:', result);
 
       if (response.ok) {
         setLoginMessage(result.message || 'Login successful');
+        const fullName = result.fullName || result.username || result.email || 'User';
+        if (rememberMe) {
+          localStorage.setItem('authToken', result.token || 'dummy-token');
+          localStorage.setItem('username', result.username || 'User');
+          localStorage.setItem('fullName', fullName);
+        } else {
+          sessionStorage.setItem('authToken', result.token || 'dummy-token');
+          sessionStorage.setItem('username', result.username || 'User');
+          sessionStorage.setItem('fullName', fullName);
+        }
         setLoginError(null);
         navigate('/app');
       } else {
@@ -216,7 +229,7 @@ export default function SignIn() {
               />
             </FormControl>
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
+              control={<Checkbox checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)} color="primary" />}
               label="Remember me"
             />
             {loginError && (

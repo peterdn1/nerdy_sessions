@@ -281,4 +281,10 @@ body {
 /* Ensure tab content is visible when standalone */
 .tab-content {
      display: block;
+
+/* Hide logout button in sidebar */
+button[aria-label="logout"] {
+  display: none !important;
+}
+
 }

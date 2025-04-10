@@ -19,7 +19,11 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
   const [mockupOpen, setMockupOpen] = useState(false);
 
   return (
-    <MuiSidebar width="240px">
+    <MuiSidebar
+      width="240px"
+      userName={localStorage.getItem('fullName') || sessionStorage.getItem('fullName') || 'User'}
+      designation="Member"
+    >
       <List>
         <ListItemButton
           selected={activeNav === 'life'}

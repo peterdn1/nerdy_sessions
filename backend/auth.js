@@ -65,7 +65,12 @@ router.post('/login', async (req, res) => {
     if (!user.emailVerified) return res.status(403).json({ error: 'Email not verified' });
 
     const token = jwt.sign({ userId: user.id, email: user.email }, JWT_SECRET, { expiresIn: '7d' });
-    res.json({ token });
+    res.json({
+      token,
+      email: user.email,
+      username: user.username,
+      fullName: user.fullName || user.username
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Login failed' });
