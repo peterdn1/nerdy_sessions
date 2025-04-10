@@ -5,6 +5,19 @@ const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 const router = express.Router();
+const rateLimit = require('express-rate-limit');
+
+// Rate limiter for auth endpoints
+const authRateLimiter = rateLimit({
+  windowMs: parseInt(process.env.AUTH_RATE_LIMIT_WINDOW_MS || '60000', 10), // default 1 minute
+  max: parseInt(process.env.AUTH_RATE_LIMIT_MAX || '5', 10), // limit each IP to 5 requests per windowMs
+  message: 'Too many authentication attempts, please try again later.',
+  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+  legacyHeaders: false,  // Disable the `X-RateLimit-*` headers
+});
+
+// Apply rate limiter to all auth routes
+router.use(authRateLimiter);
 
 // JWT secret from environment
 const JWT_SECRET = process.env.JWT_SECRET || 'dev_secret_key';
@@ -18,7 +31,8 @@ router.post('/register', async (req, res) => {
     const existing = await prisma.users.findUnique({ where: { email } });
     if (existing) return res.status(409).json({ error: 'User already exists' });
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const SALT_ROUNDS = parseInt(process.env.BCRYPT_COST || '12', 10);
+    const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
     const username = email.split('@')[0];
 
     // Generate a verification token BEFORE creating user
