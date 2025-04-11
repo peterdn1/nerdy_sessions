@@ -15,11 +15,11 @@ Create a modern, Pinterest-inspired welcome page with:
 
 ```mermaid
 flowchart TD
-    A[Header (reuse existing)]
-    B[Hero Section: Headline + Search Bar + Buttons]
-    C[Image Grid: 2-3 rows of rounded cards with overlay text]
-    D["See more" button]
-    E[Footer (reuse existing)]
+    A[Header]
+    B[Hero Section]
+    C[Image Grid]
+    D[See more button]
+    E[Footer]
 
     A --> B --> C --> D --> E
 ```
