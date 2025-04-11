@@ -17,6 +17,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
   const [newsOpen, setNewsOpen] = useState(false);
   const [lifeOpen, setLifeOpen] = useState(false);
   const [mockupOpen, setMockupOpen] = useState(false);
+  const [investmentToolsOpen, setInvestmentToolsOpen] = useState(false);
 
   const [userName, setUserName] = useState(
     localStorage.getItem('fullName') || sessionStorage.getItem('fullName') || 'User'
@@ -158,67 +159,11 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
           <List component="div" disablePadding>
             <ListItemButton
               sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #f2f7ff)' }}
-              selected={activeNav === 'stocks-screener'}
-              onClick={() => setActiveNav('stocks-screener')}
-            >
-              <ListItemIcon>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M3 3h18v18H3z"></path>
-                  <path d="M21 9H3"></path>
-                  <path d="M21 15H3"></path>
-                  <path d="M12 3v18"></path>
-                </svg>
-              </ListItemIcon>
-              <ListItemText primary="Stock Screener" />
-            </ListItemButton>
-            <ListItemButton
-              sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #f2f7ff)' }}
-              selected={activeNav === 'stocks-mock-trading'}
-              onClick={() => setActiveNav('stocks-mock-trading')}
-            >
-              <ListItemIcon>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M6 2v14a2 2 0 0 0 2 2h14"></path>
-                  <path d="M18 22V8a2 2 0 0 0-2-2H2"></path>
-                </svg>
-              </ListItemIcon>
-              <ListItemText primary="Mock Trading" />
-            </ListItemButton>
-            <ListItemButton
-              sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #f2f7ff)' }}
-              selected={activeNav === 'stocks-watchlist'}
-              onClick={() => setActiveNav('stocks-watchlist')}
-            >
-              <ListItemIcon>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M12 2v4"></path>
-                  <path d="m19 5-3 3"></path>
-                  <path d="m5 5 3 3"></path>
-                  <path d="M18 12v7a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-7"></path>
-                  <path d="M12 22V12"></path>
-                </svg>
-              </ListItemIcon>
-              <ListItemText primary="Watchlist" />
-            </ListItemButton>
-            <ListItemButton
-              sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #f2f7ff)' }}
-              selected={activeNav === 'stocks-leaderboard'}
-              onClick={() => setActiveNav('stocks-leaderboard')}
-            >
-              <ListItemIcon>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="9" cy="7" r="4"></circle>
-                  <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                </svg>
-              </ListItemIcon>
-              <ListItemText primary="Leaderboard" />
-            </ListItemButton>
-            <ListItemButton
-              sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #f2f7ff)' }}
               selected={activeNav === 'stocks-investment-tools'}
-              onClick={() => setActiveNav('stocks-investment-tools')}
+              onClick={() => {
+                setActiveNav('stocks-investment-tools');
+                setInvestmentToolsOpen(!investmentToolsOpen);
+              }}
             >
               <ListItemIcon>
                 {/* Toolbox/Briefcase icon */}
@@ -228,6 +173,83 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
                 </svg>
               </ListItemIcon>
               <ListItemText primary="Investment Tools" />
+            </ListItemButton>
+            {investmentToolsOpen && (
+              <List component="div" disablePadding>
+                <ListItemButton
+                  sx={{ pl: 8, background: 'linear-gradient(270deg, #f7faff, #e6f0ff)' }}
+                  selected={activeNav === 'stocks-mock-trading'}
+                  onClick={() => setActiveNav('stocks-mock-trading')}
+                >
+                  <ListItemIcon>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M6 2v14a2 2 0 0 0 2 2h14"></path>
+                      <path d="M18 22V8a2 2 0 0 0-2-2H2"></path>
+                    </svg>
+                  </ListItemIcon>
+                  <ListItemText primary="Mock Trading" />
+                </ListItemButton>
+                <ListItemButton
+                  sx={{ pl: 8, background: 'linear-gradient(270deg, #f7faff, #e6f0ff)' }}
+                  selected={activeNav === 'stocks-screener'}
+                  onClick={() => setActiveNav('stocks-screener')}
+                >
+                  <ListItemIcon>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M3 3h18v18H3z"></path>
+                      <path d="M21 9H3"></path>
+                      <path d="M21 15H3"></path>
+                      <path d="M12 3v18"></path>
+                    </svg>
+                  </ListItemIcon>
+                  <ListItemText primary="Screener" />
+                </ListItemButton>
+                <ListItemButton
+                  sx={{ pl: 8, background: 'linear-gradient(270deg, #f7faff, #e6f0ff)' }}
+                  selected={activeNav === 'stocks-watchlist'}
+                  onClick={() => setActiveNav('stocks-watchlist')}
+                >
+                  <ListItemIcon>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M12 2v4"></path>
+                      <path d="m19 5-3 3"></path>
+                      <path d="m5 5 3 3"></path>
+                      <path d="M18 12v7a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-7"></path>
+                      <path d="M12 22V12"></path>
+                    </svg>
+                  </ListItemIcon>
+                  <ListItemText primary="Watchlist" />
+                </ListItemButton>
+                <ListItemButton
+                  sx={{ pl: 8, background: 'linear-gradient(270deg, #f7faff, #e6f0ff)' }}
+                  selected={activeNav === 'stocks-leaderboard'}
+                  onClick={() => setActiveNav('stocks-leaderboard')}
+                >
+                  <ListItemIcon>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="9" cy="7" r="4"></circle>
+                      <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                  </ListItemIcon>
+                  <ListItemText primary="Leaderboard" />
+                </ListItemButton>
+              </List>
+            )}
+            <ListItemButton
+              sx={{ pl: 4, background: 'linear-gradient(270deg, #f7faff, #e6f0ff)' }}
+              selected={activeNav === 'stocks-agent-adviser'}
+              onClick={() => setActiveNav('stocks-agent-adviser')}
+            >
+              <ListItemIcon>
+                {/* Agent/Adviser icon */}
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="8" r="4" />
+                  <path d="M2 20c0-4 8-6 10-6s10 2 10 6v2H2v-2z" />
+                </svg>
+              </ListItemIcon>
+              <ListItemText primary="Agent Adviser" />
             </ListItemButton>
           </List>
         )}
