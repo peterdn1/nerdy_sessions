@@ -299,22 +299,6 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
         >
           <ListItemText primary="Tools" primaryTypographyProps={{ fontWeight: 'bold' }} />
         </ListItemButton>
-        <ListItemButton
-          selected={activeNav === 'workflows'}
-          onClick={() => setActiveNav('workflows')}
-          sx={{ background: 'linear-gradient(270deg, #f9fbff, #e6f0ff)' }}
-        >
-          <ListItemIcon>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="6" cy="6" r="3"></circle>
-              <circle cx="18" cy="6" r="3"></circle>
-              <circle cx="6" cy="18" r="3"></circle>
-              <circle cx="18" cy="18" r="3"></circle>
-              <path d="M6 9v6M18 9v6M9 6h6M9 18h6"></path>
-            </svg>
-          </ListItemIcon>
-          <ListItemText primary="Workflow" primaryTypographyProps={{ fontWeight: 'bold' }} />
-        </ListItemButton>
       </List>
     </MuiSidebar>
   );
