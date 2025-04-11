@@ -288,3 +288,83 @@ button[aria-label="logout"] {
 }
 
 }
+.gsi-material-button {
+.gsi-material-button-state {
+  background-color: #fff;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.gsi-material-button-content-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.gsi-material-button-icon {
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.gsi-material-button-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.gsi-material-button-contents {
+  font-weight: 500;
+  font-family: 'Roboto', arial, sans-serif;
+}
+
+.gsi-material-button:hover {
+  background-color: #f7f8f8;
+  box-shadow: 0 1px 3px rgba(60,64,67,.3), 0 4px 8px rgba(60,64,67,.15);
+}
+
+.gsi-material-button:active {
+  background-color: #e6e6e6;
+}
+
+.gsi-material-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #4285f4;
+}
+
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -webkit-appearance: none;
+  background-color: WHITE;
+  background-image: none;
+  border: 1px solid #747775;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #1f1f1f;
+  cursor: pointer;
+  font-family: 'Roboto', arial, sans-serif;
+  font-size: 14px;
+  height: 40px;
+  letter-spacing: 0.25px;
+  outline: none;
+  overflow: hidden;
+  padding: 0 12px;
+  position: relative;
+  text-align: center;
+  -webkit-transition: background-color .218s, border-color .218s, box-shadow .218s;
+  transition: background-color .218s, border-color .218s, box-shadow .218s;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: auto;
+  max-width: 400px;
+  min-width: min-content;
+}
+

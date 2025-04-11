@@ -18,6 +18,18 @@ const App = () => {
   const location = useLocation();
   const [activeNav, setActiveNav] = useState('news');
 
+  React.useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('token');
+    if (token) {
+      localStorage.setItem('authToken', token);
+      params.delete('token');
+      const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+      window.history.replaceState({}, '', newUrl);
+      window.location.href = '/app';
+    }
+  }, []);
+
   const hideHeader = location.pathname === '/' || location.pathname === '/signin' || location.pathname === '/signup';
 
   return (

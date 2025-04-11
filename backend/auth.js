@@ -92,31 +92,69 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// Placeholder for social login
-router.post('/social/:provider', async (req, res) => {
+const { google } = require('googleapis');
+
+router.get('/social/:provider', async (req, res) => {
   const { provider } = req.params;
-// TEMP endpoint to delete two most recent users
-router.delete('/delete-test-users', async (req, res) => {
+  if (provider !== 'google') {
+    return res.status(400).json({ error: 'Unsupported provider' });
+  }
+
+  const oauth2Client = new google.auth.OAuth2(
+    process.env.GOOGLE_CLIENT_ID,
+    process.env.GOOGLE_CLIENT_SECRET,
+    process.env.GOOGLE_REDIRECT_URI
+  );
+
+  const { code } = req.query;
+
+  if (!code) {
+    const authUrl = oauth2Client.generateAuthUrl({
+      access_type: 'offline',
+      scope: ['profile', 'email'],
+      prompt: 'consent'
+    });
+    console.log('Generated Google OAuth URL:', authUrl);
+    return res.redirect(authUrl);
+  }
+
   try {
-    const users = await prisma.users.findMany({
-      orderBy: { created_at: 'desc' },
-      take: 2
+    const { tokens } = await oauth2Client.getToken(code);
+    oauth2Client.setCredentials(tokens);
+
+    const oauth2 = google.oauth2({
+      auth: oauth2Client,
+      version: 'v2'
     });
 
-    const deleted = [];
-    for (const user of users) {
-      await prisma.users.delete({ where: { id: user.id } });
-      deleted.push(user.email);
+    const { data: profile } = await oauth2.userinfo.get();
+
+    if (!profile.email) {
+      return res.status(400).json({ error: 'Failed to retrieve email from Google' });
     }
 
-    res.json({ message: 'Deleted users', deleted });
+    let user = await prisma.users.findUnique({ where: { email: profile.email } });
+
+    if (!user) {
+      user = await prisma.users.create({
+        data: {
+          email: profile.email,
+          username: profile.email.split('@')[0],
+          emailVerified: true,
+          provider: 'google'
+        }
+      });
+    }
+
+    const token = jwt.sign({ userId: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '7d' });
+
+    // Redirect back to frontend with token as query param
+    const frontendBaseUrl = process.env.FRONTEND_BASE_URL || 'http://localhost:5173';
+    return res.redirect(`${frontendBaseUrl}/?token=${token}`);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Failed to delete users' });
+    console.error('Google OAuth error:', err);
+    return res.status(500).json({ error: 'Google OAuth failed' });
   }
-});
-  // TODO: Implement OAuth flow for Google, GitHub, etc.
-  res.status(501).json({ error: `Social login with ${provider} not implemented yet` });
 });
 
 // Placeholder for email verification
