@@ -7,6 +7,8 @@ import WelcomePage from './components/WelcomePage';
 import SignUp from './components/SignUp';
 import './App.css';
 import VerifyEmail from './components/VerifyEmail';
+import ResetPassword from './components/ResetPassword';
+import ForgotPassword from './components/ForgotPassword';
 
 const AppWrapper = () => (
   <BrowserRouter>
@@ -19,6 +21,9 @@ const App = () => {
   const [activeNav, setActiveNav] = useState('news');
 
   React.useEffect(() => {
+    // Prevent token processing/redirect on /reset-password route
+    if (location.pathname === '/reset-password') return;
+
     const params = new URLSearchParams(window.location.search);
     const token = params.get('token');
     const fullName = params.get('fullName');
@@ -44,7 +49,7 @@ const App = () => {
       window.history.replaceState({}, '', newUrl);
       window.location.href = '/app';
     }
-  }, []);
+  }, [location.pathname]);
 
   const hideHeader = location.pathname === '/' || location.pathname === '/signin' || location.pathname === '/signup';
 
@@ -55,7 +60,9 @@ const App = () => {
         <Routes>
           <Route path="/" element={<WelcomePage />} />
           <Route path="/signin" element={<SignIn />} />
+<Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/signup" element={<SignUp />} />
+<Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/verify-email" element={<VerifyEmail />} />
           <Route path="*" element={<Page activeNav={activeNav} setActiveNav={setActiveNav} />} />
         </Routes>

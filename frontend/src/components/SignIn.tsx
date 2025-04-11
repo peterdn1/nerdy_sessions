@@ -249,6 +249,11 @@ export default function SignIn() {
             >
               Sign in
             </Button>
+<Typography sx={{ textAlign: 'center', mt: 1 }}>
+  <Link component={RouterLink} to="/forgot-password" variant="body2">
+    Forgot Password?
+  </Link>
+</Typography>
           </Box>
           <Divider>
             <Typography sx={{ color: 'text.secondary' }}>or</Typography>

@@ -239,14 +239,93 @@ router.get('/verify-email', async (req, res) => {
 
 // Placeholder for password reset request
 router.post('/request-password-reset', async (req, res) => {
-  // TODO: Implement password reset request logic
-  res.status(501).json({ error: 'Password reset request not implemented yet' });
+  const { email } = req.body;
+  if (!email) return res.status(400).json({ error: 'Email required' });
+
+  try {
+    const user = await prisma.users.findUnique({ where: { email } });
+    if (!user) {
+      // Do not reveal if user exists for security
+      return res.json({ message: 'If that email exists, a reset link has been sent.' });
+    }
+
+    // Generate secure token and expiry (1 hour)
+    const crypto = require('crypto');
+    const resetToken = crypto.randomBytes(32).toString('hex');
+    const resetTokenExpiry = new Date(Date.now() + 60 * 60 * 1000);
+
+    await prisma.users.update({
+      where: { email },
+      data: { resetToken, resetTokenExpiry }
+    });
+
+    const frontendBaseUrl = process.env.FRONTEND_BASE_URL || 'http://localhost:5173';
+    const resetUrl = `${frontendBaseUrl}/reset-password?token=${resetToken}`;
+
+    if (REQUIRE_EMAIL_VERIFICATION) {
+      // Send email logic (reuse SendGrid if configured)
+      if (process.env.SENDGRID_API_KEY) {
+        try {
+          await sgMail.send({
+            to: email,
+            from: 'no-reply@example.com',
+            subject: 'Password Reset Request',
+            text: `Reset your password using this link: ${resetUrl}`,
+            html: `<p>Reset your password by clicking the link below:</p><p><a href="${resetUrl}">${resetUrl}</a></p>`,
+          });
+          console.log(`Password reset email sent to ${email}`);
+        } catch (emailErr) {
+          console.error('Error sending password reset email:', emailErr);
+        }
+      } else {
+        console.log(`[Email skipped] Password reset link for ${email}: ${resetUrl}`);
+      }
+    } else {
+      // Dev mode: print to console
+      console.log(`Reset link: ${resetUrl}`);
+    }
+
+    return res.json({ message: 'If that email exists, a reset link has been sent.' });
+  } catch (err) {
+    console.error('Password reset request error:', err);
+    res.status(500).json({ error: 'Failed to process password reset request' });
+  }
 });
 
 // Placeholder for password reset confirmation
 router.post('/reset-password', async (req, res) => {
-  // TODO: Implement password reset confirmation logic
-  res.status(501).json({ error: 'Password reset not implemented yet' });
+  const { token, password } = req.body;
+  if (!token || !password) return res.status(400).json({ error: 'Token and new password required' });
+
+  try {
+    const user = await prisma.users.findFirst({
+      where: {
+        resetToken: token,
+        resetTokenExpiry: { gte: new Date() }
+      }
+    });
+
+    if (!user) {
+      return res.status(400).json({ error: 'Invalid or expired reset token' });
+    }
+
+    const SALT_ROUNDS = parseInt(process.env.BCRYPT_COST || '12', 10);
+    const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+
+    await prisma.users.update({
+      where: { id: user.id },
+      data: {
+        hashed_password: hashedPassword,
+        resetToken: null,
+        resetTokenExpiry: null
+      }
+    });
+
+    return res.json({ message: 'Password has been reset successfully.' });
+  } catch (err) {
+    console.error('Password reset error:', err);
+    res.status(500).json({ error: 'Failed to reset password' });
+  }
 // Refresh token endpoint
 router.post('/refresh-token', async (req, res) => {
   const { refreshToken } = req.body;
