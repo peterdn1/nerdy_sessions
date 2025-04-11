@@ -113,9 +113,9 @@ npm run lint
 
 ## Screenshots
 
-![App](src/assets/App.png)
+![App](src/assets/images/App.png)
 
-![Sign In](src/assets/SignIn.png)
+![Sign In](src/assets/images/SignIn.png)
 
 ---
 

@@ -155,9 +155,9 @@ ISC
 
 ## Screenshot
 
-![Screenshot](frontend/src/assets/Screenshot.png)
+![Screenshot](frontend/src/assets/images/Screenshot.png)
 
-![Sign In](frontend/src/assets/SignIn.png)
+![Sign In](frontend/src/assets/images/SignIn.png)
 
-![App](frontend/src/assets/App.png)
+![App](frontend/src/assets/images/App.png)
 
