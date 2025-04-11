@@ -13,7 +13,7 @@ import Footer from './Footer';
 
 const WelcomePage: React.FC = () => {
   const videos = [robot1, robot2, robot3, robot4, robot5, robot6, robot7];
-  const [videoIndex, setVideoIndex] = useState(0);
+  const [videoIndex, setVideoIndex] = useState(() => Math.floor(Math.random() * videos.length));
 
   const handleSeeMore = () => {
     setVideoIndex((prevIndex) => (prevIndex + 1) % videos.length);
