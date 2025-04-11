@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import nerdySessionsLogo from '../assets/nerdy_sessions.svg';
-import robot1 from '../assets/robot1.mp4';
-import robot2 from '../assets/robot2.mp4';
-import robot3 from '../assets/robot3.webm';
-import robot4 from '../assets/Robot4.mov';
-import robot5 from '../assets/Robot5.mov';
-import robot6 from '../assets/Robot6.mov';
-import robot7 from '../assets/Robot7.mov';
-import weAreHereImg from '../assets/WeAreHere.png';
+import nerdySessionsLogo from '../assets/images/nerdy_sessions.svg';
+import robot1 from '../assets/videos/robot1.mp4';
+import robot2 from '../assets/videos/robot2.mp4';
+import robot3 from '../assets/videos/robot3.webm';
+import robot4 from '../assets/videos/Robot4.mov';
+import robot5 from '../assets/videos/Robot5.mov';
+import robot6 from '../assets/videos/Robot6.mov';
+import robot7 from '../assets/videos/Robot7.mov';
+import weAreHereImg from '../assets/images/WeAreHere.png';
 import Footer from './Footer';
 
 const WelcomePage: React.FC = () => {

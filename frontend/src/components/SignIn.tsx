@@ -21,9 +21,9 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
-import robotVideo from '../assets/robot.mp4';
+import robotVideo from '../assets/videos/robot.mp4';
  
-import nerdyLogo from '../assets/nerdy_sessions.svg';
+import nerdyLogo from '../assets/images/nerdy_sessions.svg';
  
 const theme = createTheme();
 

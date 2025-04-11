@@ -18,9 +18,9 @@ import { styled, ThemeProvider, createTheme } from '@mui/material/styles';
 /* Video background for SignUp */
 // No import needed, video is served from public directory
 
-import robot2Video from '../assets/robot2.mp4';
+import robot2Video from '../assets/videos/robot2.mp4';
  
-import nerdyLogo from '../assets/nerdy_sessions.svg';
+import nerdyLogo from '../assets/images/nerdy_sessions.svg';
  
 const theme = createTheme();
 

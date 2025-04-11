@@ -1,5 +1,5 @@
 import React from 'react';
-import nerdySessionsLogo from '../assets/nerdy_sessions.svg';
+import nerdySessionsLogo from '../assets/images/nerdy_sessions.svg';
 
 const Header = () => {
   const handleSignOut = () => {
