@@ -94,21 +94,19 @@ flowchart TD
 
 ```
 +-----------------------------------------------------+
-| [Header]                                            |
+| [Header: Logo | Search Bar | Log in | Sign up]      |
 +-----------------------------------------------------+
 |                                                     |
-|        Explore the best of [Your App]               |
+|   [Video background: robot videos cycling]           |
+|   +---------------------------------------------+   |
+|   |                                             |   |
+|   |   [Overlay:                                 |   |
+|   |     - "We Are Here" image                   |   |
+|   |     - "Change is coming....." headline      |   |
+|   |     - [See more] button                     |   |
+|   |   ]                                         |   |
+|   +---------------------------------------------+   |
 |                                                     |
-|        [ Search bar (placeholder) ]                 |
-|                                                     |
-|        [Sign Up]    [Log In]                        |
-|                                                     |
-+-----------------------------------------------------+
-|  [Image Card]   [Image Card]   [Image Card]         |
-|                                                     |
-|  [Image Card]   [Image Card]   [Image Card]         |
-|                                                     |
-|                   See more                          |
 +-----------------------------------------------------+
 | [Footer]                                            |
 +-----------------------------------------------------+
