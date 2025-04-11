@@ -101,6 +101,16 @@ export default function ResetPassword() {
     }
   }, [token]);
 
+  // Redirect to Sign In after successful password reset
+  React.useEffect(() => {
+    if (message && message.toLowerCase().includes('success')) {
+      const timeout = setTimeout(() => {
+        navigate('/signin');
+      }, 1500); // 1.5 seconds
+      return () => clearTimeout(timeout);
+    }
+  }, [message, navigate]);
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline enableColorScheme />
