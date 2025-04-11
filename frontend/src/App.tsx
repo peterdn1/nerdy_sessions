@@ -21,9 +21,25 @@ const App = () => {
   React.useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const token = params.get('token');
+    const fullName = params.get('fullName');
+    const username = params.get('username');
+
     if (token) {
       localStorage.setItem('authToken', token);
       params.delete('token');
+    }
+
+    if (fullName) {
+      localStorage.setItem('fullName', fullName);
+      params.delete('fullName');
+    }
+
+    if (username) {
+      localStorage.setItem('username', username);
+      params.delete('username');
+    }
+
+    if (token || fullName || username) {
       const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
       window.history.replaceState({}, '', newUrl);
       window.location.href = '/app';
