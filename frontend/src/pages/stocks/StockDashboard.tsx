@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto'; // Import Chart.js
-import { BUTTON_LABELS } from '../constants';
+import { BUTTON_LABELS } from '../../constants';
 
 function StockDashboard() {
   const portfolioChartRef = useRef<HTMLCanvasElement | null>(null);

@@ -1,6 +1,6 @@
 // frontend/src/components/StockScreener.tsx
 import React from 'react';
-import { PLACEHOLDERS } from '../constants';
+import { PLACEHOLDERS } from '../../constants';
 
 const StockScreener: React.FC = () => {
   // Mock data for the table - replace with actual data fetching later

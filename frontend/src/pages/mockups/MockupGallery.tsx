@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PLACEHOLDERS } from '../constants';
+import { PLACEHOLDERS } from '../../constants';
 
 interface UploadItem {
   id: string;

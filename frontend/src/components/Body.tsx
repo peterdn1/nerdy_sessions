@@ -1,13 +1,13 @@
 import React from 'react';
-import NewsDashboard from './NewsDashboard';
-import LifeDashboard from './LifeDashboard';
+import NewsDashboard from '../pages/news/NewsDashboard';
+import LifeDashboard from '../pages/life/LifeDashboard';
 import AgentsDashboard from './AgentsDashboard';
 import ToolsDashboard from './ToolsDashboard';
 import WorkflowsDashboard from './WorkflowsDashboard';
-import StockDashboard from './StockDashboard';
-import StockScreener from './StockScreener';
-import MockupGallery from './MockupGallery';
-import MockupWebsites from './MockupWebsites';
+import StockDashboard from '../pages/stocks/StockDashboard';
+import StockScreener from '../pages/stocks/StockScreener';
+import MockupGallery from '../pages/mockups/MockupGallery';
+import MockupWebsites from '../pages/mockups/MockupWebsites';
 
 interface BodyProps {
   activeNav: string;
