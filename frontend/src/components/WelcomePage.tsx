@@ -11,8 +11,9 @@ import robot7 from '../assets/videos/Robot7.mov';
 import weAreHereImg from '../assets/images/WeAreHere.png';
 import Footer from './Footer';
 
+const videos = [robot1, robot2, robot3, robot4, robot5, robot6, robot7];
+
 const WelcomePage: React.FC = () => {
-  const videos = [robot1, robot2, robot3, robot4, robot5, robot6, robot7];
   const [videoIndex, setVideoIndex] = useState(() => Math.floor(Math.random() * videos.length));
 
   const handleSeeMore = () => {
@@ -32,6 +33,7 @@ const WelcomePage: React.FC = () => {
             type="text"
             placeholder="Search for AI impacts, Robotics companies, AI Stock Winners and Losers"
             className="w-full max-w-3xl px-8 py-4 border border-gray-300 rounded-full bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            aria-label="Search for AI impacts, Robotics companies, AI Stock Winners and Losers"
           />
         </div>
         <div className="flex items-center space-x-8">
@@ -54,6 +56,7 @@ const WelcomePage: React.FC = () => {
           <button
             className="px-6 py-2 rounded-full bg-gray-200 hover:bg-gray-300 transition"
             onClick={handleSeeMore}
+            aria-label="See another robot video"
           >
             See more
           </button>

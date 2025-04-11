@@ -26,8 +26,18 @@
 
 ### 2. Performance
 
-- **Video Preloading:** Importing all video files at once can increase bundle size. If these videos are large, consider lazy-loading or storing their URLs in a config file or CDN.
-- **Video Key:** If you ever add a list of videos or dynamic video elements, always provide a `key` prop.
+- **Video Preloading & Bundle Size:** Importing all video files directly into the component increases the initial JavaScript bundle size, which can slow down page load times, especially for users on slower connections. To improve performance:
+  - Consider lazy-loading videos only when needed (e.g., when the user clicks "See more" or when the video is about to be shown).
+  - Store video URLs in a configuration file or serve them from a CDN to reduce the bundle size and leverage browser caching.
+  - Use dynamic `import()` or React's `lazy`/`Suspense` for video components if you split them out.
+- **Image Optimization:** Ensure all images used on the welcome page are optimized for web (compressed, appropriate resolution). Use modern formats like WebP where possible.
+- **Efficient State Management:** The current use of `useState` for video cycling is appropriate. If the component grows, consider using `useMemo` or `useCallback` to prevent unnecessary re-renders.
+- **Avoid Unnecessary Renders:** If you extract video or header sections into their own components, use `React.memo` to avoid re-rendering unless props change.
+- **Tailwind CSS JIT:** Tailwind's JIT mode is efficient, but avoid generating excessive utility classes dynamically, as this can impact build performance.
+- **Video Key Prop:** If you render a list of videos or dynamic video elements, always provide a unique `key` prop to help React optimize rendering.
+- **Testing on Slow Networks:** Use Chrome DevTools to simulate slow network conditions and ensure the welcome page remains responsive and visually complete quickly.
+
+By addressing these points, the welcome page will load faster and provide a smoother experience, especially for first-time visitors.
 
 ### 3. Code Quality
 
