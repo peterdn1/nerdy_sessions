@@ -18,11 +18,18 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
   const [lifeOpen, setLifeOpen] = useState(false);
   const [mockupOpen, setMockupOpen] = useState(false);
 
+  const handleLogout = () => {
+    localStorage.removeItem('fullName');
+    sessionStorage.removeItem('fullName');
+    window.location.href = '/';
+  };
+
   return (
     <MuiSidebar
       width="240px"
       userName={localStorage.getItem('fullName') || sessionStorage.getItem('fullName') || 'User'}
       designation="Member"
+      onLogout={handleLogout}
     >
       <List>
         <ListItemButton
