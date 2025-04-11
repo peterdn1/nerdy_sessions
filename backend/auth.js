@@ -178,6 +178,7 @@ router.get('/social/:provider', async (req, res) => {
         data: {
           email: profile.email,
           username: profile.email.split('@')[0],
+          fullName: profile.name || profile.email.split('@')[0],
           emailVerified: true,
           provider: 'google'
         }
@@ -186,9 +187,9 @@ router.get('/social/:provider', async (req, res) => {
 
     const token = jwt.sign({ userId: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '7d' });
 
-    // Redirect back to frontend with token as query param
+    // Redirect back to frontend with token and user info as query params
     const frontendBaseUrl = process.env.FRONTEND_BASE_URL || 'http://localhost:5173';
-    return res.redirect(`${frontendBaseUrl}/?token=${token}`);
+    return res.redirect(`${frontendBaseUrl}/?token=${token}&username=${user.username}&fullName=${user.fullName || user.username}`);
   } catch (err) {
     console.error('Google OAuth error:', err);
     return res.status(500).json({ error: 'Google OAuth failed' });

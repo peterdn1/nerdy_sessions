@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Sidebar as MuiSidebar } from 'react-mui-sidebar';
 
 interface SidebarProps {
@@ -18,6 +18,19 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
   const [lifeOpen, setLifeOpen] = useState(false);
   const [mockupOpen, setMockupOpen] = useState(false);
 
+  const [userName, setUserName] = useState(
+    localStorage.getItem('fullName') || sessionStorage.getItem('fullName') || 'User'
+  );
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setUserName(localStorage.getItem('fullName') || sessionStorage.getItem('fullName') || 'User');
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
+
   const handleLogout = () => {
     localStorage.removeItem('fullName');
     sessionStorage.removeItem('fullName');
@@ -27,7 +40,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
   return (
     <MuiSidebar
       width="240px"
-      userName={localStorage.getItem('fullName') || sessionStorage.getItem('fullName') || 'User'}
+      userName={userName}
       designation="Member"
       onLogout={handleLogout}
     >
