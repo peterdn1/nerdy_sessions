@@ -3,7 +3,15 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { PrismaClient } = require('@prisma/client');
 
+const REQUIRE_EMAIL_VERIFICATION = (process.env.REQUIRE_EMAIL_VERIFICATION || 'true').toLowerCase() === 'true';
+console.log('REQUIRE_EMAIL_VERIFICATION:', REQUIRE_EMAIL_VERIFICATION);
+
 const prisma = new PrismaClient();
+
+const sgMail = require('@sendgrid/mail');
+if (process.env.SENDGRID_API_KEY) {
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+}
 const router = express.Router();
 const rateLimit = require('express-rate-limit');
 
@@ -45,8 +53,8 @@ router.post('/register', async (req, res) => {
         email,
         username,
         hashed_password: hashedPassword,
-        emailVerified: false,
-        verificationToken
+        emailVerified: REQUIRE_EMAIL_VERIFICATION ? false : true,
+        verificationToken: REQUIRE_EMAIL_VERIFICATION ? verificationToken : null
       }
     });
 
@@ -55,11 +63,39 @@ router.post('/register', async (req, res) => {
     const frontendBaseUrl = process.env.FRONTEND_BASE_URL || 'http://localhost:5173';
     const verifyUrl = `${frontendBaseUrl}/verify-email?token=${verificationToken}`;
 
-    // Placeholder for sending email
-    console.log(`Send verification email to ${email} with link: ${verifyUrl}`);
-
-    res.json({ message: 'User registered. Please verify your email.' });
+    if (REQUIRE_EMAIL_VERIFICATION) {
+      if (
+        process.env.NODE_ENV !== 'test' &&
+        process.env.SENDGRID_API_KEY
+      ) {
+        try {
+          await sgMail.send({
+            to: email,
+            from: 'no-reply@example.com', // Replace with your verified sender
+            subject: 'Verify your email',
+            text: `Please verify your email by clicking the following link: ${verifyUrl}`,
+            html: `<p>Please verify your email by clicking the link below:</p><p><a href="${verifyUrl}">${verifyUrl}</a></p>`,
+          });
+          console.log(`Verification email sent to ${email}`);
+        } catch (emailErr) {
+          console.error('Error sending verification email:', emailErr);
+        }
+      } else {
+        console.log(`[Email skipped] Verification link for ${email}: ${verifyUrl}`);
+      }
+    } else {
+      console.log('Email verification disabled by environment config; skipping verification email.');
+    }
+console.log('DEBUG: About to send response - REQUIRE_EMAIL_VERIFICATION:', REQUIRE_EMAIL_VERIFICATION);
+if (REQUIRE_EMAIL_VERIFICATION) {
+  res.json({ message: 'User registered. Please verify your email.' });
+  return;
+} else {
+  res.json({ message: 'User registered successfully. Email verification not required.' });
+  return;
+}
   } catch (err) {
+console.log('DEBUG: Entered catch block, about to send error response');
     console.error(err);
     res.status(500).json({ error: 'Registration failed' });
   }
@@ -77,7 +113,9 @@ router.post('/login', async (req, res) => {
     const valid = await bcrypt.compare(password, user.hashed_password);
     if (!valid) return res.status(401).json({ error: 'Invalid credentials' });
 
-    if (!user.emailVerified) return res.status(403).json({ error: 'Email not verified' });
+    if (REQUIRE_EMAIL_VERIFICATION && !user.emailVerified) {
+      return res.status(403).json({ error: 'Email not verified' });
+    }
 
     const token = jwt.sign({ userId: user.id, email: user.email }, JWT_SECRET, { expiresIn: '7d' });
     res.json({
