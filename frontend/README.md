@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="src/assets/nerdy_sessions.svg" alt="Nerdy Sessions Logo" width="200"/>
+  <img src="src/assets/images/nerdy_sessions.svg" alt="Nerdy Sessions Logo" width="200"/>
 </p>
 
 # Nerdy Sessions Frontend
