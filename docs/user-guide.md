@@ -12,11 +12,18 @@ Nerdy Sessions is a platform designed to provide tools and dashboards for variou
 1.  Navigate to the `/signup` page.
 2.  Enter your desired username and password.
 3.  Click the "Sign Up" button.
+### Email Verification
+After signing up, you will receive an email with a verification link. Please click the link in your email to verify your account before signing in. If you do not see the email, check your spam folder.
 
 ### Signing In
 1.  Navigate to the `/signin` page.
 2.  Enter your registered username and password.
 3.  Click the "Sign In" button.
+### Resetting Your Password
+If you forget your password, click the "Forgot Password?" link on the sign-in page. Enter your registered email address and follow the instructions:
+- In production, you will receive an email with a password reset link.
+- In development, the reset link will be shown in the server console/logs.
+Click the link, set a new password, and you can then sign in with your new credentials.
 
 ## 3. Navigating the Interface
 
