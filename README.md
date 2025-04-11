@@ -48,13 +48,73 @@ npm install
 ```
 
 3. Set up environment variables
-```bash
-# In the backend directory, create a .env file with:
-PORT=5001
-DATABASE_URL=postgresql://username:password@localhost:5432/nerdy_sessions
 
-# Additional environment variables as needed
+### Backend Environment Variables
+
+Create a `.env` file in the `backend/` directory. You can copy from the provided example:
+```bash
+cp backend/.env.example backend/.env
 ```
+
+Edit `backend/.env` and fill in the required values:
+```
+# Prisma database connection string
+DATABASE_URL="postgresql://your_db_user:your_db_password@localhost:5432/nerdy_stocks"
+
+# Database credentials
+DB_USER=your_db_user
+DB_PASSWORD=your_db_password
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=nerdy_stocks
+
+# Server port
+PORT=5001
+
+# Alpha Vantage API Key
+ALPHA_VANTAGE_API_KEY=your_alpha_vantage_key
+
+# OpenAI API Key
+OPENAI_API_KEY=your_openai_key
+
+# JWT secret key (REQUIRED in production)
+JWT_SECRET=your_jwt_secret_key
+REFRESH_TOKEN_SECRET=your_refresh_token_secret_key
+
+# Cookie signing secret
+COOKIE_SECRET=your_cookie_secret_key
+
+# Google OAuth Credentials
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+GOOGLE_REDIRECT_URI=http://localhost:5001/api/auth/social/google
+
+# SendGrid API Key
+SENDGRID_API_KEY=your_sendgrid_api_key
+
+# Require email verification for new users (true/false)
+REQUIRE_EMAIL_VERIFICATION=false
+
+# Bcrypt cost factor (salt rounds)
+BCRYPT_COST=12
+```
+
+### Frontend Environment Variables
+
+Create a `.env` file in the `frontend/` directory. Example:
+```bash
+cd ../frontend
+touch .env
+```
+
+Add the following variable (adjust as needed for your backend API URL):
+```
+VITE_API_URL=http://localhost:5001
+```
+
+- The frontend communicates with the backend API at `${VITE_API_URL}/api`.
+- Interactive API docs are available at `${VITE_API_URL}/docs` (Swagger UI).
+- See `backend/openapi.yaml` for the OpenAPI spec.
 
 4. Generate Prisma client
 
@@ -70,7 +130,7 @@ npx prisma generate
 npx prisma migrate dev --name init
 ```
 
-4. Start the development servers
+6. Start the development servers
 
 Backend:
 ```bash
@@ -138,6 +198,7 @@ npm run dev  # Starts Vite dev server
 - The backend uses `swagger-ui-express` and `js-yaml` to serve the interactive API docs
 
 This allows you to explore and test all API endpoints directly from your browser.
+
 ## ESLint Configuration
 
 The frontend includes a robust ESLint configuration for TypeScript and React. To enable type-aware lint rules, update the configuration as shown in the frontend's eslint.config.js file.
@@ -160,4 +221,3 @@ ISC
 ![Sign In](frontend/src/assets/images/SignIn.png)
 
 ![App](frontend/src/assets/images/App.png)
-
