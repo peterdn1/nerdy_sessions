@@ -1,5 +1,6 @@
 // frontend/src/components/StockScreener.tsx
 import React from 'react';
+import { PLACEHOLDERS } from '../constants';
 
 const StockScreener: React.FC = () => {
   // Mock data for the table - replace with actual data fetching later
@@ -94,9 +95,9 @@ const StockScreener: React.FC = () => {
           <div className="w-full max-w-[200px]">
             <label className="block text-sm font-medium text-gray-700 mb-1">Price</label>
             <div className="flex items-center space-x-2">
-              <input type="number" placeholder="Min" className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-300" />
+              <input type="number" placeholder={PLACEHOLDERS.min} className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-300" />
               <span>-</span>
-              <input type="number" placeholder="Max" className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-300" />
+              <input type="number" placeholder={PLACEHOLDERS.max} className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-300" />
             </div>
           </div>
 

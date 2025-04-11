@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import { styled, ThemeProvider, createTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
+import { PLACEHOLDERS } from '../constants';
 
 const theme = createTheme();
 
@@ -103,7 +104,7 @@ export default function ForgotPassword() {
                 required
                 fullWidth
                 id="email"
-                placeholder="your@email.com"
+                placeholder={PLACEHOLDERS.email}
                 name="email"
                 autoComplete="email"
                 variant="outlined"

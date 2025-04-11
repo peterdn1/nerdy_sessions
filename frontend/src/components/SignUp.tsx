@@ -17,6 +17,7 @@ import {
 import { styled, ThemeProvider, createTheme } from '@mui/material/styles';
 /* Video background for SignUp */
 // No import needed, video is served from public directory
+import { PLACEHOLDERS, LABELS } from '../constants';
 
 import robot2Video from '../assets/videos/robot2.mp4';
  
@@ -200,7 +201,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="name"
-                placeholder="Jon Snow"
+                placeholder={PLACEHOLDERS.name}
                 error={nameError}
                 helperText={nameErrorMessage}
                 color={nameError ? 'error' : 'primary'}
@@ -212,7 +213,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="email"
-                placeholder="your@email.com"
+                placeholder={PLACEHOLDERS.email}
                 name="email"
                 autoComplete="email"
                 variant="outlined"
@@ -227,7 +228,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 name="password"
-                placeholder="••••••"
+                placeholder={PLACEHOLDERS.password}
                 type={showPassword ? 'text' : 'password'}
                 id="password"
                 autoComplete="new-password"
@@ -252,7 +253,7 @@ export default function SignUp() {
             </FormControl>
             <FormControlLabel
               control={<Checkbox value="allowExtraEmails" color="primary" />}
-              label="I want to receive updates via email."
+              label={LABELS.receiveUpdates}
             />
             <Button
               type="submit"

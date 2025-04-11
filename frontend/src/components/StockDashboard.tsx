@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto'; // Import Chart.js
+import { BUTTON_LABELS } from '../constants';
 
 function StockDashboard() {
   const portfolioChartRef = useRef<HTMLCanvasElement | null>(null);
@@ -113,10 +114,10 @@ function StockDashboard() {
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-semibold">Portfolio Performance</h2>
               <div className="flex space-x-2">
-                <button className="px-3 py-1 text-sm rounded bg-indigo-100 text-indigo-700">1W</button>
-                <button className="px-3 py-1 text-sm rounded">1M</button>
-                <button className="px-3 py-1 text-sm rounded">3M</button>
-                <button className="px-3 py-1 text-sm rounded">1Y</button>
+                <button className="px-3 py-1 text-sm rounded bg-indigo-100 text-indigo-700">{BUTTON_LABELS.oneWeek}</button>
+                <button className="px-3 py-1 text-sm rounded">{BUTTON_LABELS.oneMonth}</button>
+                <button className="px-3 py-1 text-sm rounded">{BUTTON_LABELS.threeMonths}</button>
+                <button className="px-3 py-1 text-sm rounded">{BUTTON_LABELS.oneYear}</button>
               </div>
             </div>
             <div className="chart-container">
@@ -167,7 +168,7 @@ function StockDashboard() {
                 </div>
                 <div className="flex flex-col items-end">
                   <span className="font-bold">$845.32</span>
-                  <button className="mt-1 text-xs text-indigo-600 hover:text-indigo-800">Add to Watchlist</button>
+                  <button className="mt-1 text-xs text-indigo-600 hover:text-indigo-800">{BUTTON_LABELS.addToWatchlist}</button>
                 </div>
               </div>
               {/* MSFT */}
@@ -184,7 +185,7 @@ function StockDashboard() {
                 </div>
                 <div className="flex flex-col items-end">
                   <span className="font-bold">$420.17</span>
-                  <button className="mt-1 text-xs text-indigo-600 hover:text-indigo-800">Add to Watchlist</button>
+                  <button className="mt-1 text-xs text-indigo-600 hover:text-indigo-800">{BUTTON_LABELS.addToWatchlist}</button>
                 </div>
               </div>
               {/* GOOG */}
@@ -201,7 +202,7 @@ function StockDashboard() {
                 </div>
                 <div className="flex flex-col items-end">
                   <span className="font-bold">$175.42</span>
-                  <button className="mt-1 text-xs text-indigo-600 hover:text-indigo-800">Add to Watchlist</button>
+                  <button className="mt-1 text-xs text-indigo-600 hover:text-indigo-800">{BUTTON_LABELS.addToWatchlist}</button>
                 </div>
               </div>
               {/* AMD */}
@@ -218,7 +219,7 @@ function StockDashboard() {
                 </div>
                 <div className="flex flex-col items-end">
                   <span className="font-bold">$158.93</span>
-                  <button className="mt-1 text-xs text-indigo-600 hover:text-indigo-800">Add to Watchlist</button>
+                  <button className="mt-1 text-xs text-indigo-600 hover:text-indigo-800">{BUTTON_LABELS.addToWatchlist}</button>
                 </div>
               </div>
             </div>
@@ -242,7 +243,7 @@ function StockDashboard() {
                 </div>
                 <div className="flex flex-col items-end">
                   <span className="font-bold">$17.23</span>
-                  <button className="mt-1 text-xs text-indigo-600 hover:text-indigo-800">Add to Watchlist</button>
+                  <button className="mt-1 text-xs text-indigo-600 hover:text-indigo-800">{BUTTON_LABELS.addToWatchlist}</button>
                 </div>
               </div>
               {/* VZ */}
@@ -259,7 +260,7 @@ function StockDashboard() {
                 </div>
                 <div className="flex flex-col items-end">
                   <span className="font-bold">$39.67</span>
-                  <button className="mt-1 text-xs text-indigo-600 hover:text-indigo-800">Add to Watchlist</button>
+                  <button className="mt-1 text-xs text-indigo-600 hover:text-indigo-800">{BUTTON_LABELS.addToWatchlist}</button>
                 </div>
               </div>
               {/* PG */}
@@ -276,7 +277,7 @@ function StockDashboard() {
                 </div>
                 <div className="flex flex-col items-end">
                   <span className="font-bold">$156.42</span>
-                  <button className="mt-1 text-xs text-indigo-600 hover:text-indigo-800">Add to Watchlist</button>
+                  <button className="mt-1 text-xs text-indigo-600 hover:text-indigo-800">{BUTTON_LABELS.addToWatchlist}</button>
                 </div>
               </div>
               {/* CVS */}
@@ -293,7 +294,7 @@ function StockDashboard() {
                 </div>
                 <div className="flex flex-col items-end">
                   <span className="font-bold">$59.48</span>
-                  <button className="mt-1 text-xs text-indigo-600 hover:text-indigo-800">Add to Watchlist</button>
+                  <button className="mt-1 text-xs text-indigo-600 hover:text-indigo-800">{BUTTON_LABELS.addToWatchlist}</button>
                 </div>
               </div>
             </div>

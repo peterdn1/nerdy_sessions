@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { PLACEHOLDERS } from '../constants';
 
 interface WebsiteItem {
   id: string;
@@ -87,7 +88,7 @@ const MockupWebsites: React.FC = () => {
           Website URL
           <input
             type="url"
-            placeholder="https://example.com"
+            placeholder={PLACEHOLDERS.url}
             value={url}
             onChange={e => setUrl(e.target.value)}
             className="border border-gray-600 bg-gray-700 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -98,7 +99,7 @@ const MockupWebsites: React.FC = () => {
           Description
           <input
             type="text"
-            placeholder="Enter a description"
+            placeholder={PLACEHOLDERS.description}
             value={description}
             onChange={e => setDescription(e.target.value)}
             className="border border-gray-600 bg-gray-700 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"

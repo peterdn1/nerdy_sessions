@@ -16,6 +16,7 @@ import { styled, ThemeProvider, createTheme } from '@mui/material/styles';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { PLACEHOLDERS } from '../constants';
 
 const theme = createTheme();
 
@@ -130,7 +131,7 @@ export default function ResetPassword() {
                 required
                 fullWidth
                 id="password"
-                placeholder="••••••"
+                placeholder={PLACEHOLDERS.password}
                 name="password"
                 type={showPassword ? 'text' : 'password'}
                 variant="outlined"

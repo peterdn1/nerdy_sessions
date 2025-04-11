@@ -1,5 +1,6 @@
 import React from 'react';
 import nerdySessionsLogo from '../assets/images/nerdy_sessions.svg';
+import { PLACEHOLDERS } from '../constants';
 
 const Header = () => {
   const handleSignOut = () => {
@@ -21,7 +22,7 @@ const Header = () => {
       <div className="flex-1 flex justify-center px-4">
         <input
           type="text"
-          placeholder="Search for ideas, inspiration, etc."
+          placeholder={PLACEHOLDERS.searchIdeas}
           className="w-full max-w-md px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>

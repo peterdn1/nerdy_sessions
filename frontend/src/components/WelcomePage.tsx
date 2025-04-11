@@ -8,6 +8,7 @@ import robot4 from '../assets/videos/Robot4.mov';
 import robot5 from '../assets/videos/Robot5.mov';
 import robot6 from '../assets/videos/Robot6.mov';
 import robot7 from '../assets/videos/Robot7.mov';
+import { PLACEHOLDERS, BUTTON_LABELS } from '../constants';
 import weAreHereImg from '../assets/images/WeAreHere.png';
 import Footer from './Footer';
 
@@ -31,9 +32,9 @@ const WelcomePage: React.FC = () => {
         <div className="flex-1 flex justify-center px-4">
           <input
             type="text"
-            placeholder="Search for AI impacts, Robotics companies, AI Stock Winners and Losers"
+            placeholder={PLACEHOLDERS.searchAI}
             className="w-full max-w-3xl px-8 py-4 border border-gray-300 rounded-full bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            aria-label="Search for AI impacts, Robotics companies, AI Stock Winners and Losers"
+            aria-label={PLACEHOLDERS.searchAI}
           />
         </div>
         <div className="flex items-center space-x-8">
@@ -56,7 +57,7 @@ const WelcomePage: React.FC = () => {
           <button
             className="px-6 py-2 rounded-full bg-gray-200 hover:bg-gray-300 transition"
             onClick={handleSeeMore}
-            aria-label="See another robot video"
+            aria-label={BUTTON_LABELS.seeAnotherRobot}
           >
             See more
           </button>

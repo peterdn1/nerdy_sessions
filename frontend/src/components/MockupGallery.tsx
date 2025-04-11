@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { PLACEHOLDERS } from '../constants';
 
 interface UploadItem {
   id: string;
@@ -112,7 +113,7 @@ const MockupGallery: React.FC = () => {
           Description
           <input
             type="text"
-            placeholder="Enter a description"
+            placeholder={PLACEHOLDERS.description}
             value={description}
             onChange={e => setDescription(e.target.value)}
             className="border border-gray-600 bg-gray-700 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"

@@ -18,6 +18,7 @@ import {
 } from '@mui/material';
 import { styled, ThemeProvider, createTheme } from '@mui/material/styles';
 import Visibility from '@mui/icons-material/Visibility';
+import { PLACEHOLDERS, LABELS } from '../constants';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
@@ -190,7 +191,7 @@ export default function SignIn() {
                 required
                 fullWidth
                 id="email"
-                placeholder="your@email.com"
+                placeholder={PLACEHOLDERS.email}
                 name="email"
                 autoComplete="email"
                 variant="outlined"
@@ -205,7 +206,7 @@ export default function SignIn() {
                 required
                 fullWidth
                 name="password"
-                placeholder="••••••"
+                placeholder={PLACEHOLDERS.password}
                 type={showPassword ? 'text' : 'password'}
                 id="password"
                 autoComplete="current-password"
@@ -230,7 +231,7 @@ export default function SignIn() {
             </FormControl>
             <FormControlLabel
               control={<Checkbox checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)} color="primary" />}
-              label="Remember me"
+              label={LABELS.rememberMe}
             />
             {loginError && (
               <Typography color="error" variant="body2">

@@ -1,4 +1,5 @@
 import React from 'react';
+import { LABELS, BUTTON_LABELS, PLACEHOLDERS } from '../constants';
 
 function ConfigurationSidebar() {
   return (
@@ -52,20 +53,20 @@ function ConfigurationSidebar() {
         <h4 className="font-semibold mb-2">Topics</h4>
         <div className="flex flex-wrap gap-2 mb-3">
           <div className="bg-gray-100 px-3 py-1 rounded-full text-sm flex items-center">
-            Technology
-            <button className="ml-2 text-gray-500 hover:text-gray-700">×</button>
+            {LABELS.technology}
+            <button className="ml-2 text-gray-500 hover:text-gray-700">{BUTTON_LABELS.close}</button>
           </div>
           <div className="bg-gray-100 px-3 py-1 rounded-full text-sm flex items-center">
-            Business
-            <button className="ml-2 text-gray-500 hover:text-gray-700">×</button>
+            {LABELS.business}
+            <button className="ml-2 text-gray-500 hover:text-gray-700">{BUTTON_LABELS.close}</button>
           </div>
           <div className="bg-gray-100 px-3 py-1 rounded-full text-sm flex items-center">
-            Science
-            <button className="ml-2 text-gray-500 hover:text-gray-700">×</button>
+            {LABELS.science}
+            <button className="ml-2 text-gray-500 hover:text-gray-700">{BUTTON_LABELS.close}</button>
           </div>
         </div>
         <div className="relative">
-          <input type="text" placeholder="Add topic..." className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500" />
+          <input type="text" placeholder={PLACEHOLDERS.addTopic} className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500" />
           <button className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
             <i className="fas fa-plus"></i>
           </button>
@@ -86,9 +87,9 @@ function ConfigurationSidebar() {
           <div>
             <label className="block text-sm text-gray-600 mb-1">Columns (Desktop)</label>
             <div className="flex items-center space-x-3">
-              <button className="px-3 py-1 border border-gray-300 rounded">1</button>
-              <button className="px-3 py-1 border border-gray-300 rounded bg-blue-500 text-white">2</button>
-              <button className="px-3 py-1 border border-gray-300 rounded">3</button>
+              <button className="px-3 py-1 border border-gray-300 rounded">{BUTTON_LABELS.page1}</button>
+              <button className="px-3 py-1 border border-gray-300 rounded bg-blue-500 text-white">{BUTTON_LABELS.page2}</button>
+              <button className="px-3 py-1 border border-gray-300 rounded">{BUTTON_LABELS.page3}</button>
             </div>
           </div>
           <div className="flex items-center justify-between">
