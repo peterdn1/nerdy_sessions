@@ -131,6 +131,13 @@ npm run dev  # Starts Vite dev server
 - API endpoints are prefixed with `/api`
 - CORS is enabled for development
 
+## API Documentation
+
+- **Swagger UI** is available at: [http://localhost:5001/docs](http://localhost:5001/docs)
+- The OpenAPI 3.1.1 specification file is located at: `backend/openapi.yaml`
+- The backend uses `swagger-ui-express` and `js-yaml` to serve the interactive API docs
+
+This allows you to explore and test all API endpoints directly from your browser.
 ## ESLint Configuration
 
 The frontend includes a robust ESLint configuration for TypeScript and React. To enable type-aware lint rules, update the configuration as shown in the frontend's eslint.config.js file.

@@ -5,6 +5,9 @@ const cors = require('cors');
 const { PrismaClient } = require('@prisma/client');
 
 const cookieParser = require('cookie-parser');
+const swaggerUi = require('swagger-ui-express');
+const yaml = require('js-yaml');
+
 const authRouter = require('./auth');
 const app = express();
 // Enforce HTTPS in production
@@ -26,6 +29,7 @@ const port = process.env.PORT || 5001;
 const multer = require('multer');
 const fs = require('fs');
 
+const openApiSpec = yaml.load(fs.readFileSync(path.join(__dirname, 'openapi.yaml'), 'utf8'));
 // Ensure uploads directory exists
 const uploadDir = path.join(__dirname, 'uploads');
 if (!fs.existsSync(uploadDir)) {
@@ -49,6 +53,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET || 'dev_cookie_secret'));
 app.use(cors());
 app.use(express.json());
 app.use('/auth', authRouter);
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(openApiSpec));
 app.use('/uploads', express.static(uploadDir));
 
 // Database connection

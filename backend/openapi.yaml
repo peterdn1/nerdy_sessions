@@ -1,0 +1,538 @@
+openapi: 3.1.1
+info:
+  title: Nerdy Sessions API
+  version: "1.0.0"
+  description: API documentation for Nerdy Sessions backend services.
+servers:
+  - url: http://localhost:5001
+paths:
+  /api:
+    get:
+      summary: API status info
+      responses:
+        '200':
+          description: API status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  version:
+                    type: string
+                  status:
+                    type: string
+
+  /api/stocks:
+    get:
+      summary: Get all stocks
+      responses:
+        '200':
+          description: List of stocks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Stock'
+
+  /api/portfolio:
+    get:
+      summary: Get user portfolio
+      parameters:
+        - in: query
+          name: user_id
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: User portfolio
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Portfolio'
+
+  /api/trades:
+    get:
+      summary: Get user trade history
+      parameters:
+        - in: query
+          name: user_id
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: User trades
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Trade'
+
+  /api/ai-score:
+    get:
+      summary: Get AI impact score for a stock
+      parameters:
+        - in: query
+          name: symbol
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: AI score
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  symbol:
+                    type: string
+                  ai_impact_score:
+                    type: integer
+
+  /api/news:
+    get:
+      summary: Get news articles for a stock
+      parameters:
+        - in: query
+          name: symbol
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: News articles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NewsArticle'
+
+  /api/mockup-images:
+    get:
+      summary: List mockup images
+      responses:
+        '200':
+          description: List of images
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MockupImage'
+    post:
+      summary: Upload a mockup image
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                user_id:
+                  type: string
+                description:
+                  type: string
+      responses:
+        '200':
+          description: Uploaded image info
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/mockup-images/{id}:
+    delete:
+      summary: Delete a mockup image
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Deletion result
+          content:
+            application/json:
+              schema:
+                type: object
+    put:
+      summary: Update a mockup image
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: false
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                description:
+                  type: string
+      responses:
+        '200':
+          description: Updated image info
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/mockup-websites:
+    get:
+      summary: List mockup websites
+      responses:
+        '200':
+          description: List of websites
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MockupWebsite'
+    post:
+      summary: Create a mockup website entry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                description:
+                  type: string
+                user_id:
+                  type: string
+      responses:
+        '200':
+          description: Created website info
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/mockup-websites/{id}:
+    delete:
+      summary: Delete a mockup website
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Deletion result
+          content:
+            application/json:
+              schema:
+                type: object
+    put:
+      summary: Update a mockup website
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                description:
+                  type: string
+      responses:
+        '200':
+          description: Updated website info
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /auth/register:
+    post:
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Registration result
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /auth/login:
+    post:
+      summary: User login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Login result
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /auth/social/{provider}:
+    get:
+      summary: Social login redirect
+      parameters:
+        - in: path
+          name: provider
+          schema:
+            type: string
+          required: true
+      responses:
+        '302':
+          description: Redirect to social login
+
+  /auth/verify-email:
+    get:
+      summary: Verify user email
+      parameters:
+        - in: query
+          name: token
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Verification result
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /auth/request-password-reset:
+    post:
+      summary: Request password reset (not implemented)
+      responses:
+        '501':
+          description: Not implemented
+
+  /auth/reset-password:
+    post:
+      summary: Reset password (not implemented)
+      responses:
+        '501':
+          description: Not implemented
+
+  /auth/refresh-token:
+    post:
+      summary: Refresh JWT token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refreshToken:
+                  type: string
+      responses:
+        '200':
+          description: New access token
+          content:
+            application/json:
+              schema:
+components:
+  schemas:
+    Stock:
+      type: object
+      properties:
+        symbol:
+          type: string
+        name:
+          type: string
+        sector:
+          type: string
+          nullable: true
+        ai_impact_score:
+          type: integer
+          nullable: true
+        last_updated:
+          type: string
+          format: date-time
+          nullable: true
+
+    NewsArticle:
+      type: object
+      properties:
+        article_id:
+          type: string
+          format: uuid
+        stock_symbol:
+          type: string
+          nullable: true
+        headline:
+          type: string
+        url:
+          type: string
+        publish_date:
+          type: string
+          format: date-time
+          nullable: true
+
+    Trade:
+      type: object
+      properties:
+        trade_id:
+          type: string
+          format: uuid
+        user_id:
+          type: string
+          format: uuid
+          nullable: true
+        stock_symbol:
+          type: string
+          nullable: true
+        shares:
+          type: integer
+        trade_price:
+          type: string
+        executed_at:
+          type: string
+          format: date-time
+          nullable: true
+
+    Portfolio:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        user_id:
+          type: string
+          format: uuid
+          nullable: true
+        stock_symbol:
+          type: string
+          nullable: true
+        shares:
+          type: integer
+        cost_basis:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          nullable: true
+
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        username:
+          type: string
+        email:
+          type: string
+        hashed_password:
+          type: string
+          nullable: true
+        emailVerified:
+          type: boolean
+        verificationToken:
+          type: string
+          nullable: true
+        resetToken:
+          type: string
+          nullable: true
+        resetTokenExpiry:
+          type: string
+          format: date-time
+          nullable: true
+        provider:
+          type: string
+          enum: [local, google, github, microsoft]
+        created_at:
+          type: string
+          format: date-time
+          nullable: true
+
+    MockupImage:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        filename:
+          type: string
+        original_name:
+          type: string
+        url:
+          type: string
+        description:
+          type: string
+          nullable: true
+        uploaded_at:
+          type: string
+          format: date-time
+        uploaded_by:
+          type: string
+          format: uuid
+          nullable: true
+
+    MockupWebsite:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        url:
+          type: string
+        description:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        uploaded_by:
+          type: string
+          format: uuid
+          nullable: true
