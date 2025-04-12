@@ -38,9 +38,25 @@ const WelcomePage: React.FC = () => {
             style={{ height: "32px", paddingLeft: "16px", marginRight: "16px" }}
           />
         </div>
-        <div className="flex items-center space-x-12">
-          <Link to="/signin" className="inline-flex items-center justify-center px-8 py-3 rounded-md border border-gray-300 text-gray-700 bg-white font-medium shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition" style={{ marginRight: "24px" }}>Log in</Link>
-          <Link to="/signup" className="inline-flex items-center justify-center px-8 py-3 rounded-md border border-transparent bg-indigo-600 text-white font-medium shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition">Sign up</Link>
+        <div className="flex items-center">
+          <div style={{ marginRight: '16px' }}>
+            <Link
+              to="/signin"
+              className="inline-flex items-center justify-center px-8 h-[32px] min-w-[100px] rounded-full bg-[#b70000] text-white font-bold text-lg transition-all duration-150 shadow-none hover:bg-[#990000] hover:text-white focus:outline-none border-2 border-[#b70000]"
+              style={{ textDecoration: "underline" }}
+            >
+              Log in
+            </Link>
+          </div>
+          <div>
+            <Link
+              to="/signup"
+              className="inline-flex items-center justify-center px-8 h-[32px] min-w-[100px] rounded-full bg-transparent text-[#4B2991] font-bold text-lg border-2 border-[#4B2991] transition-all duration-150 shadow-none hover:bg-[#f3f0fa] hover:text-[#4B2991] focus:outline-none"
+              style={{ textDecoration: "underline" }}
+            >
+              Sign up
+            </Link>
+          </div>
         </div>
       </header>
       <div className="relative w-full flex-1 flex flex-col justify-center">
