@@ -18,6 +18,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
   const [lifeOpen, setLifeOpen] = useState(false);
   const [mockupOpen, setMockupOpen] = useState(false);
   const [investmentToolsOpen, setInvestmentToolsOpen] = useState(false);
+  const [learningOpen, setLearningOpen] = useState(false);
   const [careerOpen, setCareerOpen] = useState(false);
 
   const [userName, setUserName] = useState(
@@ -438,11 +439,32 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
         )}
         <ListItemButton
           selected={activeNav === 'learning'}
-          onClick={() => setActiveNav('learning')}
+          onClick={() => {
+            setActiveNav('learning');
+            setLearningOpen(!learningOpen);
+          }}
           sx={{ background: 'linear-gradient(270deg, #f7fff9, #e6ffe6)' }}
         >
           <ListItemText primary="Learning" primaryTypographyProps={{ fontWeight: 'bold' }} />
         </ListItemButton>
+        {learningOpen && (
+          <List component="div" disablePadding>
+            <ListItemButton
+              sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #f2fff2)' }}
+              selected={activeNav === 'learning-ai-agent-tutors'}
+              onClick={() => setActiveNav('learning-ai-agent-tutors')}
+            >
+              <ListItemIcon>
+                {/* AI/Agent icon */}
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="8" r="4" />
+                  <path d="M2 20c0-4 8-6 10-6s10 2 10 6v2H2v-2z" />
+                </svg>
+              </ListItemIcon>
+              <ListItemText primary="AI Agent Tutors" />
+            </ListItemButton>
+          </List>
+        )}
         <ListItemButton
           selected={activeNav === 'community'}
           onClick={() => setActiveNav('community')}
