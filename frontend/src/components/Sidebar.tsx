@@ -18,6 +18,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
   const [lifeOpen, setLifeOpen] = useState(false);
   const [mockupOpen, setMockupOpen] = useState(false);
   const [investmentToolsOpen, setInvestmentToolsOpen] = useState(false);
+  const [careerOpen, setCareerOpen] = useState(false);
 
   const [userName, setUserName] = useState(
     localStorage.getItem('fullName') || sessionStorage.getItem('fullName') || 'User'
@@ -309,12 +310,47 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
           </List>
         )}
         <ListItemButton
-          selected={activeNav === 'career'}
-          onClick={() => setActiveNav('career')}
+          selected={activeNav === 'career' || activeNav.startsWith('career-')}
+          onClick={() => {
+            setActiveNav('career');
+            setCareerOpen(!careerOpen);
+          }}
           sx={{ background: 'linear-gradient(270deg, #f9f7ff, #e6e6ff)' }}
         >
           <ListItemText primary="Career" primaryTypographyProps={{ fontWeight: 'bold' }} />
         </ListItemButton>
+        {careerOpen && (
+          <List component="div" disablePadding>
+            <ListItemButton
+              sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #f7f2ff)' }}
+              selected={activeNav === 'career-planner'}
+              onClick={() => setActiveNav('career-planner')}
+            >
+              <ListItemText primary="Planner" />
+            </ListItemButton>
+            <ListItemButton
+              sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #f7f2ff)' }}
+              selected={activeNav === 'career-industry-shift-reports'}
+              onClick={() => setActiveNav('career-industry-shift-reports')}
+            >
+              <ListItemText primary="Industry Shift Reports" />
+            </ListItemButton>
+            <ListItemButton
+              sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #f7f2ff)' }}
+              selected={activeNav === 'career-ai-proofing'}
+              onClick={() => setActiveNav('career-ai-proofing')}
+            >
+              <ListItemText primary="AI-Proofing" />
+            </ListItemButton>
+            <ListItemButton
+              sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #f7f2ff)' }}
+              selected={activeNav === 'career-job-disruption'}
+              onClick={() => setActiveNav('career-job-disruption')}
+            >
+              <ListItemText primary="Job Disruption" />
+            </ListItemButton>
+          </List>
+        )}
         <ListItemButton
           selected={activeNav.startsWith('mockup')}
           onClick={() => {
