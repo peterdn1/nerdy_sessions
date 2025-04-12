@@ -22,14 +22,16 @@ const Header = () => {
       <div className="flex-1 flex justify-center px-4">
         <input
           type="text"
-          placeholder={PLACEHOLDERS.searchIdeas}
-          className="w-full max-w-md px-4 py-4 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder={PLACEHOLDERS.searchAI}
+          className="w-full max-w-3xl pl-4 text-xl border border-gray-300 rounded-full bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          style={{ height: "32px", paddingLeft: "16px", marginRight: "16px" }}
         />
       </div>
       <div className="flex items-center space-x-2">
         <button
           onClick={handleSignOut}
-          className="flex items-center justify-center h-12 px-4 rounded-full bg-gray-200 hover:bg-gray-300 transition"
+          className="inline-flex items-center justify-center px-8 h-[32px] min-w-[100px] rounded-full bg-[#888888] text-lg transition-all duration-150 shadow-none hover:bg-[#555555] focus:outline-none border-2 border-[#888888]"
+          style={{ color: "#fff", fontWeight: 800, textDecoration: "none" }}
         >
           Sign out
         </button>
