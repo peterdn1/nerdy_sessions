@@ -14,7 +14,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 
 const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
   const [stocksOpen, setStocksOpen] = useState(false);
-  const [newsOpen, setNewsOpen] = useState(false);
+  const [informationOpen, setInformationOpen] = useState(false);
   const [lifeOpen, setLifeOpen] = useState(false);
   const [mockupOpen, setMockupOpen] = useState(false);
   const [investmentToolsOpen, setInvestmentToolsOpen] = useState(false);
@@ -255,21 +255,21 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
           </List>
         )}
         <ListItemButton
-          selected={activeNav === 'news'}
+          selected={activeNav === 'information'}
           onClick={() => {
-            setActiveNav('news');
-            setNewsOpen(!newsOpen);
+            setActiveNav('information');
+            setInformationOpen(!informationOpen);
           }}
           sx={{ background: 'linear-gradient(270deg, #fff9f9, #ffe6e6)' }}
         >
           <ListItemText primary="Information" primaryTypographyProps={{ fontWeight: 'bold' }} />
         </ListItemButton>
-        {newsOpen && (
+        {informationOpen && (
           <List component="div" disablePadding>
             <ListItemButton
               sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #fff2f2)' }}
-              selected={activeNav === 'news-feeds'}
-              onClick={() => setActiveNav('news-feeds')}
+              selected={activeNav === 'information-headlines'}
+              onClick={() => setActiveNav('information-headlines')}
             >
               <ListItemIcon>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -281,8 +281,8 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
             </ListItemButton>
             <ListItemButton
               sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #fff2f2)' }}
-              selected={activeNav === 'news-weekly-summaries'}
-              onClick={() => setActiveNav('news-weekly-summaries')}
+              selected={activeNav === 'information-analysis'}
+              onClick={() => setActiveNav('information-analysis')}
             >
               <ListItemIcon>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -296,8 +296,8 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
             </ListItemButton>
             <ListItemButton
               sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #fff2f2)' }}
-              selected={activeNav === 'news-configure'}
-              onClick={() => setActiveNav('news-configure')}
+              selected={activeNav === 'information-misinformation'}
+              onClick={() => setActiveNav('information-misinformation')}
             >
               <ListItemIcon>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -309,8 +309,8 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
             </ListItemButton>
             <ListItemButton
               sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #fff2f2)' }}
-              selected={activeNav === 'news-podcasts'}
-              onClick={() => setActiveNav('news-podcasts')}
+              selected={activeNav === 'information-podcasts'}
+              onClick={() => setActiveNav('information-podcasts')}
             >
               <ListItemIcon>
                 {/* Podcast/Microphone icon */}
@@ -325,8 +325,8 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
             </ListItemButton>
             <ListItemButton
               sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #fff2f2)' }}
-              selected={activeNav === 'news-videos'}
-              onClick={() => setActiveNav('news-videos')}
+              selected={activeNav === 'information-videos'}
+              onClick={() => setActiveNav('information-videos')}
             >
               <ListItemIcon>
                 {/* Play/Video icon */}
@@ -339,8 +339,8 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
             </ListItemButton>
             <ListItemButton
               sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #fff2f2)' }}
-              selected={activeNav === 'news-reports'}
-              onClick={() => setActiveNav('news-reports')}
+              selected={activeNav === 'information-reports'}
+              onClick={() => setActiveNav('information-reports')}
             >
               <ListItemIcon>
                 {/* Document/Report icon */}
