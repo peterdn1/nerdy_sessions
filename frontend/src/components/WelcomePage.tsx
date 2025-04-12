@@ -29,16 +29,17 @@ const WelcomePage: React.FC = () => {
             <img src={nerdySessionsLogo} alt="Nerdy Sessions Logo" className="w-3/5 h-3/5" />
           </div>
         </div>
-        <div className="flex-1 flex justify-center px-4">
+        <div className="flex-1 flex justify-center px-4 mr-6">
           <input
             type="text"
             placeholder={PLACEHOLDERS.searchAI}
-            className="w-full max-w-3xl px-8 py-4 border border-gray-300 rounded-full bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full max-w-3xl pl-4 text-xl border border-gray-300 rounded-full bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
             aria-label={PLACEHOLDERS.searchAI}
+            style={{ height: "32px", paddingLeft: "16px", marginRight: "16px" }}
           />
         </div>
-        <div className="flex items-center space-x-8">
-          <Link to="/signin" className="inline-flex items-center justify-center px-8 py-3 rounded-md border border-gray-300 text-gray-700 bg-white font-medium shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition">Log in</Link>
+        <div className="flex items-center space-x-12">
+          <Link to="/signin" className="inline-flex items-center justify-center px-8 py-3 rounded-md border border-gray-300 text-gray-700 bg-white font-medium shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition" style={{ marginRight: "24px" }}>Log in</Link>
           <Link to="/signup" className="inline-flex items-center justify-center px-8 py-3 rounded-md border border-transparent bg-indigo-600 text-white font-medium shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition">Sign up</Link>
         </div>
       </header>
