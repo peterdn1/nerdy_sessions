@@ -42,8 +42,8 @@ const WelcomePage: React.FC = () => {
           <div style={{ marginRight: '16px' }}>
             <Link
               to="/signin"
-              className="inline-flex items-center justify-center px-8 h-[32px] min-w-[100px] rounded-full bg-[#b70000] text-white font-bold text-lg transition-all duration-150 shadow-none hover:bg-[#990000] hover:text-white focus:outline-none border-2 border-[#b70000]"
-              style={{ textDecoration: "underline" }}
+              className="inline-flex items-center justify-center px-8 h-[32px] min-w-[100px] rounded-full bg-[#b70000] text-lg transition-all duration-150 shadow-none hover:bg-[#990000] focus:outline-none border-2 border-[#b70000]"
+              style={{ color: "#fff", fontWeight: 800, textDecoration: "none" }}
             >
               Log in
             </Link>
@@ -51,8 +51,20 @@ const WelcomePage: React.FC = () => {
           <div>
             <Link
               to="/signup"
-              className="inline-flex items-center justify-center px-8 h-[32px] min-w-[100px] rounded-full bg-transparent text-[#4B2991] font-bold text-lg border-2 border-[#4B2991] transition-all duration-150 shadow-none hover:bg-[#f3f0fa] hover:text-[#4B2991] focus:outline-none"
-              style={{ textDecoration: "underline" }}
+              className="inline-flex items-center justify-center px-8 h-[32px] min-w-[100px] rounded-full text-lg transition-all duration-150 shadow-none focus:outline-none"
+              style={{
+                color: "#111",
+                fontWeight: 800,
+                background: "#ededed",
+                textDecoration: "none",
+                height: "32px",
+                lineHeight: "32px",
+                border: "none",
+                borderRadius: "9999px",
+                fontSize: "1.125rem",
+                paddingTop: 0,
+                paddingBottom: 0
+              }}
             >
               Sign up
             </Link>
