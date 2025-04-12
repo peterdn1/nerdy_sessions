@@ -455,14 +455,30 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
               onClick={() => setActiveNav('learning-ai-agent-tutors')}
             >
               <ListItemIcon>
-                {/* AI/Agent icon */}
+                {/* AI Tutors icon */}
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="12" cy="8" r="4" />
-                  <path d="M2 20c0-4 8-6 10-6s10 2 10 6v2H2v-2z" />
+                  <rect x="3" y="7" width="18" height="10" rx="5" />
+                  <circle cx="8" cy="12" r="1.5" />
+                  <circle cx="16" cy="12" r="1.5" />
+                  <path d="M12 17v2M9 7V5M15 7V5" />
                 </svg>
               </ListItemIcon>
-              <ListItemText primary="AI Agent Tutors" />
-            </ListItemButton>
+              <ListItemText primary="AI Tutors" />
+              </ListItemButton>
+              <ListItemButton
+                sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #f2fff2)' }}
+                selected={activeNav === 'learning-tutorials'}
+                onClick={() => setActiveNav('learning-tutorials')}
+              >
+                <ListItemIcon>
+                  {/* Tutorials icon */}
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <rect x="4" y="4" width="16" height="16" rx="2" />
+                    <path d="M8 8h8M8 12h8M8 16h4" />
+                  </svg>
+                </ListItemIcon>
+                <ListItemText primary="Tutorials" />
+              </ListItemButton>
           </List>
         )}
         <ListItemButton
