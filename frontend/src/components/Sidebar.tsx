@@ -309,6 +309,13 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
           </List>
         )}
         <ListItemButton
+          selected={activeNav === 'career'}
+          onClick={() => setActiveNav('career')}
+          sx={{ background: 'linear-gradient(270deg, #f9f7ff, #e6e6ff)' }}
+        >
+          <ListItemText primary="Career" primaryTypographyProps={{ fontWeight: 'bold' }} />
+        </ListItemButton>
+        <ListItemButton
           selected={activeNav.startsWith('mockup')}
           onClick={() => {
             setActiveNav('mockup');
