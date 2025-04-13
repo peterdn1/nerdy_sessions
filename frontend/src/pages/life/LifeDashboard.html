@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life with AI: Preparing for Tomorrow</title>
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9fb;
+            color: #333;
+        }
+        .card {
+            transition: all 0.3s ease;
+            border-radius: 12px;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+        .btn-primary {
+            transition: all 0.3s ease;
+            background-color: #6366f1;
+        }
+        .btn-primary:hover {
+            background-color: #4f46e5;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+        }
+        .opportunity-btn {
+            background-color: #ecfdf5;
+            color: #059669;
+        }
+        .opportunity-btn:hover {
+            background-color: #d1fae5;
+        }
+        .risk-btn {
+            background-color: #fef2f2;
+            color: #ef4444;
+        }
+        .risk-btn:hover {
+            background-color: #fee2e2;
+        }
+        .health-icon { background-color: #dbeafe; color: #3b82f6; }
+        .safety-icon { background-color: #e0f2fe; color: #0ea5e9; }
+        .privacy-icon { background-color: #f3f4f6; color: #6b7280; }
+        .transport-icon { background-color: #d1fae5; color: #10b981; }
+        .community-icon { background-color: #fce7f3; color: #ec4899; }
+        .home-icon { background-color: #ede9fe; color: #8b5cf6; }
+        
+        .health-card { border-top: 4px solid #3b82f6; }
+        .safety-card { border-top: 4px solid #0ea5e9; }
+        .privacy-card { border-top: 4px solid #6b7280; }
+        .transport-card { border-top: 4px solid #10b981; }
+        .community-card { border-top: 4px solid #ec4899; }
+        .home-card { border-top: 4px solid #8b5cf6; }
+        
+        .highlight-container {
+            transition: all 0.3s ease;
+        }
+        .highlight-opportunities {
+            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
+        }
+        .highlight-risks {
+            box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.3);
+        }
+        
+        /* Chart container styles */
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+            animation: fadeIn 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header Section -->
+    <header class="w-full bg-white py-12 mb-8 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl sm:text-5xl font-bold text-gray-800 mb-4">Life with AI: Preparing for Tomorrow</h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                Exploring how AI will shape daily life—understand the opportunities and navigate the risks.
+            </p>
+            
+            <!-- Navigation Menu -->
+            <nav class="mt-8 flex flex-wrap justify-center gap-2 sm:gap-4">
+                <a href="#health" class="px-4 py-2 rounded-full text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 transition">Health</a>
+                <a href="#safety" class="px-4 py-2 rounded-full text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 transition">Personal Safety</a>
+                <a href="#privacy" class="px-4 py-2 rounded-full text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 transition">Data Privacy</a>
+                <a href="#transport" class="px-4 py-2 rounded-full text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 transition">Transportation</a>
+                <a href="#community" class="px-4 py-2 rounded-full text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 transition">Community</a>
+                <a href="#home" class="px-4 py-2 rounded-full text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 transition">Smart Home</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Topic Cards Section -->
+        <section class="mb-16">
+            <h2 class="sr-only">AI Impact Areas</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <!-- Health Card -->
+                <div id="health" class="card health-card bg-white shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="health-icon p-3 rounded-full mr-4">
+                            <i class="fas fa-heartbeat text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800">Health</h3>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        AI is transforming healthcare with personalized treatments, early disease detection, and virtual health assistants to monitor your well-being 24/7.
+                    </p>
+                    <div class="flex space-x-3">
+                        <button class="btn-secondary opportunity-btn flex-1 py-2 rounded-lg text-sm font-medium" onclick="showTopicDetails('health', 'opportunities')">
+                            Opportunities
+                        </button>
+                        <button class="btn-secondary risk-btn flex-1 py-2 rounded-lg text-sm font-medium" onclick="showTopicDetails('health', 'risks')">
+                            Risks
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Personal Safety Card -->
+                <div id="safety" class="card safety-card bg-white shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="safety-icon p-3 rounded-full mr-4">
+                            <i class="fas fa-shield-alt text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800">Personal Safety</h3>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        AI safety systems can monitor for potential hazards, provide early warnings, and enhance physical security through advanced threat detection.
+                    </p>
+                    <div class="flex space-x-3">
+                        <button class="btn-secondary opportunity-btn flex-1 py-2 rounded-lg text-sm font-medium" onclick="showTopicDetails('safety', 'opportunities')">
+                            Opportunities
+                        </button>
+                        <button class="btn-secondary risk-btn flex-1 py-2 rounded-lg text-sm font-medium" onclick="showTopicDetails('safety', 'risks')">
+                            Risks
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Data Privacy Card -->
+                <div id="privacy" class="card privacy-card bg-white shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="privacy-icon p-3 rounded-full mr-4">
+                            <i class="fas fa-user-shield text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800">Data Privacy</h3>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        AI systems interact with your personal data daily, from content recommendations to monitoring your digital footprint across services.
+                    </p>
+                    <div class="flex space-x-3">
+                        <button class="btn-secondary opportunity-btn flex-1 py-2 rounded-lg text-sm font-medium" onclick="showTopicDetails('privacy', 'opportunities')">
+                            Opportunities
+                        </button>
+                        <button class="btn-secondary risk-btn flex-1 py-2 rounded-lg text-sm font-medium" onclick="showTopicDetails('privacy', 'risks')">
+                            Risks
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Transportation Card -->
+                <div id="transport" class="card transport-card bg-white shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="transport-icon p-3 rounded-full mr-4">
+                            <i class="fas fa-car text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800">Transportation</h3>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        Autonomous vehicles and AI-optimized traffic systems are revolutionizing how we travel, commute, and transport goods in our daily lives.
+                    </p>
+                    <div class="flex space-x-3">
+                        <button class="btn-secondary opportunity-btn flex-1 py-2 rounded-lg text-sm font-medium" onclick="showTopicDetails('transport', 'opportunities')">
+                            Opportunities
+                        </button>
+                        <button class="btn-secondary risk-btn flex-1 py-2 rounded-lg text-sm font-medium" onclick="showTopicDetails('transport', 'risks')">
+                            Risks
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Community Card -->
+                <div id="community" class="card community-card bg-white shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="community-icon p-3 rounded-full mr-4">
+                            <i class="fas fa-users text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800">Community</h3>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        AI is reshaping social connections, public spaces, and community services through smart city infrastructure and social recommendation systems.
+                    </p>
+                    <div class="flex space-x-3">
+                        <button class="btn-secondary opportunity-btn flex-1 py-2 rounded-lg text-sm font-medium" onclick="showTopicDetails('community', 'opportunities')">
+                            Opportunities
+                        </button>
+                        <button class="btn-secondary risk-btn flex-1 py-2 rounded-lg text-sm font-medium" onclick="showTopicDetails('community', 'risks')">
+                            Risks
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Smart Home Card -->
+                <div id="home" class="card home-card bg-white shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="home-icon p-3 rounded-full mr-4">
+                            <i class="fas fa-home text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800">Smart Home</h3>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        AI-powered homes adapt to your preferences, manage energy usage, and automate daily tasks from security to entertainment and climate control.
+                    </p>
+                    <div class="flex space-x-3">
+                        <button class="btn-secondary opportunity-btn flex-1 py-2 rounded-lg text-sm font-medium" onclick="showTopicDetails('home', 'opportunities')">
+                            Opportunities
+                        </button>
+                        <button class="btn-secondary risk-btn flex-1 py-2 rounded-lg text-sm font-medium" onclick="showTopicDetails('home', 'risks')">
+                            Risks
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Visualizations Section -->
+        <section id="visualization-section" class="mb-16 bg-white rounded-lg shadow-md p-6 sm:p-8">
+            <h2 class="text-2xl font-bold mb-2 text-gray-800 text-center">Impact Insights</h2>
+            <p id="visualization-description" class="text-gray-600 mb-8 text-center">
+                Click on any topic card above to explore the specific opportunities and risks of AI in that area.
+            </p>
+
+            <!-- Topic Details Section - Initially Hidden -->
+            <div id="topic-details" class="hidden mb-10 animate-fadeIn">
+                <div class="bg-gray-50 p-6 rounded-lg mb-8">
+                    <h3 id="topic-title" class="text-2xl font-bold mb-6 text-gray-800 text-center"></h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Opportunities Column -->
+                        <div id="opportunities-container" class="bg-white p-6 rounded-lg shadow-sm highlight-container">
+                            <h4 class="font-semibold text-lg mb-4 text-green-600 flex items-center">
+                                <i class="fas fa-lightbulb mr-2"></i> Opportunities
+                            </h4>
+                            <ul id="opportunities-list" class="list-disc pl-5 space-y-2 text-gray-700"></ul>
+                        </div>
+                        
+                        <!-- Risks Column -->
+                        <div id="risks-container" class="bg-white p-6 rounded-lg shadow-sm highlight-container">
+                            <h4 class="font-semibold text-lg mb-4 text-red-600 flex items-center">
+                                <i class="fas fa-exclamation-triangle mr-2"></i> Risks
+                            </h4>
+                            <ul id="risks-list" class="list-disc pl-5 space-y-2 text-gray-700"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-center text-gray-700">AI Adoption Projections by Sector</h3>
+                    <div class="chart-container">
+                        <canvas id="adoptionChart"></canvas>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-center text-gray-700">Public Perception of AI Impact</h3>
+                    <div class="chart-container">
+                        <canvas id="perceptionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action Section -->
+        <section class="mb-16 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg shadow-md p-8 text-center">
+            <h2 class="text-3xl font-bold mb-4 text-gray-800">Prepare Yourself</h2>
+            <p class="text-gray-600 mb-8 max-w-3xl mx-auto">
+                Take the next step to understand and adapt to the changing landscape of AI in daily life. 
+                Explore in-depth resources or get personalized recommendations based on your specific needs and concerns.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#" class="btn-primary px-6 py-3 text-white font-medium rounded-lg shadow-sm">
+                    Explore Detailed Impacts
+                </a>
+                <a href="#" class="btn-secondary px-6 py-3 bg-white text-indigo-600 font-medium rounded-lg shadow-sm border border-indigo-100 hover:border-indigo-300">
+                    Get Personalized Recommendations
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full bg-white py-6">
+        <div class="max-w-6xl mx-auto px-4 text-center text-gray-500 text-sm">
+            <p>© 2025 Life with AI Initiative. All information is provided for educational purposes.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Topic Data
+        const topicData = {
+            health: {
+                title: "Health & AI",
+                opportunities: [
+                    "Early disease detection through AI analysis of medical data and symptoms",
+                    "Personalized treatment plans based on individual genetic profiles and health history",
+                    "24/7 health monitoring through AI-powered wearables and home devices",
+                    "Reduced healthcare costs through AI-optimized resource allocation",
+                    "Improved healthcare access for underserved communities through telehealth"
+                ],
+                risks: [
+                    "Potential misdiagnosis due to incomplete training data or algorithm limitations",
+                    "Privacy concerns with sensitive health information collection and analysis",
+                    "Digital divide excluding vulnerable populations from AI health benefits",
+                    "Over-reliance on AI systems potentially replacing human medical expertise",
+                    "Algorithm bias affecting quality of care for certain demographic groups"
+                ]
+            },
+            safety: {
+                title: "Personal Safety & AI",
+                opportunities: [
+                    "Real-time threat detection systems providing advance warning of dangers",
+                    "AI-powered emergency response with faster, more efficient coordination",
+                    "Enhanced home security with intelligent monitoring and anomaly detection",
+                    "Wearable safety devices with predictive alert capabilities",
+                    "Improved public safety through pattern recognition in security footage"
+                ],
+                risks: [
+                    "False security alarms causing unnecessary anxiety and emergency responses",
+                    "Excessive surveillance leading to privacy violations and constant monitoring",
+                    "Safety discrimination based on algorithmic biases in threat assessment",
+                    "Increased vulnerability to hacking of integrated safety systems",
+                    "Decreased human vigilance due to over-reliance on automated safety"
+                ]
+            },
+            privacy: {
+                title: "Data Privacy & AI",
+                opportunities: [
+                    "Advanced encryption and anonymization to better protect personal information",
+                    "AI-powered privacy assistants that manage consent and data sharing preferences",
+                    "Improved detection of unauthorized access and data breaches",
+                    "Transparent data usage reporting through automated monitoring",
+                    "Smarter data collection minimizing unnecessary personal information exposure"
+                ],
+                risks: [
+                    "Unprecedented levels of personal data collection for AI training",
+                    "Sophisticated data analysis making it easier to identify individuals from anonymized data",
+                    "Complex privacy policies that are difficult for average users to understand",
+                    "Cross-platform tracking creating comprehensive profiles of individual behavior",
+                    "Potential government and corporate surveillance using AI capabilities"
+                ]
+            },
+            transport: {
+                title: "Transportation & AI",
+                opportunities: [
+                    "Autonomous vehicles reducing accident rates through constant vigilance",
+                    "Traffic flow optimization reducing congestion and commute times",
+                    "Reduced transportation costs through route optimization and vehicle efficiency",
+                    "Enhanced mobility for elderly, disabled, and non-driving populations",
+                    "Environmental benefits from more efficient driving patterns and resource use"
+                ],
+                risks: [
+                    "Job displacement for professional drivers and related service industries",
+                    "Complex ethical dilemmas in autonomous vehicle decision-making during accidents",
+                    "Infrastructure challenges requiring significant investment for AI transportation",
+                    "Cybersecurity vulnerabilities in connected vehicle networks",
+                    "Potential for transportation inequality based on technology access"
+                ]
+            },
+            community: {
+                title: "Community & AI",
+                opportunities: [
+                    "Smart city infrastructure improving public service delivery and efficiency",
+                    "AI-facilitated community engagement through personalized local information",
+                    "More equitable resource allocation based on comprehensive needs analysis",
+                    "Improved emergency services through predictive response systems",
+                    "Enhanced public spaces with adaptive lighting, safety, and accessibility features"
+                ],
+                risks: [
+                    "Algorithmic bias affecting public resource distribution and services",
+                    "Digital divides creating two-tier communities based on technology access",
+                    "Reduced face-to-face interaction as services become more automated",
+                    "Privacy concerns with public monitoring systems in community spaces",
+                    "Over-optimization potentially removing valuable serendipity and diversity"
+                ]
+            },
+            home: {
+                title: "Smart Home & AI",
+                opportunities: [
+                    "Energy optimization reducing utility costs and environmental impact",
+                    "Personalized home environments adapting to individual preferences and needs",
+                    "Enhanced security through intelligent monitoring and threat detection",
+                    "Time savings through automation of routine home management tasks",
+                    "Improved accessibility for elderly and disabled residents through voice control"
+                ],
+                risks: [
+                    "Home privacy erosion with always-on listening and monitoring devices",
+                    "Increased cybersecurity vulnerabilities through connected home systems",
+                    "Technology dependency reducing resilience during power outages or outages",
+                    "Cost barriers potentially creating smart home inequality",
+                    "Technical complexity creating frustration and potential abandonment of systems"
+                ]
+            }
+        };
+
+        // Function to show topic details
+        function showTopicDetails(topic, section) {
+            const data = topicData[topic];
+            
+            // Update title and make details visible
+            document.getElementById('topic-title').textContent = data.title;
+            document.getElementById('topic-details').classList.remove('hidden');
+            
+            // Scroll to visualization section
+            document.getElementById('visualization-section').scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+            
+            // Update lists
+            const opportunitiesList = document.getElementById('opportunities-list');
+            const risksList = document.getElementById('risks-list');
+            
+            // Clear previous content
+            opportunitiesList.innerHTML = '';
+            risksList.innerHTML = '';
+            
+            // Add new content
+            data.opportunities.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                opportunitiesList.appendChild(li);
+            });
+            
+            data.risks.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                risksList.appendChild(li);
+            });
+            
+            // Highlight selected section
+            const opportunitiesContainer = document.getElementById('opportunities-container');
+            const risksContainer = document.getElementById('risks-container');
+            
+            if (section === 'opportunities') {
+                opportunitiesContainer.classList.add('highlight-opportunities');
+                risksContainer.classList.remove('highlight-risks');
+            } else {
+                risksContainer.classList.add('highlight-risks');
+                opportunitiesContainer.classList.remove('highlight-opportunities');
+            }
+            
+            // Update visualization description
+            document.getElementById('visualization-description').textContent = 
+                `Exploring ${data.title}: Impact on daily life and future considerations.`;
+        }
+
+        // Initialize charts when the page loads
+        window.addEventListener('load', function() {
+            // Adoption Chart
+            const adoptionCtx = document.getElementById('adoptionChart').getContext('2d');
+            const adoptionChart = new Chart(adoptionCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Healthcare', 'Safety', 'Privacy', 'Transportation', 'Community', 'Smart Home'],
+                    datasets: [{
+                        label: 'Current Adoption (%)',
+                        data: [48, 35, 42, 32, 28, 55],
+                        backgroundColor: 'rgba(99, 102, 241, 0.5)',
+                        borderColor: 'rgba(99, 102, 241, 1)',
+                        borderWidth: 1
+                    }, {
+                        label: 'Projected 2030 (%)',
+                        data: [85, 75, 70, 90, 65, 95],
+                        backgroundColor: 'rgba(139, 92, 246, 0.5)',
+                        borderColor: 'rgba(139, 92, 246, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            title: {
+                                display: true,
+                                text: 'Adoption Rate (%)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Perception Chart
+            const perceptionCtx = document.getElementById('perceptionChart').getContext('2d');
+            const perceptionChart = new Chart(perceptionCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Health Benefits', 'Privacy Concerns', 'Safety Improvement', 'Convenience', 'Job Impact', 'Societal Change'],
+                    datasets: [{
+                        label: 'Positive Perception',
+                        data: [85, 40, 75, 90, 30, 65],
+                        fill: true,
+                        backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                        borderColor: 'rgb(16, 185, 129)',
+                        pointBackgroundColor: 'rgb(16, 185, 129)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(16, 185, 129)'
+                    }, {
+                        label: 'Concern Level',
+                        data: [30, 80, 45, 25, 85, 60],
+                        fill: true,
+                        backgroundColor: 'rgba(239, 68, 68, 0.2)',
+                        borderColor: 'rgb(239, 68, 68)',
+                        pointBackgroundColor: 'rgb(239, 68, 68)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(239, 68, 68)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    elements: {
+                        line: {
+                            borderWidth: 2
+                        }
+                    },
+                    scales: {
+                        r: {
+                            angleLines: {
+                                display: true
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

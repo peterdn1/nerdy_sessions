@@ -367,4 +367,40 @@ button[aria-label="logout"] {
   max-width: 400px;
   min-width: min-content;
 }
+/* === LifeDashboard Card Grid & Card Styles === */
+.card {
+  transition: all 0.3s ease;
+  border-radius: 12px;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+.btn-secondary {
+  transition: all 0.3s ease;
+}
+.btn-secondary:hover {
+  transform: translateY(-2px);
+}
+.opportunity-btn {
+  background-color: #ecfdf5;
+  color: #059669;
+}
+.opportunity-btn:hover {
+  background-color: #d1fae5;
+}
+.risk-btn {
+  background-color: #fef2f2;
+  color: #ef4444;
+}
+.risk-btn:hover {
+  background-color: #fee2e2;
+}
+.health-icon { background-color: #dbeafe; color: #3b82f6; }
+.safety-icon { background-color: #e0f2fe; color: #0ea5e9; }
+.privacy-icon { background-color: #f3f4f6; color: #6b7280; }
+.transport-icon { background-color: #d1fae5; color: #10b981; }
+.community-icon { background-color: #fce7f3; color: #db2777; }
+.home-icon { background-color: #ede9fe; color: #8b5cf6; }
+
 
