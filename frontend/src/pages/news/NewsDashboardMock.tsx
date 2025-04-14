@@ -1,7 +1,9 @@
+import type { NextPage } from 'next';
+import Head from 'next/head';
 import { useState } from 'react';
 import { Mail, BrainCircuit, TrendingUp, Wrench, Users, ArrowRight } from 'lucide-react';
 
-const LifeDashboard: React.FC = () => {
+const NerdySessionsHome: NextPage = () => {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
   const [error, setError] = useState('');
@@ -21,7 +23,11 @@ const LifeDashboard: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-blue-50 text-gray-900">
-      {/* Removed Next.js Head component - add meta tags in index.html for Vite */}
+      <Head>
+        <title>Nerdy Sessions - Navigate the AI Revolution</title>
+        <meta name="description" content="Empowering individuals to navigate and plan for the societal impacts of AI." />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
       {/* Header */}
       <header className="py-4 px-4 sm:px-6 lg:px-8 bg-white shadow-sm">
@@ -145,4 +151,4 @@ const LifeDashboard: React.FC = () => {
   );
 };
 
-export default LifeDashboard;
+export default NerdySessionsHome;
