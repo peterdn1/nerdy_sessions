@@ -231,20 +231,24 @@ function LifeDashboard() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="w-full px-2 sm:px-4 md:px-8 py-8">
         {/* Topic Cards Section */}
         <section className="mb-16">
           <h2 className="sr-only">AI Impact Areas</h2>
-          <Box sx={{ maxWidth: 1200, mx: 'auto', width: '100%' }}>
-            <Grid container spacing={3} direction="row" sx={{
-              justifyContent: "center",
-              alignItems: "flex-start",
-            }}>
+          <Box sx={{ width: '100%', px: { xs: 1, sm: 2, md: 3 } }}>
+            <Grid
+              container
+              spacing={2}
+              direction="row"
+              justifyContent="space-between"
+              alignItems="stretch"
+              sx={{ width: '100%', margin: 0 }}
+            >
               {topicKeys.map(({ key, label, icon, cardClass, iconClass }) => (
-                <Grid item xs={12} sm={6} md={4} key={key}>
+                <Grid item xs={12} sm={6} md={2} key={key} sx={{ display: 'flex' }}>
                   <div
                     id={key}
-                    className={`bg-white p-8 flex flex-col rounded-2xl shadow-md border-t-4 h-full ${
+                    className={`bg-white p-6 flex flex-col rounded-2xl shadow-md border-t-4 w-full h-full ${
                       key === 'health' ? 'border-blue-400' :
                       key === 'safety' ? 'border-cyan-400' :
                       key === 'privacy' ? 'border-gray-400' :
@@ -252,7 +256,16 @@ function LifeDashboard() {
                       key === 'community' ? 'border-pink-400' :
                       key === 'home' ? 'border-purple-400' : ''
                     }`}
-                    style={{ minHeight: 160, minWidth: 260, maxWidth: 350, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
+                    style={{
+                      aspectRatio: '1 / 1',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'space-between',
+                      width: '100%',
+                      minWidth: 0,
+                      minHeight: 0,
+                      height: '100%',
+                    }}
                   >
                     <div>
                       <div className="flex items-center mb-4">
