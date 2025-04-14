@@ -11,7 +11,7 @@
 
 ## 2. Logo
 
-- **Primary Logo**: <img src="../frontend/src/assets/images/nerdy_sessions.svg" alt="Nerdy Sessions Logo" width="200"/>  
+- **Primary Logo**: <img src="../frontend/src/assets/images/brain.svg" alt="Nerdy Sessions Logo" width="200"/>  
 - **Placeholder**: Define the primary logo design. Consider if it should evoke themes of foresight, connection, balance, or learning.  
   - [Link to Primary Logo Asset - Full Color]  
   - [Link to Primary Logo Asset - White/Monochrome]  
