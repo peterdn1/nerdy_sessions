@@ -13,7 +13,9 @@
 A modern fullstack application with a React frontend and Node.js backend.
 
 ## Tech Stack
+<p>
   <img src="frontend/src/assets/images/techstack.png" alt="Nerdy Sessions Logo" width="200"/>
+</p>
 ### Frontend
 - React 18 with TypeScript
 - Vite for build tooling and development server
