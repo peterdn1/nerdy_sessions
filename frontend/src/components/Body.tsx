@@ -15,7 +15,7 @@ interface BodyProps {
 
 const Body: React.FC<BodyProps> = ({ activeNav }) => {
   return (
-    <main className="flex-1 p-6 overflow-y-auto bg-gray-50">
+    <main className="flex-1 p-6 overflow-y-auto bg-[#F9FAFB]">
       {activeNav === 'news' && <NewsDashboard />}
       {activeNav === 'life' && <LifeDashboard />}
       {activeNav === 'agents' && <AgentsDashboard />}

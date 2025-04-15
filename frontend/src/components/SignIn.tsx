@@ -26,7 +26,86 @@ import robotVideo from '../assets/videos/robot.mp4';
  
 import nerdyLogo from '../assets/images/nerdy_sessions.svg';
  
-const theme = createTheme();
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#8C5CFF', // Electric Purple
+      contrastText: '#fff',
+    },
+    secondary: {
+      main: '#101828', // Deep Blue
+      contrastText: '#fff',
+    },
+    background: {
+      default: '#F9FAFB', // Light Gray
+      paper: '#fff',
+    },
+  },
+  typography: {
+    fontFamily: ['Inter', 'InterDisplay', 'sans-serif'].join(','),
+    h4: {
+      fontWeight: 700,
+      fontSize: '2.25rem', // 36px
+      lineHeight: 1.22,
+      color: '#101828',
+      fontFamily: 'InterDisplay, Inter, sans-serif',
+    },
+    button: {
+      fontWeight: 600,
+      fontSize: '1rem',
+      textTransform: 'uppercase',
+      letterSpacing: '0.04em',
+      fontFamily: 'Inter, InterDisplay, sans-serif',
+    },
+  },
+  shape: {
+    borderRadius: 12,
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 8,
+          padding: '12px 24px',
+        },
+        containedPrimary: {
+          backgroundColor: '#8C5CFF',
+          color: '#fff',
+          '&:hover': {
+            backgroundColor: '#6f3fff',
+          },
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#F9FAFB',
+          borderRadius: 8,
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          borderRadius: 8,
+        },
+        notchedOutline: {
+          borderColor: '#D0D5DD',
+        },
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          borderRadius: 12,
+          boxShadow: '0px 4px 8px rgba(0,0,0,0.05)',
+          padding: '24px',
+        },
+      },
+    },
+  },
+});
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -177,8 +256,8 @@ export default function SignIn() {
         <Card variant="outlined">
           <img
             src={nerdyLogo}
-            alt="Nerdy Sessions Logo"
-            style={{ width: '150px', margin: '0 auto' }}
+            alt="Nerdy Sessions logo, stylized brain"
+            style={{ width: '120px', margin: '0 auto 16px auto', display: 'block' }}
           />
           <Box
             component="form"
@@ -252,40 +331,50 @@ export default function SignIn() {
             </Button>
           </Box>
           <Divider>
-            <Typography sx={{ color: 'text.secondary' }}>or</Typography>
-            <button
-              className="gsi-material-button"
+            <Typography sx={{ color: 'text.secondary', fontWeight: 500, fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '0.04em' }}>or</Typography>
+            <Button
+              variant="outlined"
+              fullWidth
+              startIcon={
+                <svg width="24" height="24" viewBox="0 0 48 48" fill="none">
+                  <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path>
+                  <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path>
+                  <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path>
+                  <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path>
+                  <path fill="none" d="M0 0h48v48H0z"></path>
+                </svg>
+              }
               onClick={() => { window.location.href = 'http://localhost:5001/auth/social/google'; }}
+              sx={{
+                fontWeight: 600,
+                textTransform: 'uppercase',
+                borderColor: '#8C5CFF',
+                color: '#8C5CFF',
+                backgroundColor: '#fff',
+                '&:hover': {
+                  backgroundColor: '#EDE9FE',
+                  borderColor: '#6f3fff',
+                  color: '#6f3fff',
+                },
+                mt: 2,
+              }}
             >
-              <div className="gsi-material-button-state"></div>
-              <div className="gsi-material-button-content-wrapper">
-                <div className="gsi-material-button-icon">
-                  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" xmlnsXlink="http://www.w3.org/1999/xlink" style={{ display: 'block' }}>
-                    <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path>
-                    <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path>
-                    <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path>
-                    <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path>
-                    <path fill="none" d="M0 0h48v48H0z"></path>
-                  </svg>
-                </div>
-                <span className="gsi-material-button-contents">Sign in with Google</span>
-                <span style={{ display: 'none' }}>Sign in with Google</span>
-              </div>
-            </button>
+              Sign in with Google
+            </Button>
             <Typography sx={{ textAlign: 'center', mt: 2 }}>
-              <Link component={RouterLink} to="/forgot-password" variant="body2">
+              <Link component={RouterLink} to="/forgot-password" variant="body2" sx={{ color: '#8C5CFF', fontWeight: 600, textDecoration: 'underline' }}>
                 Forgot Password?
               </Link>
             </Typography>
           </Divider>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            <Typography sx={{ textAlign: 'center' }}>
+            <Typography sx={{ textAlign: 'center', fontSize: '1rem' }}>
               Don't have an account?{' '}
               <Link
                 component={RouterLink}
                 to="/signup"
                 variant="body2"
-                sx={{ alignSelf: 'center' }}
+                sx={{ alignSelf: 'center', color: '#8C5CFF', fontWeight: 600, textDecoration: 'underline' }}
               >
                 Sign up
               </Link>
