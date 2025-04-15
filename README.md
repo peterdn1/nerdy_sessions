@@ -39,6 +39,10 @@ Before you begin, ensure you have the following installed:
 - PostgreSQL
 
 ## Getting Started
+<p>
+  <img src="frontend/src/assets/images/gettingstarted.png" alt="Nerdy Sessions Logo" width="200"/>
+</p>
+
 
 1. Clone the repository
 ```bash
