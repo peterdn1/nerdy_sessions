@@ -2,6 +2,12 @@
   <img src="frontend/src/assets/images/nerdy_sessions.svg" alt="Nerdy Sessions Logo" width="200"/>
 </p>
 
+## Overview
+- **Mission**: Empowering individuals to navigate and plan for the societal impacts of AI.  
+- **Positioning**: A trusted resource at the intersection of AI awareness, societal impact analysis, and proactive personal planning.  
+- **Target Audience**: Lifelong learners, professionals adapting to industry shifts, concerned citizens, students, educators, and anyone seeking to understand and prepare for an AI-influenced future.  
+- **Brand Personality**: Insightful, forward-thinking, balanced, empowering, accessible, pragmatic, and fostering constructive dialogue.
+
 # Fullstack Application
 
 A modern fullstack application with a React frontend and Node.js backend.
