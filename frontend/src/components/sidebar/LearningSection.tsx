@@ -60,6 +60,20 @@ const LearningSection: React.FC<LearningSectionProps> = ({
           </ListItemIcon>
           <ListItemText primary="Tutorials" />
         </ListItemButton>
+        <ListItemButton
+          sx={{ pl: 4, background: 'linear-gradient(270deg, #ffffff, #f2fff2)' }}
+          selected={activeNav === 'learning-classroom'}
+          onClick={() => setActiveNav('learning-classroom')}
+        >
+          <ListItemIcon>
+            {/* Classroom icon */}
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M2 6h20v12H2zM6 6V4m12 2V4M8 12h2m2 0h2m-4 4h4"/>
+              <path d="M12 18v-6"/>
+            </svg>
+          </ListItemIcon>
+          <ListItemText primary="Classroom" />
+        </ListItemButton>
       </List>
     )}
   </>
