@@ -29,7 +29,7 @@ import nerdyLogo from '../assets/images/nerdy_sessions.svg';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#8C5CFF', // Electric Purple
+      main: '#70aa32', // Green
       contrastText: '#fff',
     },
     secondary: {
@@ -72,7 +72,7 @@ const theme = createTheme({
           backgroundColor: '#8C5CFF',
           color: '#fff',
           '&:hover': {
-            backgroundColor: '#6f3fff',
+            backgroundColor: '#5a8a28',
           },
         },
       },

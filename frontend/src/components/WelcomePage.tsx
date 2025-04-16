@@ -42,7 +42,7 @@ const WelcomePage: React.FC = () => {
           <div style={{ marginRight: '16px' }}>
             <Link
               to="/signin"
-              className="inline-flex items-center justify-center px-8 h-[32px] min-w-[100px] rounded-full bg-[#b70000] text-lg transition-all duration-150 shadow-none hover:bg-[#990000] focus:outline-none border-2 border-[#b70000]"
+              className="inline-flex items-center justify-center px-8 h-[32px] min-w-[100px] rounded-full bg-[#70aa32] text-lg transition-all duration-150 shadow-none hover:bg-[#5a8a28] focus:outline-none border-2 border-[#70aa32]"
               style={{ color: "#fff", fontWeight: 800, textDecoration: "none" }}
             >
               Log in
