@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import LearningSection from './sidebar/LearningSection';
 import LifeSection from './sidebar/LifeSection';
+import RoboticsSection from './sidebar/RoboticsSection';
 import StocksSection from './sidebar/StocksSection';
 import InformationSection from './sidebar/InformationSection';
 import CareerSection from './sidebar/CareerSection';
@@ -18,9 +19,12 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 
 
+import { COMMON_MENU_STYLES } from './sidebar/constants';
+
 const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
   const [stocksOpen, setStocksOpen] = useState(false);
   const [informationOpen, setInformationOpen] = useState(false);
+  const [roboticsOpen, setRoboticsOpen] = useState(false);
   const [lifeOpen, setLifeOpen] = useState(false);
   const [mockupOpen, setMockupOpen] = useState(false);
   const [investmentToolsOpen, setInvestmentToolsOpen] = useState(false);
@@ -92,6 +96,12 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
             activeNav={activeNav}
             setActiveNav={setActiveNav}
           />
+          <RoboticsSection
+            roboticsOpen={roboticsOpen}
+            setRoboticsOpen={setRoboticsOpen}
+            activeNav={activeNav}
+            setActiveNav={setActiveNav}
+          />
           <LearningSection
             learningOpen={learningOpen}
             setLearningOpen={setLearningOpen}
@@ -102,17 +112,9 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
             selected={activeNav === 'community'}
             onClick={() => setActiveNav('community')}
             sx={{
-              borderRadius: '8px',
-              margin: '4px 12px',
-              mb: 1,
+              ...COMMON_MENU_STYLES,
               backgroundColor: activeNav === 'community' ? '#EDE9FE' : 'transparent',
               borderLeft: activeNav === 'community' ? '4px solid #8C5CFF' : '4px solid transparent',
-              color: '#101828',
-              fontWeight: 600,
-              fontFamily: 'Inter, InterDisplay, sans-serif',
-              '&:hover': {
-                backgroundColor: '#F9FAFB'
-              }
             }}
           >
             <ListItemText
@@ -135,17 +137,9 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
             selected={activeNav === 'agents'}
             onClick={() => setActiveNav('agents')}
             sx={{
-              borderRadius: '8px',
-              margin: '4px 12px',
-              mb: 1,
+              ...COMMON_MENU_STYLES,
               backgroundColor: activeNav === 'agents' ? '#EDE9FE' : 'transparent',
               borderLeft: activeNav === 'agents' ? '4px solid #8C5CFF' : '4px solid transparent',
-              color: '#101828',
-              fontWeight: 600,
-              fontFamily: 'Inter, InterDisplay, sans-serif',
-              '&:hover': {
-                backgroundColor: '#F9FAFB'
-              }
             }}
           >
             <ListItemText
@@ -161,17 +155,9 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
             selected={activeNav === 'tools'}
             onClick={() => setActiveNav('tools')}
             sx={{
-              borderRadius: '8px',
-              margin: '4px 12px',
-              mb: 1,
+              ...COMMON_MENU_STYLES,
               backgroundColor: activeNav === 'tools' ? '#EDE9FE' : 'transparent',
               borderLeft: activeNav === 'tools' ? '4px solid #8C5CFF' : '4px solid transparent',
-              color: '#101828',
-              fontWeight: 600,
-              fontFamily: 'Inter, InterDisplay, sans-serif',
-              '&:hover': {
-                backgroundColor: '#F9FAFB'
-              }
             }}
           >
             <ListItemText
