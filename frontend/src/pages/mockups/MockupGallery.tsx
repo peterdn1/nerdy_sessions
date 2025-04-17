@@ -20,6 +20,8 @@ const MockupGallery: React.FC = () => {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  // State for hover effect, now includes index
+  const [hoveredItem, setHoveredItem] = useState<{ id: string | null; index: number | null }>({ id: null, index: null });
 
   // Fetch uploads from server
   const fetchUploads = async () => {
@@ -255,13 +257,15 @@ const MockupGallery: React.FC = () => {
           gap: '20px'
         }}
       >
-        {uploads.map(item => (
+        {uploads.map((item, index) => ( // Added index here
           <div
             key={item.id}
-            className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md"
+            className={`relative bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 ease-in-out ${hoveredItem.id === item.id ? 'z-50 scale-105' : 'z-0'}`} // Check hoveredItem.id
+            onMouseEnter={() => setHoveredItem({ id: item.id, index })} // Store id and index
+            onMouseLeave={() => setHoveredItem({ id: null, index: null })} // Reset state
           >
             {/* Fixed height image container */}
-            <div style={{ height: '180px', overflow: 'hidden', backgroundColor: '#f3f4f6' }}>
+            <div style={{ height: '180px', overflow: 'hidden', backgroundColor: '#f3f4f6' }} className="rounded-t-lg"> {/* Added rounded-t-lg */}
               <img
                 src={item.imageUrl}
                 alt={item.description}
@@ -306,6 +310,21 @@ const MockupGallery: React.FC = () => {
                 </button>
               </div>
             </div>
+            {/* Enlarged image overlay on hover */}
+            {hoveredItem.id === item.id && ( // Check hoveredItem.id
+              <div className={`absolute inset-0 z-10 flex items-center p-1 bg-black bg-opacity-30 rounded-lg pointer-events-none backdrop-blur-sm ${
+                // Adjust justification based on index to prevent edge clipping
+                hoveredItem.index === 0 ? 'justify-start pl-2' : // First item: push right
+                hoveredItem.index === uploads.length - 1 ? 'justify-end pr-2' : // Last item: push left
+                'justify-center' // Middle items: center
+              }`}>
+                <img
+                  src={item.imageUrl}
+                  alt={`Enlarged ${item.description}`}
+                  className="max-w-[95%] max-h-[95%] object-contain transition-transform duration-200 ease-in-out transform scale-250 shadow-xl rounded-md"
+                />
+              </div>
+            )}
           </div>
         ))}
       </div>
