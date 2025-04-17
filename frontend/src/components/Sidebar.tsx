@@ -112,7 +112,6 @@ const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {
             selected={activeNav === 'community'}
             onClick={() => setActiveNav('community')}
             sx={{
-              ...COMMON_MENU_STYLES,
               backgroundColor: activeNav === 'community' ? '#EDE9FE' : 'transparent',
               borderLeft: activeNav === 'community' ? '4px solid #8C5CFF' : '4px solid transparent',
             }}

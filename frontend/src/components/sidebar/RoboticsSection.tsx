@@ -33,7 +33,7 @@ const RoboticsSection: React.FC<RoboticsSectionProps> = ({
     },
     {
       id: 'automation',
-      text: 'Automation - Exploring AI-driven automation technologies revolutionizing industries from manufacturing to healthcare with real-world implementations',
+      text: 'Automation',
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2A5CAA" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
           <rect x="3" y="11" width="18" height="11" rx="2"/>
@@ -87,7 +87,6 @@ const RoboticsSection: React.FC<RoboticsSectionProps> = ({
         selected={activeNav === 'robotics'}
         onClick={() => setRoboticsOpen(!roboticsOpen)}
         sx={{
-          ...COMMON_MENU_STYLES,
           backgroundColor: activeNav.startsWith('robotics/') ? '#EDE9FE' : 'transparent',
           borderLeft: activeNav.startsWith('robotics/') ? '4px solid #8C5CFF' : '4px solid transparent',
         }}
