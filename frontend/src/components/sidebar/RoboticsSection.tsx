@@ -1,39 +1,23 @@
 import React from 'react';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon'; // Added import
+import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
 import List from '@mui/material/List';
-import ExpandLess from '@mui/icons-material/ExpandLess';
-import ExpandMore from '@mui/icons-material/ExpandMore';
 import { COMMON_MENU_STYLES } from './constants';
 
 interface RoboticsSectionProps {
   roboticsOpen: boolean;
-  setRoboticsOpen: (open: boolean) => void;
   activeNav: string;
   setActiveNav: (nav: string) => void;
 }
 
-const RoboticsSection: React.FC<RoboticsSectionProps> = ({ 
-  roboticsOpen, 
-  setRoboticsOpen,
+const RoboticsSection: React.FC<RoboticsSectionProps> = ({
+  roboticsOpen,
   activeNav,
   setActiveNav
 }) => {
   const subItems = [
-    {
-      id: 'dashboard',
-      text: 'Dashboard',
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2A5CAA" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="3" y="3" width="7" height="7"/>
-          <rect x="14" y="3" width="7" height="7"/>
-          <rect x="14" y="14" width="7" height="7"/>
-          <rect x="3" y="14" width="7" height="7"/>
-        </svg>
-      )
-    },
     {
       id: 'innovation',
       text: 'Innovation Spotlight',
@@ -97,13 +81,21 @@ const RoboticsSection: React.FC<RoboticsSectionProps> = ({
   return (
     <>
       <ListItemButton
-        selected={activeNav === 'robotics'}
-        onClick={() => setRoboticsOpen(!roboticsOpen)}
+        selected={activeNav === 'robotics/dashboard'}
+        onClick={() => setActiveNav('robotics/dashboard')}
         sx={{
           backgroundColor: activeNav.startsWith('robotics/') ? '#EDE9FE' : 'transparent',
           borderLeft: activeNav.startsWith('robotics/') ? '4px solid #8C5CFF' : '4px solid transparent',
         }}
       >
+        <ListItemIcon sx={{ minWidth: 'auto', marginRight: '12px' }}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2A5CAA" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="3" y="3" width="7" height="7"/>
+            <rect x="14" y="3" width="7" height="7"/>
+            <rect x="14" y="14" width="7" height="7"/>
+            <rect x="3" y="14" width="7" height="7"/>
+          </svg>
+        </ListItemIcon>
         <ListItemText
           primary="Robotics"
           primaryTypographyProps={{
@@ -112,7 +104,6 @@ const RoboticsSection: React.FC<RoboticsSectionProps> = ({
             color: '#101828'
           }}
         />
-        {roboticsOpen ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={roboticsOpen} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
@@ -128,7 +119,7 @@ const RoboticsSection: React.FC<RoboticsSectionProps> = ({
                 borderLeft: activeNav === `robotics/${item.id}` ? '4px solid #8C5CFF' : '4px solid transparent',
               }}
             >
-              <ListItemIcon sx={{ minWidth: 'auto', marginRight: '12px' }}> {/* Added Icon */}
+              <ListItemIcon sx={{ minWidth: 'auto', marginRight: '12px' }}>
                 {item.icon}
               </ListItemIcon>
               <ListItemText
