@@ -1,5 +1,6 @@
 import React from 'react';
 import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon'; // Added import
 import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
 import List from '@mui/material/List';
@@ -127,6 +128,9 @@ const RoboticsSection: React.FC<RoboticsSectionProps> = ({
                 borderLeft: activeNav === `robotics/${item.id}` ? '4px solid #8C5CFF' : '4px solid transparent',
               }}
             >
+              <ListItemIcon sx={{ minWidth: 'auto', marginRight: '12px' }}> {/* Added Icon */}
+                {item.icon}
+              </ListItemIcon>
               <ListItemText
                 primary={item.text}
                 primaryTypographyProps={{
