@@ -9,6 +9,7 @@ import StockScreener from '../pages/stocks/StockScreener';
 import MockupGallery from '../pages/mockups/MockupGallery';
 import MockupWebsites from '../pages/mockups/MockupWebsites';
 import RoboticsDashboard from './RoboticsDashboard';
+import InformationDashboard from '../pages/information/InformationDashboard'; // Added import
 
 interface BodyProps {
   activeNav: string;
@@ -17,6 +18,7 @@ interface BodyProps {
 const Body: React.FC<BodyProps> = ({ activeNav }) => {
   return (
     <main className="flex-1 p-6 overflow-y-auto bg-[#F9FAFB]">
+      {activeNav === 'information' && <InformationDashboard />} {/* Added condition */}
       {activeNav === 'news' && <NewsDashboard />}
       {activeNav === 'life' && <LifeDashboard />}
       {activeNav === 'agents' && <AgentsDashboard />}
