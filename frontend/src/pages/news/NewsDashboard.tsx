@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { 
   FaGlobeAmericas, 
   FaLandmark, 
@@ -53,7 +53,6 @@ function NewsDashboard() {
   // State management
   const [activeCategory, setActiveCategory] = useState<string>('featured');
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [filteredArticles, setFilteredArticles] = useState<Article[]>([]);
   const [showBookmarked, setShowBookmarked] = useState<boolean>(false);
   const [showUnread, setShowUnread] = useState<boolean>(false);
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
@@ -270,7 +269,7 @@ function NewsDashboard() {
   ];
 
   // Filter articles based on active category, search query, and filters
-  useEffect(() => {
+  const filteredArticles = useMemo(() => {
     let results = [...articles];
     
     // Filter by category
@@ -289,8 +288,8 @@ function NewsDashboard() {
     if (searchQuery.trim() !== '') {
       const query = searchQuery.toLowerCase();
       results = results.filter(
-        article => 
-          article.title.toLowerCase().includes(query) || 
+        article =>
+          article.title.toLowerCase().includes(query) ||
           article.summary.toLowerCase().includes(query) ||
           article.content.toLowerCase().includes(query)
       );
@@ -306,7 +305,7 @@ function NewsDashboard() {
       results = results.filter(article => !article.read);
     }
     
-    setFilteredArticles(results);
+    return results;
   }, [activeCategory, searchQuery, showBookmarked, showUnread, articles]);
 
   // Handle category selection
@@ -323,9 +322,6 @@ function NewsDashboard() {
   // Toggle bookmark status
   const toggleBookmark = (e: React.MouseEvent, articleId: string): void => {
     e.stopPropagation();
-    const updatedArticles = articles.map(article => 
-      article.id === articleId ? { ...article, bookmarked: !article.bookmarked } : article
-    );
     // In a real app, this would update state or call an API
     console.log(`Toggled bookmark for article ${articleId}`);
   };
@@ -333,9 +329,6 @@ function NewsDashboard() {
   // Toggle read status
   const toggleRead = (e: React.MouseEvent, articleId: string): void => {
     e.stopPropagation();
-    const updatedArticles = articles.map(article => 
-      article.id === articleId ? { ...article, read: !article.read } : article
-    );
     // In a real app, this would update state or call an API
     console.log(`Toggled read status for article ${articleId}`);
   };
@@ -615,7 +608,7 @@ function NewsDashboard() {
           </div>
         </footer>
         
-        <style jsx>{`
+        <style>{`
           /* Global Styles */
           .news-dashboard {
             max-width: 1600px;

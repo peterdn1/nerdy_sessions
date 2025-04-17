@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   FaChartLine,
   FaChartPie,
@@ -11,7 +11,7 @@ import {
   FaBell,
   FaUser,
   FaSyncAlt,
-  FaEllipsisV,
+  FaShieldAlt,
   FaInfoCircle,
   FaExternalLinkAlt,
   FaRobot,
@@ -77,15 +77,14 @@ interface TimeRange {
 function StockDashboard() {
   // State management
   const [timeRange, setTimeRange] = useState<string>('1M');
-  const [selectedSector, setSelectedSector] = useState<string>('all');
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const [filteredStocks, setFilteredStocks] = useState<Stock[]>([]);
-  const [portfolioValue, setPortfolioValue] = useState({
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedSector, setSelectedSector] = useState('All');
+  const portfolioValue = {
     current: 156730.42,
     previous: 148250.18,
     change: 8480.24,
     changePercent: 5.72
-  });
+  };
   
   // Mock data - Time ranges
   const timeRanges: TimeRange[] = [
@@ -408,41 +407,40 @@ function StockDashboard() {
     }
   ];
 
-  // Filter stocks based on sector filter and search query
-  useEffect(() => {
+  // Memoized filtered stocks
+  const filteredStocks = useMemo(() => {
     let results = [...stocks];
     
     // Filter by sector
     if (selectedSector !== 'all') {
-      results = results.filter(stock => stock.sector === selectedSector);
+      results = results.filter((stock: Stock) => stock.sector === selectedSector);
     }
     
     // Filter by search query
     if (searchQuery.trim() !== '') {
       const query = searchQuery.toLowerCase();
-      results = results.filter(
-        stock => 
-          stock.symbol.toLowerCase().includes(query) || 
-          stock.name.toLowerCase().includes(query)
+      results = results.filter((stock: Stock) =>
+        stock.symbol.toLowerCase().includes(query) ||
+        stock.name.toLowerCase().includes(query)
       );
     }
     
-    setFilteredStocks(results);
+    return results;
   }, [selectedSector, searchQuery, stocks]);
 
   // Get winners (positive change)
-  const getWinners = () => {
+  const getWinners = (): Stock[] => {
     return filteredStocks
-      .filter(stock => stock.changePercent > 0)
-      .sort((a, b) => b.changePercent - a.changePercent)
+      .filter((stock: Stock) => stock.changePercent > 0)
+      .sort((a: Stock, b: Stock) => b.changePercent - a.changePercent)
       .slice(0, 5);
   };
 
   // Get losers (negative change)
-  const getLosers = () => {
+  const getLosers = (): Stock[] => {
     return filteredStocks
-      .filter(stock => stock.changePercent < 0)
-      .sort((a, b) => a.changePercent - b.changePercent)
+      .filter((stock: Stock) => stock.changePercent < 0)
+      .sort((a: Stock, b: Stock) => a.changePercent - b.changePercent)
       .slice(0, 5);
   };
 
@@ -467,12 +465,6 @@ function StockDashboard() {
   };
   
   // Format as compact number (e.g., 1.2M, 5K)
-  const formatCompact = (value: number): string => {
-    return new Intl.NumberFormat('en-US', {
-      notation: 'compact',
-      compactDisplay: 'short'
-    }).format(value);
-  };
 
   return (
     <>
@@ -875,7 +867,7 @@ function StockDashboard() {
           </div>
         </footer>
         
-        <style jsx>{`
+        <style>{`
           /* Global Styles */
           .investment-dashboard {
             max-width: 1600px;
