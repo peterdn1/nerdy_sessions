@@ -8,6 +8,7 @@ import StockDashboard from '../pages/stocks/StockDashboard';
 import StockScreener from '../pages/stocks/StockScreener';
 import MockupGallery from '../pages/mockups/MockupGallery';
 import MockupWebsites from '../pages/mockups/MockupWebsites';
+import RoboticsDashboard from './RoboticsDashboard';
 
 interface BodyProps {
   activeNav: string;
@@ -25,6 +26,7 @@ const Body: React.FC<BodyProps> = ({ activeNav }) => {
       {activeNav === 'stocks-screener' && <StockScreener />}
       {activeNav === 'mockup-gallery' && <MockupGallery />}
       {activeNav === 'mockup-websites' && <MockupWebsites />}
+      {activeNav === 'robotics' && <RoboticsDashboard />}
     </main>
   );
 };

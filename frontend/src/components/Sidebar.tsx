@@ -16,9 +16,6 @@ interface SidebarProps {
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import ListItemIcon from '@mui/material/ListItemIcon';
-
-
 import { COMMON_MENU_STYLES } from './sidebar/constants';
 
 const Sidebar: React.FC<SidebarProps> = ({ activeNav, setActiveNav }) => {

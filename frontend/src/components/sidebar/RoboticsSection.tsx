@@ -22,6 +22,18 @@ const RoboticsSection: React.FC<RoboticsSectionProps> = ({
 }) => {
   const subItems = [
     {
+      id: 'dashboard',
+      text: 'Dashboard',
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2A5CAA" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="3" width="7" height="7"/>
+          <rect x="14" y="3" width="7" height="7"/>
+          <rect x="14" y="14" width="7" height="7"/>
+          <rect x="3" y="14" width="7" height="7"/>
+        </svg>
+      )
+    },
+    {
       id: 'innovation',
       text: 'Innovation Spotlight',
       icon: (
@@ -107,7 +119,7 @@ const RoboticsSection: React.FC<RoboticsSectionProps> = ({
             <ListItemButton
               key={item.id}
               selected={activeNav === `robotics/${item.id}`}
-              onClick={() => setActiveNav(`robotics/${item.id}`)}
+              onClick={() => setActiveNav(item.id)}
               sx={{ 
                 pl: 4,
                 ...COMMON_MENU_STYLES,
