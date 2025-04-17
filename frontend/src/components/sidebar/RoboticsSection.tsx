@@ -119,7 +119,7 @@ const RoboticsSection: React.FC<RoboticsSectionProps> = ({
             <ListItemButton
               key={item.id}
               selected={activeNav === `robotics/${item.id}`}
-              onClick={() => setActiveNav(item.id)}
+              onClick={() => setActiveNav(`robotics/${item.id}`)}
               sx={{ 
                 pl: 4,
                 ...COMMON_MENU_STYLES,

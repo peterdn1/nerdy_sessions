@@ -26,7 +26,7 @@ const Body: React.FC<BodyProps> = ({ activeNav }) => {
       {activeNav === 'stocks-screener' && <StockScreener />}
       {activeNav === 'mockup-gallery' && <MockupGallery />}
       {activeNav === 'mockup-websites' && <MockupWebsites />}
-      {activeNav === 'robotics' && <RoboticsDashboard />}
+      {(activeNav === 'robotics' || activeNav === 'robotics/dashboard') && <RoboticsDashboard />}
     </main>
   );
 };
