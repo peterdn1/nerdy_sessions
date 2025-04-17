@@ -258,7 +258,7 @@ const MockupGallery: React.FC = () => {
         {uploads.map(item => (
           <div
             key={item.id}
-            className="border border-gray-200 rounded-md overflow-hidden shadow-sm hover:shadow-md"
+            className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md"
           >
             {/* Fixed height image container */}
             <div style={{ height: '180px', overflow: 'hidden', backgroundColor: '#f3f4f6' }}>
@@ -273,10 +273,13 @@ const MockupGallery: React.FC = () => {
                 }}
               />
             </div>
+
+            {/* Separator */}
+            <hr className="border-gray-200" />
             
             {/* Description and buttons */}
-            <div className="p-3">
-              <p className="text-sm mb-3" style={{
+            <div className="p-4">
+              <p className="text-base font-medium text-gray-800 mb-4" style={{
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
                 display: '-webkit-box',
@@ -288,16 +291,16 @@ const MockupGallery: React.FC = () => {
                 {item.description}
               </p>
               
-              <div className="flex justify-between">
+              <div className="flex justify-end gap-2">
                 <button
                   onClick={() => handleEdit(item)}
-                  className="text-xs px-3 py-1 bg-yellow-500 text-white rounded-md hover:bg-yellow-600"
+                  className="text-sm px-3 py-1 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-300"
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => handleDelete(item.id)}
-                  className="text-xs px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600"
+                  className="text-sm px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-red-400"
                 >
                   Delete
                 </button>
